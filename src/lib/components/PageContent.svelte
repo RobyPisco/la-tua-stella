@@ -13,14 +13,15 @@
   {/each}
   <section>
     <h2>{content.faqTitle}</h2>
-    <dl class="faq">
+    <!-- Closed by default; the answers stay in the page for search engines and work without JS. -->
+    <div class="faq">
       {#each content.faq as item}
-        <div>
-          <dt>{item.q}</dt>
-          <dd>{item.a}</dd>
-        </div>
+        <details>
+          <summary>{item.q}</summary>
+          <p class="answer">{item.a}</p>
+        </details>
       {/each}
-    </dl>
+    </div>
   </section>
 </article>
 
@@ -43,17 +44,43 @@
     color: var(--ink);
   }
   .faq {
-    margin: 0;
-    display: grid;
-    gap: 1.5rem;
+    border-top: 1px solid var(--rule);
   }
-  dt {
+  details {
+    border-bottom: 1px solid var(--rule);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
     font-family: var(--serif);
     font-size: 1.3rem;
-    margin-bottom: 0.35rem;
+    cursor: pointer;
+    list-style: none;
   }
-  dd {
-    margin: 0;
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  /* A plus that turns into a minus. */
+  summary::after {
+    content: '+';
+    flex: none;
+    font-family: var(--sans, inherit);
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--star);
+    transition: transform 0.2s;
+  }
+  details[open] summary::after {
+    content: '−';
+  }
+  summary:hover {
+    color: var(--star);
+  }
+  .answer {
+    margin: 0 0 1.25rem;
     color: var(--muted);
   }
 </style>
