@@ -91,6 +91,7 @@
       dateLine: `${fmtDate(instant, where.timeZone)}, ${fmtTime(instant, where.timeZone)}`,
       placeLine: placeLine(where),
       starLine: s ? starLine(s, instant) : '',
+      starFacts: s ? [t().isA(starName(s, locale.lang), starKind(s)), ...facts(s)] : undefined,
       credit: SITE,
       target: s ? { raH: s.raH, dec: s.dec, ci: s.ci, label: starName(s, locale.lang) } : undefined,
       planetNames: t().planetNames,
@@ -214,23 +215,6 @@
     }
   }
 
-  // Poster and star facts stay in view while the controls scroll. When together they are taller
-  // than the window, the column first scrolls until its bottom shows, then stays put.
-  let stage: HTMLDivElement | undefined = $state();
-  let stickTop = $state(24);
-  $effect(() => {
-    if (!stage) return;
-    const el = stage;
-    const fit = () => (stickTop = Math.min(24, window.innerHeight - el.offsetHeight - 24));
-    const ro = new ResizeObserver(fit);
-    ro.observe(el);
-    window.addEventListener('resize', fit);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', fit);
-    };
-  });
-
   const optionKeys = ['milkyWay', 'lines', 'names', 'moonPlanets', 'highlight', 'grid', 'frame'] as const;
 </script>
 
@@ -241,21 +225,10 @@
     <p class="intro">{t().posterIntro}</p>
   </header>
 
-  <div class="stage" bind:this={stage} style:--stick-top="{stickTop}px">
-    <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
-      <div class="paper" style:aspect-ratio="1 / {format.ratio}" style:--ratio={format.ratio}>
-        {@html svg}
-      </div>
+  <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
+    <div class="paper" style:aspect-ratio="1 / {format.ratio}" style:--ratio={format.ratio}>
+      {@html svg}
     </div>
-
-    {#if star}
-      <section class="about" aria-live="polite">
-        <h2>{starName(star, locale.lang)}</h2>
-        <h3>{t().aboutTitle}</h3>
-        <p>{t().isA(starName(star, locale.lang), starKind(star))}</p>
-        {#each facts(star) as line}<p>{line}</p>{/each}
-      </section>
-    {/if}
   </div>
 
   <form class="controls" onsubmit={(e) => e.preventDefault()}>
@@ -388,15 +361,11 @@
     color: var(--muted);
     max-width: 38rem;
   }
-  .stage {
+  .preview {
     grid-area: preview;
     align-self: start;
     position: sticky;
-    top: var(--stick-top, 1.5rem);
-    display: grid;
-    gap: 2rem;
-  }
-  .preview {
+    top: 1.5rem;
     display: grid;
     place-items: center;
     padding: clamp(1rem, 3vw, 2.5rem);
@@ -584,24 +553,6 @@
     border: 1px solid var(--rule);
     text-decoration: none;
   }
-  .about {
-    display: grid;
-    gap: 0.6rem;
-  }
-  .about h2 {
-    margin: 0;
-    font-style: italic;
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-  }
-  .about h3 {
-    margin: 0.75rem 0 0;
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 1.45rem;
-  }
-  .about p {
-    margin: 0;
-  }
   .status {
     color: var(--ink);
   }
@@ -623,10 +574,8 @@
       grid-template-columns: 1fr;
       grid-template-areas: 'head' 'preview' 'controls';
     }
-    .stage {
-      position: static;
-    }
     .preview {
+      position: static;
       padding: 1rem;
     }
     .paper {

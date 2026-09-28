@@ -163,6 +163,8 @@ export interface PosterSpec {
   dateLine: string;
   placeLine: string;
   starLine: string;
+  /** About the star (kind, light, temperature, distance): printed on paper formats only. */
+  starFacts?: string[];
   credit: string;
   target?: { raH: number; dec: number; ci: number; label: string };
   planetNames: Record<string, string>;
@@ -420,9 +422,19 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
     block.push({ text: spec.starLine, size, before: 30 * sc, attrs: `font-family="${esc(FONT_SERIF)}" font-style="italic" fill="${th.text}" opacity="0.85"` });
   }
   // Cap height ≈ 0.7 em: stack lines by their visible height.
-  const height = block.reduce((h, l) => h + l.before + l.size * 0.72, 0);
+  const measureBlock = () => block.reduce((h, l) => h + l.before + l.size * 0.72, 0);
   const top = L.cy + L.R + 40;
   const bottom = L.H - (o.frame ? 80 : 60);
+  // The star's facts go on print formats, and only when they fit: a long dedication wins.
+  if (o.highlight && spec.starLine && spec.format.print && spec.starFacts?.length) {
+    const facts = spec.starFacts.map((text, i) => {
+      const size = fitSize(measure, text, sans, 15 * sc, maxW);
+      return { text, size, before: (i === 0 ? 34 : 11) * sc, attrs: `font-family="${esc(FONT_SANS)}" fill="${th.muted}"` };
+    });
+    const withFacts = measureBlock() + facts.reduce((h, l) => h + l.before + l.size * 0.72, 0);
+    if (withFacts <= bottom - top) block.push(...facts);
+  }
+  const height = measureBlock();
   let y = Math.max(top, top + (bottom - top - height) / 2);
   for (const l of block) {
     y += l.before + l.size * 0.72;
