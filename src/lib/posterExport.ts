@@ -104,7 +104,9 @@ export async function renderPdf(svg: string, format: Format): Promise<Blob> {
 
 export function download(blob: Blob, name: string) {
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  // A generic type makes browsers save the file: Firefox would open a PDF in a new tab and
+  // people would leave the page (and never see what comes after the download).
+  a.href = URL.createObjectURL(new Blob([blob], { type: 'application/octet-stream' }));
   a.download = name;
   document.body.append(a);
   a.click();
