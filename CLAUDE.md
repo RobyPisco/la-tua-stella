@@ -50,6 +50,9 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 - `src/lib/poster.ts` + `posterExport.ts` — SVG del poster, Via Lattea proiettata, export.
 - `src/lib/components/pages/` — componenti delle pagine generate (senza JavaScript: `csr = false`).
 - `scripts/` — costruzione dei dati da HYG (CC BY-SA 4.0) e d3-celestial (BSD-3).
+- `worker/` — contatore pubblico "mappe create" (Cloudflare Worker + D1 su `api.skyofyourday.com`,
+  istruzioni in `worker/README.md`) · `src/lib/counter.ts` — lato sito. Mostrato da subito (scelta
+  dell'utente), sotto i pulsanti di scaricamento; conta una volta per mappa, non per file.
 
 ## Pubblicazione
 
@@ -61,7 +64,8 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
   Custom domain e HTTPS impostati nelle impostazioni Pages del repository; i vecchi URL
   `robypisco.github.io/la-tua-stella/...` fanno 301 verso il dominio.
 - Variabili di build: `BASE_PATH` (vuota) e `VITE_SITE_URL=https://skyofyourday.com`: canonical,
-  hreflang, sitemap e og:image derivano da lì.
+  hreflang, sitemap e og:image derivano da lì. `VITE_COUNTER_URL=https://api.skyofyourday.com`
+  accende il contatore: senza (in sviluppo) non conta nulla.
 - Google Search Console: proprietà Dominio verificata, sitemap `https://skyofyourday.com/sitemap.xml`
   inviata (3.680 pagine rilevate il 28/09/2026).
 
@@ -78,9 +82,9 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 
 ## Idee aperte
 
-**Contatore pubblico** (visite o mappe create; vedi issue su GitHub: solo numeri veri) ·
+Contatore anche in home (per ora solo nel poster) ·
 altre lingue (de, fr, pt: ~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`,
 `CONTENT`, `PT`, `CONSTELLATIONS`/`PROPER` in names.ts, `PAGES` e cartella in `src/routes/`) ·
 link Ko-fi quando l'utente lo crea ·
-l'editor del poster perde la data cambiando lingua · immagini di anteprima per pagina ·
+immagini di anteprima per pagina ·
 analisi dei dati di Search Console dopo 2–3 settimane.

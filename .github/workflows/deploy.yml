@@ -34,6 +34,8 @@ jobs:
           # GitHub redirects the old robypisco.github.io/la-tua-stella/ addresses here.
           BASE_PATH: ''
           VITE_SITE_URL: https://skyofyourday.com
+          # Public "maps made" counter (worker/): only the real site counts.
+          VITE_COUNTER_URL: https://api.skyofyourday.com
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build

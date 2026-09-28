@@ -1,0 +1,19 @@
+# Public counter at https://api.skyofyourday.com (see README.md in this folder).
+name = "sky-counter"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+workers_dev = false
+
+# A custom domain gets its own DNS record: the site's records can stay "DNS only".
+routes = [{ pattern = "api.skyofyourday.com", custom_domain = true }]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sky-counter"
+database_id = "0762fd06-dca4-4e64-a230-16d219a859d0"
+
+# At most 10 counts per minute from the same address (kept in memory, never stored).
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }

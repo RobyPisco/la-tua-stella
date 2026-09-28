@@ -4,7 +4,8 @@
   import { KOFI_URL, SITE } from '../brand';
   import { guessPlace, savePlace, savedPlace } from '../geo';
   import { href } from '../routes';
-  import { fmtDate, fmtTime, locale, t } from '../i18n.svelte';
+  import { countMap, mapsCount } from '../counter';
+  import { fmtDate, fmtNum, fmtTime, locale, t } from '../i18n.svelte';
   import {
     buildPoster, FORMATS, loadPosterData, renderMilkyWay, THEMES,
     type PosterOptions, type PosterSpec,
@@ -34,6 +35,9 @@
   let status = $state('');
   let busy = $state(false);
   let downloaded = $state(false);
+  let mapsMade = $state<number | null>(null);
+  // One count per map: downloading the same map again, or in another file type, is not a new map.
+  const counted = new Set<string>();
   let stars: Star[] = [];
   let catalogReady = $state(false);
 
@@ -116,7 +120,37 @@
     }, 120);
   });
 
+  // Changing language opens another page: keep the choices for the session so nothing is lost.
+  // The title is kept only if edited, otherwise it follows the language.
+  const STATE_KEY = 'poster-editor';
+  let restored = false;
+  $effect(() => {
+    const s = {
+      dateValue, time, subtitle, themeId, formatId, options: { ...options },
+      title: title === t().posterTitleDefault ? null : title,
+    };
+    if (!restored) return;
+    try { sessionStorage.setItem(STATE_KEY, JSON.stringify(s)); } catch {}
+  });
+
+  function restore() {
+    try {
+      const s = JSON.parse(sessionStorage.getItem(STATE_KEY) ?? 'null');
+      if (!s) return;
+      if (typeof s.dateValue === 'string') dateValue = s.dateValue;
+      if (typeof s.time === 'string') time = s.time;
+      if (typeof s.subtitle === 'string') subtitle = s.subtitle;
+      if (typeof s.title === 'string') title = s.title;
+      if (THEMES.some((x) => x.id === s.themeId)) themeId = s.themeId;
+      if (FORMATS.some((x) => x.id === s.formatId)) formatId = s.formatId;
+      if (s.options) options = { ...options, ...s.options };
+    } catch {}
+  }
+
   onMount(() => {
+    mapsCount().then((n) => (mapsMade = n));
+    restore();
+    restored = true;
     // Arriving from "your star": start from that birth date and the place already chosen.
     try {
       const prefill = sessionStorage.getItem('poster-date');
@@ -166,6 +200,11 @@
       }
       status = t().posterDone;
       downloaded = true;
+      const key = JSON.stringify([dateValue, time, where.lat, where.lon, title, subtitle, themeId, options]);
+      if (!counted.has(key)) {
+        counted.add(key);
+        countMap().then((n) => n !== null && (mapsMade = n));
+      }
     } catch (e) {
       console.error(e);
       status = t().posterFailed;
@@ -284,6 +323,7 @@
         <button class="btn ghost" type="button" disabled={busy || !svg} onclick={() => save('svg')}>{t().dlSvg}</button>
       </div>
       {#if status}<p class="status" role="status">{status}</p>{/if}
+      {#if mapsMade}<p class="count">{t().mapsMade(mapsMade, fmtNum(mapsMade))}</p>{/if}
       {#if format.print}<p class="hint">{t().posterPrintHint}</p>{/if}
       {#if downloaded && KOFI_URL}
         <div class="kofi">
@@ -513,6 +553,11 @@
   }
   .status {
     color: var(--ink);
+  }
+  .count {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--muted);
   }
   .kofi {
     display: grid;
