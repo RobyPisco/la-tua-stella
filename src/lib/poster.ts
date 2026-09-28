@@ -1,6 +1,7 @@
 import { Body, Equator, Illumination, Observer } from 'astronomy-engine';
 import { equatorialVector, horizonMatrix, toHorizon, type HorizonPos, type Place } from './astro';
 import { starRgb } from './color';
+import { properName } from './names';
 
 // ---------------------------------------------------------------------------------------
 // Data
@@ -129,7 +130,17 @@ export const FORMATS: Format[] = [
 // ---------------------------------------------------------------------------------------
 // Poster
 
+export type Detail = 'essential' | 'balanced' | 'rich';
+
+/** How much goes on the chart: faintest star shown, which names are written. */
+const DETAIL: Record<Detail, { mag: number; starNames: number; ranks: number; size: number }> = {
+  essential: { mag: 4.6, starNames: -2, ranks: 1, size: 1.15 },
+  balanced: { mag: 5.6, starNames: 0.9, ranks: 2, size: 1.05 },
+  rich: { mag: 6.5, starNames: 1.6, ranks: 3, size: 1 },
+};
+
 export interface PosterOptions {
+  detail: Detail;
   lines: boolean;
   names: boolean;
   milkyWay: boolean;
@@ -282,7 +293,7 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
   if (th.glow) out.push(`<circle cx="${L.cx}" cy="${L.cy}" r="${f1(L.R * 1.22)}" fill="url(#${id}-halo)"/>`);
   out.push(`<circle cx="${L.cx}" cy="${L.cy}" r="${L.R}" fill="url(#${id}-disk)"/>`);
 
-  out.push('<g clip-path="url(#${id}-chart)">');
+  out.push(`<g clip-path="url(#${id}-chart)">`);
   if (o.milkyWay && milkyWayHref) {
     out.push(`<image href="${milkyWayHref}" x="${f1(L.cx - L.R * 1.01)}" y="${f1(L.cy - L.R * 1.01)}" width="${f1(L.R * 2.02)}" height="${f1(L.R * 2.02)}" preserveAspectRatio="none"/>`);
   }
@@ -313,60 +324,73 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
     out.push(`<path d="${path}" fill="none" stroke="${th.lines}" stroke-width="${f1(1.3 * k)}" stroke-linejoin="round" stroke-linecap="round"/>`);
   }
 
+  const detail = DETAIL[o.detail];
+
   // Stars: faint ones as a single group, bright ones with a soft shine.
   const dots: string[] = [];
   const shines: string[] = [];
   for (const s of d.stars) {
+    if (s.mag > detail.mag) continue;
     const h = toHorizon(m, s.v);
     if (h.alt < 0) continue;
     const [x, y] = project(h);
-    const r = Math.max(0.55, (6.8 - s.mag) ** 1.4 * 0.3) * k;
+    const r = Math.max(0.55, (6.8 - s.mag) ** 1.4 * 0.3) * k * detail.size;
     const fill = th.realColors ? `rgb(${starRgb(s.ci, 0.38).join(' ')})` : th.star;
     dots.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${Math.round(r * 100) / 100}" fill="${fill}"/>`);
     if (s.mag < 1.6 && th.id !== 'white') shines.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(r * 3.4)}" fill="url(#${id}-shine)" opacity="0.5"/>`);
   }
   out.push(`<g>${shines.join('')}</g><g>${dots.join('')}</g>`);
 
-  // Moon and planets are placed first so constellation names can keep clear of them.
-  const occupied: [number, number, number][] = [];
-  const bodiesSvg = o.moonPlanets ? bodies(spec, m, project, k, occupied) : '';
+  // Everything written on the chart goes through one placer, most important first,
+  // so no two labels overlap and none spills over the rim.
+  const labels: Label[] = [];
+  const obstacles: Box[] = [];
 
-  if (o.names) {
-    const cons: string[] = [];
-    for (const l of d.labels) {
-      const h = toHorizon(m, l.v);
-      if (h.alt < 8) continue;
-      const [x, y] = project(h);
-      if (occupied.some(([bx, by, br]) => Math.hypot(bx - x, by - y) < br + 30 * k)) continue;
-      const name = l.names[spec.lang] || l.names.la;
-      const size = (l.rank === 1 ? 12.5 : 11) * k;
-      cons.push(`<text x="${f1(x)}" y="${f1(y)}" font-size="${f1(size)}">${esc(name)}</text>`);
-    }
-    out.push(`<g font-family="${esc(FONT_SANS)}" fill="${th.labels}" text-anchor="middle" letter-spacing="${f1(1.2 * k)}">${cons.join('')}</g>`);
-    const stars: string[] = [];
-    for (const n of d.names) {
-      const h = toHorizon(m, n.v);
-      if (h.alt < 5) continue;
-      const [x, y] = project(h);
-      stars.push(`<text x="${f1(x + 7 * k)}" y="${f1(y - 6 * k)}" font-size="${f1(11.5 * k)}">${esc(n.name)}</text>`);
-    }
-    out.push(`<g font-family="${esc(FONT_SERIF)}" font-style="italic" fill="${th.labels}">${stars.join('')}</g>`);
-  }
-
-  out.push(bodiesSvg);
-
+  let targetSvg = '';
   if (o.highlight && spec.target) {
     const t = spec.target;
     const h = toHorizon(m, equatorialVector(t.raH * 15, t.dec));
     if (h.alt > 0) {
       const [x, y] = project(h);
       const color = th.highlight ?? `rgb(${starRgb(t.ci, 0.75).join(' ')})`;
-      out.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(15 * k)}" fill="none" stroke="${color}" stroke-width="${f1(1.8 * k)}"/>`);
-      out.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(3.2 * k)}" fill="${color}"/>`);
-      const right = x < L.cx + L.R * 0.45;
-      out.push(`<text x="${f1(x + (right ? 22 : -22) * k)}" y="${f1(y + 5 * k)}" text-anchor="${right ? 'start' : 'end'}" font-family="${esc(FONT_SERIF)}" font-style="italic" font-size="${f1(17 * k)}" fill="${color}">${esc(t.label)}</text>`);
+      targetSvg =
+        `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(15 * k)}" fill="none" stroke="${color}" stroke-width="${f1(1.8 * k)}"/>` +
+        `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(3.2 * k)}" fill="${color}"/>`;
+      obstacles.push([x - 17 * k, y - 17 * k, x + 17 * k, y + 17 * k]);
+      labels.push({
+        text: t.label, size: 17 * k, font: 'serif', fill: color, priority: 100,
+        at: [[x + 22 * k, y + 5 * k, 'start'], [x - 22 * k, y + 5 * k, 'end'], [x, y - 24 * k, 'middle'], [x, y + 36 * k, 'middle']],
+      });
     }
   }
+
+  const bodiesSvg = o.moonPlanets ? bodies(spec, m, project, k, labels, obstacles) : '';
+
+  if (o.names) {
+    for (const n of d.names) {
+      if (n.mag > detail.starNames) continue;
+      const h = toHorizon(m, n.v);
+      if (h.alt < 5) continue;
+      const [x, y] = project(h);
+      labels.push({
+        text: properName(n.name, spec.lang), size: 11.5 * k, font: 'serif', fill: th.labels, priority: 70 - n.mag,
+        at: [[x + 7 * k, y - 6 * k, 'start'], [x - 7 * k, y - 6 * k, 'end'], [x + 7 * k, y + 14 * k, 'start']],
+      });
+    }
+    for (const l of d.labels) {
+      if (l.rank > detail.ranks) continue;
+      const h = toHorizon(m, l.v);
+      if (h.alt < 8) continue;
+      const [x, y] = project(h);
+      labels.push({
+        text: l.names[spec.lang] || l.names.la, size: (l.rank === 1 ? 12.5 : 11) * k, font: 'sans',
+        fill: th.labels, priority: 60 - l.rank * 10, spacing: 1.2 * k,
+        at: [[x, y, 'middle'], [x, y + 16 * k, 'middle'], [x, y - 16 * k, 'middle']],
+      });
+    }
+  }
+
+  out.push(bodiesSvg, targetSvg, placeLabels(labels, obstacles, measure, L, k));
   out.push('</g>');
   out.push(`<circle cx="${L.cx}" cy="${L.cy}" r="${L.R}" fill="none" stroke="${th.diskStroke}" stroke-width="${f1(1.6 * k)}"/>`);
 
@@ -428,21 +452,25 @@ function bodies(
   m: number[][],
   project: (p: HorizonPos) => [number, number],
   k: number,
-  occupied: [number, number, number][],
+  labels: Label[],
+  obstacles: Box[],
 ): string {
   const th = spec.theme;
   const obs = new Observer(spec.place.lat, spec.place.lon, 0);
   const out: string[] = [];
-  const label = (x: number, y: number, text: string, dy: number) =>
-    `<text x="${f1(x)}" y="${f1(y + dy)}" text-anchor="middle" font-family="${esc(FONT_SANS)}" font-size="${f1(11 * k)}" letter-spacing="${f1(0.8 * k)}" fill="${th.labels}">${esc(text)}</text>`;
+  const label = (text: string, x: number, y: number, gap: number, priority: number): Label => ({
+    text, size: 11 * k, font: 'sans', fill: th.labels, priority, spacing: 0.8 * k,
+    at: [[x, y + gap + 8 * k, 'middle'], [x, y - gap - 3 * k, 'middle'], [x + gap + 4 * k, y + 4 * k, 'start'], [x - gap - 4 * k, y + 4 * k, 'end']],
+  });
 
   for (const [body, key, size] of PLANETS) {
     const h = toHorizon(m, bodyVector(body, spec.date, obs));
     if (h.alt < 2) continue;
     const [x, y] = project(h);
-    occupied.push([x, y, 14 * k]);
-    out.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(size * k)}" fill="${th.planet}"/>`);
-    out.push(label(x, y, spec.planetNames[key] ?? key, 20 * k));
+    const r = size * k;
+    obstacles.push([x - r, y - r, x + r, y + r]);
+    out.push(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(r)}" fill="${th.planet}"/>`);
+    labels.push(label(spec.planetNames[key] ?? key, x, y, r + 4 * k, 80));
   }
 
   // The Moon, drawn larger than life, lit from the Sun's direction.
@@ -457,11 +485,49 @@ function bodies(
     const angle = Math.atan2(ty - y, tx - x) / RAD;
     const frac = Illumination(Body.Moon, spec.date).phase_fraction;
     const r = 13 * k;
-    occupied.push([x, y, r + 16 * k]);
+    obstacles.push([x - r, y - r, x + r, y + r]);
     const e = r * (2 * frac - 1);
     const lit = `M0 ${f1(-r)}A${f1(r)} ${f1(r)} 0 0 1 0 ${f1(r)}A${f1(Math.abs(e))} ${f1(r)} 0 0 ${e > 0 ? 1 : 0} 0 ${f1(-r)}Z`;
     out.push(`<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(angle)})"><circle r="${f1(r)}" fill="${th.moonDark}" stroke="${th.moonLit}" stroke-opacity="0.35" stroke-width="${f1(0.8 * k)}"/><path d="${lit}" fill="${th.moonLit}"/></g>`);
-    out.push(label(x, y, spec.moonName, r + 16 * k));
+    labels.push(label(spec.moonName, x, y, r + 2 * k, 90));
+  }
+  return out.join('');
+}
+
+type Box = [number, number, number, number]; // x0, y0, x1, y1
+
+interface Label {
+  text: string;
+  size: number;
+  font: 'sans' | 'serif';
+  fill: string;
+  priority: number;
+  spacing?: number;
+  /** Candidate anchor points, tried in order. */
+  at: [number, number, 'start' | 'middle' | 'end'][];
+}
+
+function placeLabels(labels: Label[], obstacles: Box[], measure: Measure, L: Layout, k: number): string {
+  const placed: Box[] = [...obstacles];
+  const pad = 2.5 * k;
+  const inside = (b: Box) =>
+    [[b[0], b[1]], [b[2], b[1]], [b[0], b[3]], [b[2], b[3]]].every(([x, y]) => Math.hypot(x - L.cx, y - L.cy) < L.R - 4 * k);
+  const hits = (b: Box) => placed.some((p) => b[0] < p[2] && b[2] > p[0] && b[1] < p[3] && b[3] > p[1]);
+  const out: string[] = [];
+
+  for (const l of [...labels].sort((a, b) => b.priority - a.priority)) {
+    const font = l.font === 'serif' ? `italic 400 ${l.size}px ${FONT_SERIF}` : `500 ${l.size}px ${FONT_SANS}`;
+    const w = measure(l.text, font) + (l.spacing ?? 0) * l.text.length;
+    for (const [x, y, anchor] of l.at) {
+      const x0 = anchor === 'start' ? x : anchor === 'end' ? x - w : x - w / 2;
+      const box: Box = [x0 - pad, y - l.size * 0.78 - pad, x0 + w + pad, y + l.size * 0.22 + pad];
+      if (!inside(box) || hits(box)) continue;
+      placed.push(box);
+      const family = l.font === 'serif' ? `font-family="${esc(FONT_SERIF)}" font-style="italic"` : `font-family="${esc(FONT_SANS)}"`;
+      const spacing = l.spacing ? ` letter-spacing="${f1(l.spacing)}"` : '';
+      out.push(`<text x="${f1(x)}" y="${f1(y)}" text-anchor="${anchor}" font-size="${f1(l.size)}" fill="${l.fill}" ${family}${spacing}>${esc(l.text)}</text>`);
+      break;
+    }
   }
   return out.join('');
 }

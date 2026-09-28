@@ -112,6 +112,8 @@ export const strings = {
     posterStyle: 'Lo stile',
     posterFormat: 'Il formato',
     posterDetails: 'I dettagli',
+    detailLabel: 'Quantità di dettagli',
+    detailLevels: { essential: 'Essenziale', balanced: 'Equilibrata', rich: 'Ricca' } as Record<string, string>,
     posterDownload: 'Scarica',
     themes: { night: 'Notte', paper: 'Carta', gold: 'Oro', white: 'Bianco' } as Record<string, string>,
     formats: {
@@ -264,6 +266,8 @@ export const strings = {
     posterStyle: 'The style',
     posterFormat: 'The size',
     posterDetails: 'The details',
+    detailLabel: 'Amount of detail',
+    detailLevels: { essential: 'Minimal', balanced: 'Balanced', rich: 'Rich' } as Record<string, string>,
     posterDownload: 'Download',
     themes: { night: 'Night', paper: 'Paper', gold: 'Gold', white: 'White' } as Record<string, string>,
     formats: {

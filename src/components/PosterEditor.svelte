@@ -36,6 +36,7 @@
   let themeId = $state('night');
   let formatId = $state('a3');
   let options = $state<PosterOptions>({
+    detail: 'balanced',
     lines: true, names: true, milkyWay: true, moonPlanets: true, grid: false, highlight: true, frame: false,
   });
 
@@ -247,6 +248,17 @@
 
     <fieldset>
       <legend>{t().posterDetails}</legend>
+      <div class="levels" role="radiogroup" aria-label={t().detailLabel}>
+        <span class="levels-label">{t().detailLabel}</span>
+        <div class="segmented">
+          {#each ['essential', 'balanced', 'rich'] as const as level}
+            <label class:on={options.detail === level}>
+              <input type="radio" name="detail" value={level} bind:group={options.detail} />
+              <span>{t().detailLevels[level]}</span>
+            </label>
+          {/each}
+        </div>
+      </div>
       <div class="checks">
         {#each optionKeys as key}
           <label class="check">
@@ -424,6 +436,44 @@
     height: 1.8rem;
     border-radius: 50%;
     border: 1px solid;
+  }
+  .levels {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .levels-label {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .segmented {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.25rem;
+    gap: 0.25rem;
+  }
+  .segmented label {
+    display: grid;
+    place-items: center;
+    min-height: 2.6rem;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .segmented label.on {
+    background: var(--star);
+    color: var(--night);
+    font-weight: 700;
+  }
+  .segmented label:has(input:focus-visible) {
+    outline: 2px solid var(--star);
+    outline-offset: 2px;
+  }
+  .segmented input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
   }
   .checks {
     display: grid;
