@@ -214,6 +214,23 @@
     }
   }
 
+  // Poster and star facts stay in view while the controls scroll. When together they are taller
+  // than the window, the column first scrolls until its bottom shows, then stays put.
+  let stage: HTMLDivElement | undefined = $state();
+  let stickTop = $state(24);
+  $effect(() => {
+    if (!stage) return;
+    const el = stage;
+    const fit = () => (stickTop = Math.min(24, window.innerHeight - el.offsetHeight - 24));
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    window.addEventListener('resize', fit);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', fit);
+    };
+  });
+
   const optionKeys = ['milkyWay', 'lines', 'names', 'moonPlanets', 'highlight', 'grid', 'frame'] as const;
 </script>
 
@@ -224,10 +241,21 @@
     <p class="intro">{t().posterIntro}</p>
   </header>
 
-  <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
-    <div class="paper" style:aspect-ratio="1 / {format.ratio}" style:--ratio={format.ratio}>
-      {@html svg}
+  <div class="stage" bind:this={stage} style:--stick-top="{stickTop}px">
+    <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
+      <div class="paper" style:aspect-ratio="1 / {format.ratio}" style:--ratio={format.ratio}>
+        {@html svg}
+      </div>
     </div>
+
+    {#if star}
+      <section class="about" aria-live="polite">
+        <h2>{starName(star, locale.lang)}</h2>
+        <h3>{t().aboutTitle}</h3>
+        <p>{t().isA(starName(star, locale.lang), starKind(star))}</p>
+        {#each facts(star) as line}<p>{line}</p>{/each}
+      </section>
+    {/if}
   </div>
 
   <form class="controls" onsubmit={(e) => e.preventDefault()}>
@@ -336,18 +364,6 @@
   </form>
 </section>
 
-<!-- Outside the editor grid: the sticky preview would slide over it. -->
-{#if star}
-  <section class="about" aria-live="polite">
-    <div>
-      <h2>{starName(star, locale.lang)}</h2>
-      <h3>{t().aboutTitle}</h3>
-      <p>{t().isA(starName(star, locale.lang), starKind(star))}</p>
-      {#each facts(star) as line}<p>{line}</p>{/each}
-    </div>
-  </section>
-{/if}
-
 <style>
   .editor {
     display: grid;
@@ -372,11 +388,15 @@
     color: var(--muted);
     max-width: 38rem;
   }
-  .preview {
+  .stage {
     grid-area: preview;
     align-self: start;
     position: sticky;
-    top: 1.5rem;
+    top: var(--stick-top, 1.5rem);
+    display: grid;
+    gap: 2rem;
+  }
+  .preview {
     display: grid;
     place-items: center;
     padding: clamp(1rem, 3vw, 2.5rem);
@@ -565,21 +585,13 @@
     text-decoration: none;
   }
   .about {
-    max-width: 78rem;
-    width: 100%;
-    margin: 3rem auto 0;
-  }
-  .about > div {
     display: grid;
     gap: 0.6rem;
-    max-width: 44rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--rule);
   }
   .about h2 {
     margin: 0;
     font-style: italic;
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
   }
   .about h3 {
     margin: 0.75rem 0 0;
@@ -611,8 +623,10 @@
       grid-template-columns: 1fr;
       grid-template-areas: 'head' 'preview' 'controls';
     }
-    .preview {
+    .stage {
       position: static;
+    }
+    .preview {
       padding: 1rem;
     }
     .paper {
