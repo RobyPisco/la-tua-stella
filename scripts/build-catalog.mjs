@@ -2,6 +2,7 @@
 // and the d3-celestial constellation lines (BSD-3).
 //   node scripts/build-catalog.mjs
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { colorIndex } from './spectral.mjs';
 
 const RAW = new URL('./raw/', import.meta.url);
 const OUT = new URL('../src/data/', import.meta.url);
@@ -58,9 +59,10 @@ for (let i = 1; i < csv.length; i++) {
   const mag = +c[col.mag];
   const raH = +c[col.ra];
   const dec = +c[col.dec];
-  const ci = c[col.ci] === '' ? 0.65 : +c[col.ci];
+  // null = colour unknown: drawn neutral, no temperature claimed.
+  const ci = colorIndex(c[col.ci], c[col.spect]);
 
-  if (mag <= SKY_MAG) sky.push(round(raH * 15, 3), round(dec, 3), round(mag, 2), round(ci, 2));
+  if (mag <= SKY_MAG) sky.push(round(raH * 15, 3), round(dec, 3), round(mag, 2), round(ci ?? 0.65, 2));
 
   if (!(pc > 0 && pc < 100000)) continue;
   const ly = pc * PC_TO_LY;
@@ -78,7 +80,7 @@ for (let i = 1; i < csv.length; i++) {
     round(dec, 5),
     round(ly, 3),
     round(mag, 2),
-    round(ci, 3),
+    ci === null ? null : round(ci, 3),
     round(+c[col.lum] || 0, 4),
     c[col.spect],
   ]);

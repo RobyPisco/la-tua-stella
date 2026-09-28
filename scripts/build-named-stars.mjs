@@ -1,6 +1,7 @@
 // Stars with an IAU proper name, for the star pages (server-side only).
 //   node scripts/build-named-stars.mjs   (after build-catalog.mjs has fetched hyg.csv)
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { colorIndex } from './spectral.mjs';
 
 const lines = readFileSync(new URL('./raw/hyg.csv', import.meta.url), 'utf8').split(/\r?\n/);
 const head = lines[0].split(',').map((h) => h.replace(/"/g, ''));
@@ -21,7 +22,7 @@ for (let i = 2; i < lines.length; i++) {
     dec: round(+c[col.dec], 5),
     ly: pc > 0 && pc < 100000 ? round(pc * 3.261563777, 2) : 0,
     mag: round(+c[col.mag], 2),
-    ci: c[col.ci] === '' ? 0.65 : round(+c[col.ci], 3),
+    ci: ((ci) => (ci === null ? null : round(ci, 3)))(colorIndex(c[col.ci], c[col.spect])),
     lum: round(+c[col.lum] || 0, 3),
     spect: c[col.spect],
     con: c[col.con],

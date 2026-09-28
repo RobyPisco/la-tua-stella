@@ -13,12 +13,17 @@ export interface Star {
   dec: number;   // J2000 declination, degrees
   ly: number;    // distance, light years
   mag: number;   // apparent visual magnitude
-  ci: number;    // B-V colour index
+  ci: number;    // B-V colour index (neutral 0.65 when unknown, for drawing only)
+  /** False when the catalogue has neither colour nor spectral type: no temperature is claimed. */
+  ciKnown: boolean;
   lum: number;   // luminosity, Sun = 1
   spect: string;
 }
 
-type Row = [number, number, number, string, string, string, number, string, number, number, number, number, number, number, string];
+type Row = [number, number, number, string, string, string, number, string, number, number, number, number, number | null, number, string];
+
+/** Stored colour index → drawing colour and whether it is real. */
+export const colour = (ci: number | null) => ({ ci: ci ?? 0.65, ciKnown: ci !== null });
 
 let catalog: Promise<Star[]> | undefined;
 
@@ -26,7 +31,7 @@ export function loadCatalog(): Promise<Star[]> {
   catalog ??= import('../data/near-stars.json').then((m) =>
     (m.default as unknown as Row[]).map(
       ([id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, ci, lum, spect]) => ({
-        id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, ci, lum, spect,
+        id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, lum, spect, ...colour(ci),
       }),
     ),
   );

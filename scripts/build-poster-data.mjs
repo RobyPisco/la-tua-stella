@@ -1,15 +1,16 @@
 // Builds the extra data the poster needs:
 //   src/data/poster-stars.json  stars to magnitude 6.5, names for the brightest
 //   src/data/constellations.json label position and localized names
-//   public/milkyway.png         the Milky Way as an equirectangular brightness map
+//   static/milkyway.png         the Milky Way as an equirectangular brightness map
 // Sources: HYG Database (CC BY-SA 4.0), d3-celestial (BSD-3-Clause).
 //   node scripts/build-poster-data.mjs   (after scripts/build-catalog.mjs has fetched raw data)
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { deflateSync, crc32 } from 'node:zlib';
+import { colorIndex } from './spectral.mjs';
 
 const RAW = new URL('./raw/', import.meta.url);
 const DATA = new URL('../src/data/', import.meta.url);
-const PUBLIC = new URL('../public/', import.meta.url);
+const STATIC = new URL('../static/', import.meta.url);
 const D3 = 'https://raw.githubusercontent.com/ofrohn/d3-celestial/master/data/';
 
 async function raw(name, url) {
@@ -38,7 +39,7 @@ for (let i = 2; i < lines.length; i++) {
   const mag = +c[col.mag];
   if (!(mag <= 6.5)) continue;
   const ra = +c[col.ra] * 15, dec = +c[col.dec];
-  const ci = c[col.ci] === '' ? 0.65 : +c[col.ci];
+  const ci = colorIndex(c[col.ci], c[col.spect]) ?? 0.65;
   stars.push(round(ra, 3), round(dec, 3), round(mag, 2), round(ci, 2));
   if (mag < 1.6 && c[col.proper]) names.push([c[col.proper], round(ra, 3), round(dec, 3), round(mag, 2)]);
 }
@@ -161,6 +162,6 @@ const png = Buffer.concat([
   chunk('IDAT', deflateSync(gray, { level: 9 })),
   chunk('IEND', Buffer.alloc(0)),
 ]);
-writeFileSync(new URL('milkyway.png', PUBLIC), png);
+writeFileSync(new URL('milkyway.png', STATIC), png);
 
 console.log(`poster stars: ${stars.length / 4}, named: ${names.length}, constellations: ${Object.keys(labels).length}, milkyway.png: ${(png.length / 1024).toFixed(0)} KB`);

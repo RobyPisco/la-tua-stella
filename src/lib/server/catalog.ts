@@ -4,7 +4,7 @@ import { starPosition, sunAltitude } from '../astro';
 import type { Lang } from '../i18n.svelte';
 import { properName } from '../names';
 import { LANGS } from '../routes';
-import type { Star } from '../stars';
+import { colour, type Star } from '../stars';
 
 export interface NamedStar {
   id: number;
@@ -14,6 +14,7 @@ export interface NamedStar {
   ly: number;
   mag: number;
   ci: number;
+  ciKnown: boolean;
   lum: number;
   spect: string;
   con: string;
@@ -24,7 +25,9 @@ export interface NamedStar {
   hd: number;
 }
 
-export const NAMED: NamedStar[] = named as NamedStar[];
+export const NAMED: NamedStar[] = (named as (Omit<NamedStar, 'ci' | 'ciKnown'> & { ci: number | null })[]).map(
+  (s) => ({ ...s, ...colour(s.ci) }),
+);
 
 const slugify = (s: string) =>
   s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -51,10 +54,10 @@ export function namedBySlug(lang: Lang, slug: string): NamedStar | undefined {
 }
 
 /** Nearby stars for birth-year matching, same shape as the client catalogue. */
-type Row = [number, number, number, string, string, string, number, string, number, number, number, number, number, number, string];
+type Row = [number, number, number, string, string, string, number, string, number, number, number, number, number | null, number, string];
 export const NEAR: Star[] = (near as unknown as Row[]).map(
   ([id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, ci, lum, spect]) => ({
-    id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, ci, lum, spect,
+    id, hip, hd, gl, proper, bayer, flam, con, raH, dec, ly, mag, lum, spect, ...colour(ci),
   }),
 );
 

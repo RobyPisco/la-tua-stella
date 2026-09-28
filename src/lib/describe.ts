@@ -35,7 +35,7 @@ export function facts(s: Star): string[] {
   if (s.lum > 1.5) out.push(tt.brighter(fmtNum(s.lum, s.lum < 10 ? 1 : 0)));
   else if (s.lum > 0 && s.lum < 0.67) out.push(tt.fainter(fmtNum(s.lum * 100, s.lum < 0.01 ? 2 : s.lum < 0.1 ? 1 : 0)));
   else if (s.lum > 0) out.push(tt.sunLike);
-  out.push(tt.temp(fmtNum(Math.round(temperature(s.ci) / 100) * 100)));
+  if (s.ciKnown) out.push(tt.temp(fmtNum(Math.round(temperature(s.ci) / 100) * 100)));
   const km = s.ly * 9.4607e12;
   const km_s = new Intl.NumberFormat(locale.lang, { notation: 'compact', compactDisplay: 'long', maximumFractionDigits: 0 }).format(km);
   out.push(tt.distance(fmtNum(s.ly, 1), km_s));
