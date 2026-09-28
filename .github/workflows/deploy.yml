@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Weekly rebuild: ages, "light that left in…" years and upcoming moons stay current.
+  schedule:
+    - cron: '17 3 * * 1'
 
 permissions:
   contents: read

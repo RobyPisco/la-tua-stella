@@ -30,3 +30,12 @@ export function toolJsonLd(c: PageContent, url: string, lang: Lang, category: st
     },
   ];
 }
+
+/** Breadcrumb trail for search results: [name, absolute URL] from the top. */
+export function breadcrumbs(items: [string, string][]): object {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })),
+  };
+}

@@ -140,3 +140,121 @@ select {
 body:has(dialog[open]) {
   overflow: hidden;
 }
+
+/* Generated reference pages (moon phases, birth years, stars). */
+.doc {
+  max-width: 60rem;
+  margin: 1.5rem auto 0;
+  display: grid;
+  gap: 2.5rem;
+}
+.doc > header {
+  display: grid;
+  gap: 1rem;
+  max-width: 44rem;
+}
+.doc h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: -0.01em;
+}
+.doc h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+}
+.doc .lead {
+  font-size: 1.2rem;
+  max-width: 42rem;
+}
+.doc .crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.doc .crumbs li + li::before {
+  content: '›';
+  margin-right: 0.6rem;
+  color: var(--rule);
+}
+.doc .crumbs a {
+  color: var(--muted);
+}
+.doc section {
+  display: grid;
+  gap: 1rem;
+}
+.doc .note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.doc .cta {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  max-width: 44rem;
+}
+.doc .cta .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.doc .btn {
+  text-decoration: none;
+  display: inline-block;
+}
+.doc .btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.doc .pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+.doc .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.doc .table th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.doc .table td {
+  padding: 0.7rem 0.75rem 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.doc .grid-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.4rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.doc .grid-links a {
+  color: var(--ink);
+}
+@media (max-width: 640px) {
+  .doc .table .hide-sm {
+    display: none;
+  }
+  .doc .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

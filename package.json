@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "catalog": "node scripts/build-catalog.mjs && node scripts/build-poster-data.mjs",
+    "catalog": "node scripts/build-catalog.mjs && node scripts/build-poster-data.mjs && node scripts/build-named-stars.mjs",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

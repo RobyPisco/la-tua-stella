@@ -8,6 +8,7 @@
   import { locale, t, type Lang } from '$lib/i18n.svelte';
   import { href, langFromPath, LANGS, PAGES, type PageId } from '$lib/routes';
   import { SITE_NAME } from '$lib/site';
+  import { PT } from '$lib/pageText';
 
   let { children } = $props();
 
@@ -46,6 +47,9 @@
     <nav aria-label={t().footerNav}>
       <a href={href('home', locale.lang)}>{t().stepStar}</a>
       <a href={href('poster', locale.lang)}>{t().posterHeading}</a>
+      <a href={href('moonHub', locale.lang)}>{PT[locale.lang].moonHubH1.replace(/\?$/, '')}</a>
+      <a href={href('bornHub', locale.lang)}>{PT[locale.lang].bornHubH1}</a>
+      <a href={href('starsHub', locale.lang)}>{PT[locale.lang].starsHubH1}</a>
     </nav>
     <p>{t().credits}</p>
     <p>{t().privacy}</p>
