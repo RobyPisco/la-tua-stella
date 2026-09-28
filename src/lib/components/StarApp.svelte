@@ -1,26 +1,26 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Sky from './components/Sky.svelte';
-  import Result, { type Step } from './components/Result.svelte';
-  import DateField from './components/DateField.svelte';
-  import PosterEditor from './components/PosterEditor.svelte';
-  import { nextDark, type Place } from './lib/astro';
-  import { starCss } from './lib/color';
-  import { sighting as computeSighting, type Sighting } from './lib/describe';
-  import { guessPlace, savePlace, savedPlace } from './lib/geo';
-  import { fmtTime, locale, setLang, t } from './lib/i18n.svelte';
-  import { renderCard, share, shareUrl } from './lib/share';
-  import { findStars, loadCatalog, starById, starName, type Star } from './lib/stars';
+  import { goto, replaceState } from '$app/navigation';
+  import Sky from './Sky.svelte';
+  import Result, { type Step } from './Result.svelte';
+  import DateField from './DateField.svelte';
+  import { nextDark, type Place } from '../astro';
+  import { starCss } from '../color';
+  import { sighting as computeSighting, type Sighting } from '../describe';
+  import { guessPlace, savePlace, savedPlace } from '../geo';
+  import { fmtTime, locale, t } from '../i18n.svelte';
+  import { href } from '../routes';
+  import { renderCard, share, shareUrl } from '../share';
+  import { findStars, loadCatalog, starById, starName, type Star } from '../stars';
 
-  let birthInput = $state(loadBirth());
+  let birthInput = $state('');
   let birth = $state<Date | null>(null);
   let star = $state<Star | null>(null);
   let others = $state<Star[]>([]);
-  let place = $state<Place | null>(savedPlace());
+  let place = $state<Place | null>(null);
   let error = $state('');
   let busy = $state(false);
   let step = $state<Step>('date');
-  let view = $state<'journey' | 'poster'>(new URL(location.href).searchParams.has('poster') ? 'poster' : 'journey');
   let now = $state(new Date());
 
   const skyPlace = $derived(place ?? guessPlace());
@@ -30,10 +30,16 @@
 
   $effect(() => {
     document.documentElement.style.setProperty('--star', star ? starCss(star.ci, 0.85) : '#f6e2b4');
-    document.title = star ? `${starName(star, locale.lang)} · ${t().title}` : t().title;
   });
 
   onMount(() => {
+    birthInput = loadBirth();
+    place = savedPlace();
+    // Links from the first version: /?poster opened the poster editor.
+    if (new URL(location.href).searchParams.has('poster')) {
+      goto(href('poster', locale.lang), { replaceState: true });
+      return;
+    }
     const id = Number(new URL(location.href).searchParams.get('s'));
     if (id) {
       loadCatalog().then((stars) => {
@@ -44,30 +50,17 @@
         }
       });
     }
-    const onpop = () => (view = new URL(location.href).searchParams.has('poster') ? 'poster' : 'journey');
-    addEventListener('popstate', onpop);
     // Keep the intro sky turning with the real sky.
     const timer = setInterval(() => { if (!star) now = new Date(); }, 60000);
-    return () => {
-      clearInterval(timer);
-      removeEventListener('popstate', onpop);
-    };
+    return () => clearInterval(timer);
   });
 
+  /** Opens the poster editor on this birth date; the date travels in session storage, not the URL. */
   function openPoster() {
-    transition(() => {
-      view = 'poster';
-      history.pushState(null, '', `${location.pathname}?poster`);
-      scrollTo({ top: 0 });
-    });
-  }
-
-  function closePoster() {
-    transition(() => {
-      view = 'journey';
-      history.pushState(null, '', location.pathname);
-      scrollTo({ top: 0 });
-    });
+    try {
+      if (birth) sessionStorage.setItem('poster-date', birthInput);
+    } catch {}
+    goto(href('poster', locale.lang));
   }
 
   function loadBirth(): string {
@@ -99,7 +92,7 @@
       star = found.best;
       others = found.others;
       step = 'star';
-      history.replaceState(null, '', location.pathname);
+      replaceState(location.pathname, {});
       scrollTo({ top: 0 });
     });
   }
@@ -110,7 +103,7 @@
       birth = null;
       others = [];
       step = 'date';
-      history.replaceState(null, '', location.pathname);
+      replaceState(location.pathname, {});
     });
   }
 
@@ -169,18 +162,8 @@
   }
 </script>
 
-<div class="page step-{step}" class:has-result={!!star && view === 'journey'}>
-  <nav class="lang" aria-label="Language">
-    <button type="button" class="link" aria-pressed={locale.lang === 'it'} onclick={() => setLang('it')}>Italiano</button>
-    <button type="button" class="link" aria-pressed={locale.lang === 'en'} onclick={() => setLang('en')}>English</button>
-  </nav>
-
-  {#if view === 'poster'}
-    <main class="poster-view">
-      <PosterEditor {birth} {place} hasStar={!!star} onplace={pickPlace} onback={closePoster} />
-    </main>
-  {:else}
-  <main class="layout">
+<div class="journey step-{step}" class:has-result={!!star}>
+  <section class="layout">
       <div class="text">
         <nav class="steps" aria-label={t().stepsLabel}>
           <ol>
@@ -224,7 +207,7 @@
               <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
             </form>
             <p class="privacy">{t().privacy}</p>
-          <button class="link other-date" type="button" onclick={openPoster}>{t().posterOther}</button>
+            <a class="link other-date" href={href('poster', locale.lang)}>{t().posterOther}</a>
           </div>
         {/if}
       </div>
@@ -240,33 +223,11 @@
             : introDate === now ? t().skyNow : t().skyTonight}
         />
       </div>
-    </main>
+    </section>
   
-  {/if}
-
-  <footer>
-    <p>{t().credits}</p>
-  </footer>
 </div>
 
 <style>
-  .page {
-    min-height: 100dvh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 1rem clamp(1rem, 4vw, 3rem) 2rem;
-    gap: 1rem;
-  }
-  .lang {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    font-size: 0.95rem;
-  }
-  .lang [aria-pressed='true'] {
-    color: var(--ink);
-    text-decoration: none;
-  }
   .layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
@@ -362,27 +323,11 @@
   .other-date {
     justify-self: start;
   }
-  .poster-view {
-    width: 100%;
-  }
   .privacy {
     color: var(--muted);
     font-size: 0.95rem;
   }
-  footer {
-    max-width: 78rem;
-    width: 100%;
-    margin: 2rem auto 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
   @media (max-width: 760px) {
-    .page {
-      padding-inline: 1rem;
-    }
-    .lang .link {
-      padding: 0.5rem 0.25rem;
-    }
     .layout {
       grid-template-columns: 1fr;
       gap: 2rem;

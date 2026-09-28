@@ -1,20 +1,10 @@
 export type Lang = 'it' | 'en';
 
-function initialLang(): Lang {
-  try {
-    const saved = localStorage.getItem('lang');
-    if (saved === 'it' || saved === 'en') return saved;
-  } catch {}
-  return navigator.language.toLowerCase().startsWith('it') ? 'it' : 'en';
-}
-
-export const locale = $state({ lang: initialLang() });
-
-export function setLang(lang: Lang) {
-  locale.lang = lang;
-  document.documentElement.lang = lang;
-  try { localStorage.setItem('lang', lang); } catch {}
-}
+/**
+ * The current language. Set from the page's URL by the root layout (/it/… is Italian,
+ * everything else English), so each prerendered page carries its own language.
+ */
+export const locale = $state<{ lang: Lang }>({ lang: 'en' });
 
 const DIRECTIONS = {
   it: ['nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ovest', 'ovest', 'nord-ovest'],
@@ -28,6 +18,7 @@ export const strings = {
     lead: 'La luce delle stelle viaggia per anni prima di arrivare fino a noi. Da qualche parte nel cielo ce n’è una la cui luce è partita il giorno della tua nascita e ti raggiunge proprio adesso.',
     birthLabel: 'La tua data di nascita',
     stepsLabel: 'Passaggi',
+    footerNav: 'Pagine del sito',
     stepDate: 'La tua data',
     stepStar: 'La tua stella',
     nextLook: 'Dove guardarla',
@@ -182,6 +173,7 @@ export const strings = {
     lead: 'Starlight travels for years before it reaches us. Somewhere in the sky there is a star whose light set out on the day you were born, and is reaching you right now.',
     birthLabel: 'Your date of birth',
     stepsLabel: 'Steps',
+    footerNav: 'Site pages',
     stepDate: 'Your date',
     stepStar: 'Your star',
     nextLook: 'Where to look',

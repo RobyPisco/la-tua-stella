@@ -1,0 +1,14 @@
+{
+  "name": "Sky of Your Day",
+  "short_name": "Sky of Your Day",
+  "description": "Find the star whose light left it the day you were born, and make a free poster of the sky of any day.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#0d1830",
+  "background_color": "#0d1830",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

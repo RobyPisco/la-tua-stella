@@ -26,7 +26,8 @@ are, and makes an image to share.
 
 ## Stack
 
-Svelte 5 (runes) · TypeScript · Vite 8 · PWA installabile e offline (vite-plugin-pwa) ·
+SvelteKit 2 con pagine pre-generate (adapter-static) · Svelte 5 (runes) · TypeScript · Vite 8 ·
+service worker nativo per l'uso offline ·
 View Transitions API · Web Share API con immagine · Canvas 2D ·
 DeviceOrientation, getUserMedia e Screen Wake Lock per la modalità telefono.
 
@@ -36,13 +37,18 @@ DeviceOrientation, getUserMedia e Screen Wake Lock per la modalità telefono.
 npm install
 npm run dev        # http://localhost:5173
 npm run check      # controllo tipi
-npm run build      # dist/ pronto da pubblicare
-npm run catalog    # rigenera src/data/*.json dal database HYG
+npm run build      # build/ con tutte le pagine in HTML
+npm run catalog    # rigenera i dati da HYG e d3-celestial
 ```
 
 Il deploy su GitHub Pages è automatico a ogni push su `main`
-(`.github/workflows/deploy.yml`). La build usa percorsi relativi, quindi `dist/` funziona
-anche copiata in una sottocartella di qualsiasi server (per esempio XAMPP).
+(`.github/workflows/deploy.yml`). Due variabili governano gli indirizzi:
+`BASE_PATH` (la sottocartella, per GitHub Pages `/la-tua-stella`) e `VITE_SITE_URL`
+(l'indirizzo pubblico, usato per canonical, hreflang, sitemap e anteprime social).
+Con un dominio proprio: `BASE_PATH` vuoto e `VITE_SITE_URL=https://dominio`.
+
+Le pagine e i loro indirizzi in ogni lingua sono in `src/lib/routes.ts`; i testi per i
+motori di ricerca in `src/lib/content.ts`.
 
 ## Licenze
 

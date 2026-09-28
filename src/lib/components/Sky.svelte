@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { Place } from '../lib/astro';
-  import { loadSky, SkyRenderer, type Target } from '../lib/sky';
-  import { t } from '../lib/i18n.svelte';
+  import type { Place } from '../astro';
+  import { loadSky, SkyRenderer, type Target } from '../sky';
+  import { t } from '../i18n.svelte';
 
   interface Props {
     date: Date;
@@ -18,7 +18,6 @@
   let renderer: SkyRenderer | undefined = $state();
   let size = $state(0);
 
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 
   // Animated state: the chart turns towards the target and the ring closes in on it.
   let shownFacing = 180;
@@ -26,6 +25,7 @@
   let revealFor: Target | undefined;
 
   onMount(() => {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     loadSky().then((c) => (renderer = new SkyRenderer(c)));
     const ro = new ResizeObserver(([e]) => (size = Math.floor(e.contentRect.width)));
     ro.observe(box);

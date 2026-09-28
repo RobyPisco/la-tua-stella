@@ -26,9 +26,14 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+        env:
+          # Served from https://robypisco.github.io/la-tua-stella/. With a custom domain:
+          # BASE_PATH '' and VITE_SITE_URL set to the domain.
+          BASE_PATH: /la-tua-stella
+          VITE_SITE_URL: https://robypisco.github.io/la-tua-stella
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: build
           # Keep account storage low: the site is redeployed on every push anyway.
           retention-days: 1
 

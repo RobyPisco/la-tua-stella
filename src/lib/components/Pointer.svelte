@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { equatorialVector, horizonMatrix, toEnu, type Place } from '../lib/astro';
-  import { starRgb } from '../lib/color';
-  import { t } from '../lib/i18n.svelte';
-  import { toScreen, watchOrientation, type Matrix3 } from '../lib/orientation';
-  import { loadSky, type SkyCatalog } from '../lib/sky';
-  import type { Target } from '../lib/sky';
+  import { equatorialVector, horizonMatrix, toEnu, type Place } from '../astro';
+  import { starRgb } from '../color';
+  import { t } from '../i18n.svelte';
+  import { toScreen, watchOrientation, type Matrix3 } from '../orientation';
+  import { loadSky, type SkyCatalog } from '../sky';
+  import type { Target } from '../sky';
 
   let { target, place, onclose }: { target: Target; place: Place; onclose: () => void } = $props();
 

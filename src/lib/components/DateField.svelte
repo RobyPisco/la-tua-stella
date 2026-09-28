@@ -1,14 +1,32 @@
 <script lang="ts">
-  import { locale, t } from '../lib/i18n.svelte';
+  import { untrack } from 'svelte';
+  import { locale, t } from '../i18n.svelte';
 
   // Three plain fields instead of <input type="date">: native pickers differ wildly between
   // phones, and scrolling back decades to a birth year is painful on all of them.
   let { value = $bindable(''), invalid = false, describedby, legend }: { value?: string; invalid?: boolean; describedby?: string; legend?: string } = $props();
 
-  const [y0, m0, d0] = value ? value.split('-') : ['', '', ''];
-  let day = $state(d0 ? String(+d0) : '');
-  let month = $state(m0 ? String(+m0) : '');
-  let year = $state(y0);
+  let day = $state('');
+  let month = $state('');
+  let year = $state('');
+
+  const compose = (d: string, m: string, y: string) => {
+    const dd = +d, mm = +m, yy = +y;
+    const valid = yy >= 1000 && mm >= 1 && dd >= 1 && dd <= new Date(yy, mm, 0).getDate();
+    return valid ? `${yy}-${String(mm).padStart(2, '0')}-${String(dd).padStart(2, '0')}` : '';
+  };
+
+  // A date set from outside (a saved one, loaded after the page) fills the three fields.
+  $effect.pre(() => {
+    const v = value;
+    untrack(() => {
+      if (!v || v === compose(day, month, year)) return;
+      const [y, m, d] = v.split('-');
+      year = y;
+      month = String(+m);
+      day = String(+d);
+    });
+  });
 
   const months = $derived(
     Array.from({ length: 12 }, (_, i) =>
@@ -17,9 +35,7 @@
   );
 
   $effect(() => {
-    const d = +day, m = +month, y = +year;
-    const valid = y >= 1000 && m >= 1 && d >= 1 && d <= new Date(y, m, 0).getDate();
-    value = valid ? `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}` : '';
+    value = compose(day, month, year);
   });
 </script>
 

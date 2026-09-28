@@ -1,36 +1,26 @@
 <script lang="ts">
-  import { onMount, untrack } from 'svelte';
-  import { sunAltitude, type Place } from '../lib/astro';
-  import { KOFI_URL, SITE } from '../lib/brand';
-  import { guessPlace, savePlace } from '../lib/geo';
-  import { fmtDate, fmtTime, locale, t } from '../lib/i18n.svelte';
+  import { onMount } from 'svelte';
+  import { sunAltitude, type Place } from '../astro';
+  import { KOFI_URL, SITE } from '../brand';
+  import { guessPlace, savePlace, savedPlace } from '../geo';
+  import { href } from '../routes';
+  import { fmtDate, fmtTime, locale, t } from '../i18n.svelte';
   import {
     buildPoster, FORMATS, loadPosterData, renderMilkyWay, THEMES,
     type PosterOptions, type PosterSpec,
-  } from '../lib/poster';
-  import { download, renderPdf, renderPng, standaloneSvg } from '../lib/posterExport';
-  import { arrivalDate, findStars, loadCatalog, starName, type Star } from '../lib/stars';
-  import { zonedToUtc } from '../lib/timezone';
+  } from '../poster';
+  import { download, renderPdf, renderPng, standaloneSvg } from '../posterExport';
+  import { arrivalDate, findStars, loadCatalog, starName, type Star } from '../stars';
+  import { zonedToUtc } from '../timezone';
   import DateField from './DateField.svelte';
   import PlacePicker from './PlacePicker.svelte';
 
-  interface Props {
-    birth: Date | null;
-    place: Place | null;
-    onplace: (p: Place) => void;
-    onback: () => void;
-    hasStar: boolean;
-  }
-  let { birth, place, onplace, onback, hasStar }: Props = $props();
-
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
-  // Starting values only: from here on the editor owns its own state.
-  const initial = untrack(() => ({ birth, place }));
-  let dateValue = $state(iso(initial.birth ?? new Date()));
+  let dateValue = $state(iso(new Date()));
   let time = $state('22:00');
-  let where = $state<Place>(initial.place ?? guessPlace());
-  let choosingPlace = $state(!initial.place);
+  let where = $state<Place>(guessPlace());
+  let choosingPlace = $state(true);
   let title = $state(t().posterTitleDefault);
   let subtitle = $state('');
   let themeId = $state('night');
@@ -104,8 +94,9 @@
   });
 
   // Text measuring with the page's own (already loaded) fonts.
-  const measureCtx = document.createElement('canvas').getContext('2d')!;
+  let measureCtx: CanvasRenderingContext2D | undefined;
   const measure = (text: string, font: string) => {
+    measureCtx ??= document.createElement('canvas').getContext('2d')!;
     measureCtx.font = font;
     return measureCtx.measureText(text).width;
   };
@@ -126,6 +117,19 @@
   });
 
   onMount(() => {
+    // Arriving from "your star": start from that birth date and the place already chosen.
+    try {
+      const prefill = sessionStorage.getItem('poster-date');
+      if (prefill) {
+        dateValue = prefill;
+        sessionStorage.removeItem('poster-date');
+      }
+    } catch {}
+    const saved = savedPlace();
+    if (saved) {
+      where = saved;
+      choosingPlace = false;
+    }
     loadCatalog().then((s) => {
       stars = s;
       catalogReady = true;
@@ -142,7 +146,6 @@
     where = p;
     choosingPlace = false;
     savePlace(p);
-    onplace(p);
   }
 
   function fileName(ext: string) {
@@ -176,7 +179,7 @@
 
 <section class="editor">
   <header class="head">
-    <button class="link" type="button" onclick={onback}>{hasStar ? t().posterBack : t().posterHome}</button>
+    <a class="link" href={href('home', locale.lang)}>{t().posterHome}</a>
     <h1>{t().posterHeading}</h1>
     <p class="intro">{t().posterIntro}</p>
   </header>

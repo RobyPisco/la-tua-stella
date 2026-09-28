@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Place } from '../lib/astro';
-  import { currentPosition, searchCity } from '../lib/geo';
-  import { locale, t } from '../lib/i18n.svelte';
+  import type { Place } from '../astro';
+  import { currentPosition, searchCity } from '../geo';
+  import { locale, t } from '../i18n.svelte';
 
   let { onpick }: { onpick: (p: Place) => void } = $props();
 

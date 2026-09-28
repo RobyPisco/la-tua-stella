@@ -3,11 +3,11 @@
 </script>
 
 <script lang="ts">
-  import type { Place } from '../lib/astro';
-  import { facts, instrument, starKind, visibility, type Sighting } from '../lib/describe';
-  import { fmtDate, fmtNum, locale, t } from '../lib/i18n.svelte';
-  import { arrivalDate, departureDate, starDesignation, starName, type Star } from '../lib/stars';
-  import { orientationSupported, requestOrientation } from '../lib/orientation';
+  import type { Place } from '../astro';
+  import { facts, instrument, starKind, visibility, type Sighting } from '../describe';
+  import { fmtDate, fmtNum, locale, t } from '../i18n.svelte';
+  import { arrivalDate, departureDate, starDesignation, starName, type Star } from '../stars';
+  import { orientationSupported, requestOrientation } from '../orientation';
   import PlacePicker from './PlacePicker.svelte';
   import Pointer from './Pointer.svelte';
 
@@ -30,7 +30,7 @@
   let choosingPlace = $state(false);
   let pointing = $state(false);
   let pointError = $state('');
-  const canPoint = orientationSupported();
+  const canPoint = typeof window !== 'undefined' && orientationSupported();
 
   async function startPointing() {
     // iOS only grants sensor access from inside the tap that asks for it.

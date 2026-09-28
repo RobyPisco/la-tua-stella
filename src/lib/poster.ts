@@ -1,3 +1,4 @@
+import { assets } from '$app/paths';
 import { Body, Equator, Illumination, Observer } from 'astronomy-engine';
 import { equatorialVector, horizonMatrix, toHorizon, type HorizonPos, type Place } from './astro';
 import { starRgb } from './color';
@@ -30,7 +31,7 @@ export function loadPosterData(): Promise<PosterData> {
     import('../data/poster-stars.json'),
     import('../data/constellations.json'),
     import('../data/sky.json'),
-    loadImage(`${import.meta.env.BASE_URL}milkyway.png`),
+    loadImage(`${assets}/milkyway.png`),
   ]).then(([ps, cons, sky, mwImg]) => {
     const p = ps.default as { stars: number[]; names: [string, number, number, number][] };
     const stars: PosterData['stars'] = [];
