@@ -3,7 +3,9 @@
   import { facts, instrument, starKind, visibility, type Sighting } from '../lib/describe';
   import { fmtDate, fmtNum, locale, t } from '../lib/i18n.svelte';
   import { arrivalDate, departureDate, starDesignation, starName, type Star } from '../lib/stars';
+  import { orientationSupported, requestOrientation } from '../lib/orientation';
   import PlacePicker from './PlacePicker.svelte';
+  import Pointer from './Pointer.svelte';
 
   interface Props {
     star: Star;
@@ -19,6 +21,16 @@
   let { star, others, birth, place, sighting, onpickplace, onpickstar, onrestart, onshare }: Props = $props();
 
   let choosingPlace = $state(false);
+  let pointing = $state(false);
+  let pointError = $state('');
+  const canPoint = orientationSupported();
+
+  async function startPointing() {
+    // iOS only grants sensor access from inside the tap that asks for it.
+    const ok = await requestOrientation();
+    pointError = ok ? '' : t().pointDenied;
+    pointing = ok;
+  }
   let shareStatus = $state('');
   let sharing = $state(false);
 
@@ -82,6 +94,12 @@
         {#each sighting.lines as line}<p>{line}</p>{/each}
       {/if}
       <p>{visibility(star.mag)}</p>
+      {#if canPoint}
+        <div class="point">
+          <button class="btn" type="button" onclick={startPointing}>{t().pointButton}</button>
+          {#if pointError}<p role="alert">{pointError}</p>{/if}
+        </div>
+      {/if}
     {:else}
       <p>{t().needPlace}</p>
       <PlacePicker onpick={pickPlace} />
@@ -119,6 +137,14 @@
 
   <p class="note">{t().precision}</p>
 </article>
+
+{#if pointing && place}
+  <Pointer
+    target={{ raH: star.raH, dec: star.dec, ci: star.ci, label: name }}
+    {place}
+    onclose={() => (pointing = false)}
+  />
+{/if}
 
 <style>
   .result {
@@ -208,6 +234,15 @@
     justify-items: start;
   }
   .share p {
+    color: var(--muted);
+  }
+  .point {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+    margin-top: 0.5rem;
+  }
+  .point p {
     color: var(--muted);
   }
   .note {

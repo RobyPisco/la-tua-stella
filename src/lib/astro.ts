@@ -121,3 +121,11 @@ export function nextDark(place: Place, from = new Date()): Date {
   }
   return from;
 }
+
+/** J2000 unit vector → local east-north-up unit vector. */
+export function toEnu(m: number[][], v: readonly number[]): [number, number, number] {
+  const x = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2]; // north
+  const y = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2]; // west
+  const z = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2]; // up
+  return [-y, x, z];
+}

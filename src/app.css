@@ -135,3 +135,7 @@ input {
     animation: none !important;
   }
 }
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}

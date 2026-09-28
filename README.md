@@ -19,12 +19,16 @@ are, and makes an image to share.
   (precessione, nutazione, rifrazione, crepuscolo).
 - **Luoghi:** geolocalizzazione del browser oppure ricerca città con l'API gratuita di
   [Open-Meteo](https://open-meteo.com/en/docs/geocoding-api).
+- **Cercala col telefono:** su smartphone la bussola e i sensori di movimento
+  (DeviceOrientation) mostrano il cielo nella direzione in cui punti, con indicazioni
+  per arrivare alla stella, vibrazione quando la inquadri e fotocamera opzionale.
 - Tutto il calcolo avviene nel browser: la data di nascita non lascia il dispositivo.
 
 ## Stack
 
 Svelte 5 (runes) · TypeScript · Vite 8 · PWA installabile e offline (vite-plugin-pwa) ·
-View Transitions API · Web Share API con immagine · Canvas 2D.
+View Transitions API · Web Share API con immagine · Canvas 2D ·
+DeviceOrientation, getUserMedia e Screen Wake Lock per la modalità telefono.
 
 ## Sviluppo
 
