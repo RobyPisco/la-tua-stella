@@ -144,7 +144,7 @@ export function starPage(lang: Lang, slug: string) {
     star,
     departed: star.ly > 0 && star.ly < 5000 ? Math.round(BUILT.getUTCFullYear() - star.ly) : null,
     birthYear,
-    visibility: visibility(star, THIS_YEAR),
+    visibility: visibility(star, THIS_YEAR, PT[lang].visibilityLat),
     sameCon,
     alternates: alternatesOf((l) => paths.star(l, slugs[l])),
   };

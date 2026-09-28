@@ -97,7 +97,7 @@
 
   {#if data.sameCon.length}
     <section>
-      <h2>{p.sameConstellation(lang === 'en' ? conPlain : conName)}</h2>
+      <h2>{p.sameConstellation(lang === 'en' || lang === 'de' ? conPlain : conName)}</h2>
       <ul class="grid-links wide">
         {#each data.sameCon as o (o.slug)}
           <li><a href={base + paths.star(lang, o.slug)}>{properName(o.proper, lang)}</a></li>

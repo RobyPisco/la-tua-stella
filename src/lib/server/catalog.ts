@@ -75,13 +75,13 @@ export interface Visibility {
 }
 
 /**
- * Visibility from latitude 42° N (Rome, New York, Tokyo, Barcelona…), at 22:00 local mean
- * solar time on the 15th of each month.
+ * Visibility from a latitude (42° N: Rome, New York, Tokyo…; each language picks its own),
+ * at 22:00 local mean solar time on the 15th of each month.
  */
-export function visibility(s: { raH: number; dec: number }, year: number): Visibility {
-  const lat = 42;
+export function visibility(s: { raH: number; dec: number }, year: number, lat = 42): Visibility {
   const maxAlt = 90 - Math.abs(lat - s.dec);
-  const minAlt = s.dec - (90 - lat); // lowest point, below the pole
+  // Lowest point, below the visible pole (north or south).
+  const minAlt = Math.abs(lat) - 90 + (lat >= 0 ? s.dec : -s.dec);
   if (maxAlt < 0) return { months: [], circumpolar: false, never: true, low: false };
   if (maxAlt < 15) return { months: [], circumpolar: false, never: false, low: true };
   const place = { lat, lon: 0, name: '' };

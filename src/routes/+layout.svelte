@@ -24,7 +24,9 @@
     (page.data.alternates as Partial<Record<Lang, string>> | undefined) ??
       (page.data.page ? PAGES[page.data.page as PageId] : undefined),
   );
-  const LANG_NAMES: Record<Lang, string> = { en: 'English', es: 'Español', it: 'Italiano' };
+  const LANG_NAMES: Record<Lang, string> = {
+    en: 'English', es: 'Español', it: 'Italiano', de: 'Deutsch', fr: 'Français', pt: 'Português',
+  };
 </script>
 
 <div class="shell">
@@ -33,7 +35,13 @@
     <nav class="lang" aria-label="Language">
       {#each LANGS as l (l)}
         {#if alternates?.[l]}
-          <a href={base + alternates[l]} hreflang={l} lang={l} aria-current={l === locale.lang ? 'page' : undefined}>{LANG_NAMES[l]}</a>
+          <a
+            href={base + alternates[l]}
+            hreflang={l}
+            lang={l}
+            aria-label={LANG_NAMES[l]}
+            aria-current={l === locale.lang ? 'page' : undefined}
+          ><span class="full">{LANG_NAMES[l]}</span><span class="short" aria-hidden="true">{l.toUpperCase()}</span></a>
         {/if}
       {/each}
     </nav>
@@ -94,6 +102,22 @@
   .lang a[aria-current='page'] {
     color: var(--ink);
     text-decoration: none;
+  }
+  .short {
+    display: none;
+  }
+  /* Six languages don't fit next to the name on a phone: two-letter codes instead. */
+  @media (max-width: 1100px) {
+    .lang {
+      gap: 0.6rem;
+    }
+    .full {
+      display: none;
+    }
+    .short {
+      display: inline;
+      letter-spacing: 0.04em;
+    }
   }
   main {
     min-width: 0;

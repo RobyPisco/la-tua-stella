@@ -14,7 +14,7 @@
   }
   let { title, description, lang, alternates, image = '/og.png', jsonLd = [] }: Props = $props();
 
-  const OG_LOCALE: Record<Lang, string> = { en: 'en_US', es: 'es_ES', it: 'it_IT' };
+  const OG_LOCALE: Record<Lang, string> = { en: 'en_US', es: 'es_ES', it: 'it_IT', de: 'de_DE', fr: 'fr_FR', pt: 'pt_BR' };
   const canonical = $derived(absolute(alternates[lang] ?? '/'));
   // "</" can't appear inside a <script> element.
   const ld = (o: object) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</` + 'script>';

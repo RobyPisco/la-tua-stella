@@ -155,6 +155,150 @@
         p: ['Quien quiera puede apoyar el sitio con una donación voluntaria. No desbloquea nada: todo sigue siendo gratis para todos.'],
       },
     },
+    de: {
+      title: 'Nutzungsbedingungen',
+      description: 'Was du mit den Himmelspostern von Sky of Your Day machen darfst: kostenlos für den persönlichen Gebrauch und als Geschenk, nicht zum Weiterverkauf.',
+      lead: 'Sky of Your Day ist kostenlos und bleibt es. Diese wenigen Regeln sorgen dafür, dass es so bleibt.',
+      sections: [
+        {
+          h: 'Was du darfst',
+          p: [
+            'So viele Poster und Bilder erstellen, herunterladen und drucken, wie du willst, ohne etwas zu bezahlen.',
+            'Sie selbst nutzen, zu Hause aufhängen, verschenken, in sozialen Medien oder in einer Nachricht teilen.',
+            'Die Datei in einen Copyshop oder zu einer Online-Druckerei bringen, um sie drucken zu lassen.',
+          ],
+        },
+        {
+          h: 'Was nicht erlaubt ist',
+          p: [
+            'Mit der Website erstellte Poster oder Dateien verkaufen, auch verändert: zum Beispiel auf Etsy, Amazon, eBay oder in einem Geschäft.',
+            'Die Erstellung von Postern mit der Website als bezahlte Dienstleistung anbieten.',
+            'Die Adresse skyofyourday.com von den Postern entfernen, um sie als eigene Arbeit auszugeben.',
+          ],
+        },
+        {
+          h: 'Wem was gehört',
+          p: [
+            'Die Gestaltung, das Layout der Poster und die Texte der Website gehören Sky of Your Day.',
+            'Positionen und Daten der Sterne stammen aus der HYG Database (CC BY-SA 4.0), die Sternbildfiguren aus d3-celestial (BSD-3) und die Berechnungen aus Astronomy Engine (MIT): Sie bleiben unter ihren eigenen Lizenzen frei.',
+          ],
+        },
+        {
+          h: 'Genauigkeit',
+          p: [
+            'Der Himmel wird für das gewählte Datum, die Uhrzeit und den Ort sorgfältig berechnet, aber die Website wird ohne Gewähr angeboten, so wie sie ist: Die Daten einiger Sterne, vor allem der weniger erforschten, können unvollständig sein.',
+          ],
+        },
+        {
+          h: 'Datenschutz',
+          p: [
+            'Keine Cookies und keine Konten. Dein Geburtsdatum und dein Ort bleiben auf deinem Gerät.',
+            'Wenn du nach einer Stadt suchst, wird der eingegebene Name an Open-Meteo gesendet, um ihre Koordinaten zu finden.',
+            'Wenn du ein Poster herunterlädst, zählt die Website den öffentlichen Zähler der erstellten Karten um 1 hoch: Gezählt wird der Download, nicht wer ihn macht.',
+          ],
+        },
+      ],
+      donate: {
+        h: 'Spenden',
+        p: ['Wer möchte, kann die Website mit einer freiwilligen Spende unterstützen. Sie schaltet nichts frei: Alles bleibt für alle kostenlos.'],
+      },
+    },
+    fr: {
+      title: 'Conditions d’utilisation',
+      description: 'Ce que tu peux faire avec les posters du ciel créés sur Sky of Your Day : gratuits pour un usage personnel et pour offrir, pas pour la revente.',
+      lead: 'Sky of Your Day est gratuit et le restera. Ces quelques règles servent à ce qu’il le reste.',
+      sections: [
+        {
+          h: 'Ce que tu peux faire',
+          p: [
+            'Créer, télécharger et imprimer autant de posters et d’images que tu veux, sans rien payer.',
+            'Les utiliser pour toi, les accrocher chez toi, les offrir, les partager sur les réseaux sociaux ou dans un message.',
+            'Apporter le fichier chez un imprimeur ou à un service d’impression en ligne pour le faire imprimer.',
+          ],
+        },
+        {
+          h: 'Ce qui n’est pas autorisé',
+          p: [
+            'Vendre les posters ou les fichiers créés avec le site, même modifiés : par exemple sur Etsy, Amazon, eBay ou dans une boutique.',
+            'Proposer contre paiement la création de posters faits avec le site.',
+            'Retirer l’adresse skyofyourday.com des posters pour les présenter comme ton propre travail.',
+          ],
+        },
+        {
+          h: 'À qui appartient quoi',
+          p: [
+            'Le graphisme, la mise en page des posters et les textes du site appartiennent à Sky of Your Day.',
+            'Les positions et les données des étoiles viennent de la HYG Database (CC BY-SA 4.0), les figures des constellations de d3-celestial (BSD-3) et les calculs d’Astronomy Engine (MIT) : elles restent libres selon leurs licences.',
+          ],
+        },
+        {
+          h: 'Précision',
+          p: [
+            'Le ciel est calculé avec soin pour la date, l’heure et le lieu choisis, mais le site est proposé tel quel, sans garantie : les données de certaines étoiles, surtout les moins étudiées, peuvent être incomplètes.',
+          ],
+        },
+        {
+          h: 'Vie privée',
+          p: [
+            'Pas de cookies ni de compte. Ta date de naissance et ton lieu restent sur ton appareil.',
+            'Quand tu cherches une ville, le nom saisi est envoyé à Open-Meteo pour trouver ses coordonnées.',
+            'Quand tu télécharges un poster, le site ajoute 1 au compteur public des cartes créées : on compte le téléchargement, pas la personne.',
+          ],
+        },
+      ],
+      donate: {
+        h: 'Dons',
+        p: ['Qui le souhaite peut soutenir le site par un don volontaire. Il ne débloque rien : tout reste gratuit pour tout le monde.'],
+      },
+    },
+    pt: {
+      title: 'Termos de uso',
+      description: 'O que você pode fazer com os pôsteres do céu criados no Sky of Your Day: grátis para uso pessoal e para presentear, não para revenda.',
+      lead: 'O Sky of Your Day é grátis e vai continuar assim. Estas poucas regras servem para manter as coisas assim.',
+      sections: [
+        {
+          h: 'O que você pode fazer',
+          p: [
+            'Criar, baixar e imprimir quantos pôsteres e imagens quiser, sem pagar nada.',
+            'Usá-los para você, pendurá-los em casa, dar de presente, compartilhar nas redes sociais ou numa mensagem.',
+            'Levar o arquivo a uma gráfica ou a um serviço de impressão online para imprimir.',
+          ],
+        },
+        {
+          h: 'O que não é permitido',
+          p: [
+            'Vender os pôsteres ou os arquivos criados com o site, mesmo modificados: por exemplo na Etsy, na Amazon, no eBay ou numa loja.',
+            'Oferecer como serviço pago a criação de pôsteres feitos com o site.',
+            'Tirar o endereço skyofyourday.com dos pôsteres para apresentá-los como trabalho próprio.',
+          ],
+        },
+        {
+          h: 'De quem é cada coisa',
+          p: [
+            'O design, a diagramação dos pôsteres e os textos do site são do Sky of Your Day.',
+            'As posições e os dados das estrelas vêm do HYG Database (CC BY-SA 4.0), as figuras das constelações do d3-celestial (BSD-3) e os cálculos do Astronomy Engine (MIT): continuam livres segundo as suas licenças.',
+          ],
+        },
+        {
+          h: 'Precisão',
+          p: [
+            'O céu é calculado com cuidado para a data, a hora e o lugar escolhidos, mas o site é oferecido como está, sem garantias: os dados de algumas estrelas, sobretudo as menos estudadas, podem estar incompletos.',
+          ],
+        },
+        {
+          h: 'Privacidade',
+          p: [
+            'Sem cookies e sem contas. Sua data de nascimento e seu lugar ficam no seu aparelho.',
+            'Quando você procura uma cidade, o nome digitado é enviado ao Open-Meteo para encontrar as coordenadas.',
+            'Quando você baixa um pôster, o site soma 1 ao contador público de mapas criados: conta-se o download, não quem faz.',
+          ],
+        },
+      ],
+      donate: {
+        h: 'Doações',
+        p: ['Quem quiser pode apoiar o site com uma doação voluntária. Ela não libera nada: tudo continua grátis para todos.'],
+      },
+    },
   };
 
   const c = $derived(TERMS[lang]);

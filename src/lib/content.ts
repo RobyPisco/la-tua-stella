@@ -125,6 +125,120 @@ export const CONTENT: Record<'home' | 'poster', Record<Lang, PageContent>> = {
         },
       ],
     },
+    de: {
+      title: 'Dein Stern: der Stern, dessen Licht an deinem Geburtstag aufbrach | Sky of Your Day',
+      description:
+        'Gib dein Geburtsdatum ein und finde den Stern, dessen Licht an deinem Geburtstag aufgebrochen ist und jetzt die Erde erreicht. Sieh, wo du ihn heute Nacht findest. Kostenlos, ohne Anmeldung.',
+      sections: [
+        {
+          heading: 'So funktioniert es',
+          paragraphs: [
+            'Licht braucht Zeit. Von einem Stern in 40 Lichtjahren Entfernung ist das Licht, das du heute Nacht siehst, vor 40 Jahren aufgebrochen.',
+            'Für jedes Alter gibt es also einen Stern in genau der richtigen Entfernung: Das Licht, das ihn an deinem Geburtstag verlassen hat, kommt ungefähr jetzt auf der Erde an. Wir durchsuchen einen Katalog von über 4.000 nahen Sternen, erstellt aus den Katalogen Hipparcos, Yale und Gliese, nach dem Stern, der zu deinem Datum passt, und bevorzugen Sterne, die du mit bloßem Auge sehen kannst.',
+            'Dann berechnen wir für deinen Standort, wann er aufgeht, wie hoch er steigt und in welche Richtung du schauen musst, und zeichnen den echten Himmel über dir mit deinem Stern darin. Mit dem Handy kannst du es zum Himmel halten und dem Pfeil folgen.',
+          ],
+        },
+      ],
+      faqTitle: 'Fragen',
+      faq: [
+        {
+          q: 'Ist es ein echter Stern?',
+          a: 'Ja. Jeder Stern hier ist ein echter Stern mit gemessener Entfernung. Nichts wird erfunden oder für dich „getauft“: Es ist der Stern, dessen Entfernung in Lichtjahren deinem Alter entspricht.',
+        },
+        {
+          q: 'Wie genau ist das Datum?',
+          a: 'Die Entfernungen der Sterne stammen aus Parallaxenmessungen. Bei nahen Sternen liegt die Unsicherheit zwischen einigen Wochen und einigen Monaten Lichtlaufzeit: Das Datum ist also eine gute Schätzung, nicht auf den Tag genau.',
+        },
+        {
+          q: 'Und wenn mein Stern zu schwach ist, um ihn zu sehen?',
+          a: 'Wir bevorzugen Sterne, die mit bloßem Auge sichtbar sind. Für manche Alter ist der passendste Stern schwach: Dann sagen wir dir, ob du einen dunklen Himmel, ein Fernglas oder ein Teleskop brauchst, und zeigen dir die anderen Sterne in deinem Alter.',
+        },
+        {
+          q: 'Und bei Babys und kleinen Kindern?',
+          a: 'Der nächste Stern, Proxima Centauri, ist 4,2 Lichtjahre entfernt. Bei Kindern unter vier Jahren ist das Licht, das an ihrem Geburtstag aufgebrochen ist, noch nicht angekommen: Wir zeigen, welcher Stern es ist und an welchem Tag sein Licht die Erde erreicht.',
+        },
+        {
+          q: 'Ist es kostenlos? Was passiert mit meinen Daten?',
+          a: 'Es ist kostenlos und ohne Anmeldung. Dein Geburtsdatum wird nur in deinem Browser verwendet und nirgendwohin gesendet. Wenn du nach einer Stadt suchst, wird nur ihr Name an den Geocoding-Dienst von Open-Meteo gesendet.',
+        },
+      ],
+    },
+    fr: {
+      title: 'Ton étoile : l’étoile dont la lumière est partie le jour de ta naissance | Sky of Your Day',
+      description:
+        'Entre ta date de naissance et trouve l’étoile dont la lumière est partie le jour de ta naissance et atteint la Terre maintenant. Découvre où la regarder ce soir. Gratuit, sans inscription.',
+      sections: [
+        {
+          heading: 'Comment ça marche',
+          paragraphs: [
+            'La lumière met du temps à voyager. D’une étoile située à 40 années-lumière, la lumière que tu vois ce soir est partie il y a 40 ans.',
+            'Pour chaque âge, il existe donc une étoile à la bonne distance : la lumière qui l’a quittée le jour de ta naissance arrive sur Terre à peu près maintenant. Nous cherchons dans un catalogue de plus de 4 000 étoiles proches, construit à partir des catalogues Hipparcos, Yale et Gliese, celle qui correspond à ta date, en privilégiant les étoiles visibles à l’œil nu.',
+            'Ensuite nous calculons, pour l’endroit où tu te trouves, quand elle se lève, à quelle hauteur elle monte et dans quelle direction regarder, et nous dessinons le vrai ciel au-dessus de toi avec ton étoile. Sur un téléphone, tu peux le lever vers le ciel et suivre la flèche.',
+          ],
+        },
+      ],
+      faqTitle: 'Questions',
+      faq: [
+        {
+          q: 'C’est une vraie étoile ?',
+          a: 'Oui. Chaque étoile ici est une vraie étoile dont la distance a été mesurée. Rien n’est inventé ni « baptisé » pour toi : c’est l’étoile dont la distance en années-lumière correspond à ton âge.',
+        },
+        {
+          q: 'La date est-elle précise ?',
+          a: 'Les distances des étoiles viennent de mesures de parallaxe. Pour les étoiles proches, l’incertitude va de quelques semaines à quelques mois de trajet de la lumière : la date est une bonne estimation, pas exacte au jour près.',
+        },
+        {
+          q: 'Et si mon étoile est trop faible pour être vue ?',
+          a: 'Nous privilégions les étoiles visibles à l’œil nu. Pour certains âges, l’étoile la plus proche du compte est faible : nous te disons s’il faut un ciel noir, des jumelles ou un télescope, et nous te montrons les autres étoiles de ton âge.',
+        },
+        {
+          q: 'Et pour les bébés et les jeunes enfants ?',
+          a: 'L’étoile la plus proche, Proxima du Centaure, est à 4,2 années-lumière. Pour les enfants de moins de quatre ans, la lumière partie le jour de leur naissance n’est pas encore arrivée : nous montrons de quelle étoile il s’agit et la date à laquelle sa lumière atteindra la Terre.',
+        },
+        {
+          q: 'C’est gratuit ? Que deviennent mes données ?',
+          a: 'C’est gratuit et sans inscription. Ta date de naissance est utilisée uniquement dans ton navigateur et n’est envoyée nulle part. Si tu cherches une ville, seul son nom est envoyé au service de géocodage d’Open-Meteo.',
+        },
+      ],
+    },
+    pt: {
+      title: 'Sua estrela: a estrela cuja luz partiu no dia do seu nascimento | Sky of Your Day',
+      description:
+        'Digite sua data de nascimento e encontre a estrela cuja luz partiu no dia em que você nasceu e está chegando agora à Terra. Veja onde olhar esta noite. Grátis, sem cadastro.',
+      sections: [
+        {
+          heading: 'Como funciona',
+          paragraphs: [
+            'A luz leva tempo para viajar. De uma estrela a 40 anos-luz, a luz que você vê esta noite partiu há 40 anos.',
+            'Então, para cada idade existe uma estrela na distância certa: a luz que saiu dela no dia do seu nascimento está chegando à Terra mais ou menos agora. Procuramos num catálogo de mais de 4.000 estrelas próximas, montado a partir dos catálogos Hipparcos, Yale e Gliese, a que corresponde à sua data, e damos preferência às estrelas que você pode ver a olho nu.',
+            'Depois calculamos, para o lugar onde você está, quando ela nasce, até que altura sobe e para que lado olhar, e desenhamos o céu real acima de você com a sua estrela. No celular, você pode apontá-lo para o céu e seguir a seta.',
+          ],
+        },
+      ],
+      faqTitle: 'Perguntas',
+      faq: [
+        {
+          q: 'É uma estrela de verdade?',
+          a: 'Sim. Cada estrela aqui é uma estrela real, com distância medida. Nada é inventado nem “batizado” para você: é a estrela cuja distância em anos-luz corresponde à sua idade.',
+        },
+        {
+          q: 'A data é precisa?',
+          a: 'As distâncias das estrelas vêm de medições de paralaxe. Para estrelas próximas, a incerteza vai de algumas semanas a alguns meses de viagem da luz: a data é uma boa estimativa, não exata ao dia.',
+        },
+        {
+          q: 'E se a minha estrela for fraca demais para ver?',
+          a: 'Damos preferência a estrelas visíveis a olho nu. Para algumas idades a estrela mais próxima da conta é fraca: dizemos se você precisa de um céu escuro, de binóculos ou de um telescópio, e mostramos as outras estrelas da sua idade.',
+        },
+        {
+          q: 'E para bebês e crianças pequenas?',
+          a: 'A estrela mais próxima, Proxima Centauri, está a 4,2 anos-luz. Para crianças com menos de quatro anos, a luz que partiu no dia do nascimento ainda não chegou: mostramos qual é a estrela e a data em que a luz dela vai chegar à Terra.',
+        },
+        {
+          q: 'É grátis? O que acontece com os meus dados?',
+          a: 'É grátis e sem cadastro. Sua data de nascimento é usada só no seu navegador e não é enviada a lugar nenhum. Se você procurar uma cidade, só o nome dela é enviado ao serviço de geocodificação do Open-Meteo.',
+        },
+      ],
+    },
   },
   poster: {
     en: {
@@ -241,6 +355,123 @@ export const CONTENT: Record<'home' | 'poster', Record<Lang, PageContent>> = {
         {
           q: 'Posso farla per un matrimonio, un anniversario o una nascita?',
           a: 'Sì: qualsiasi data, qualsiasi luogo. Aggiungi un titolo e una dedica e scegli uno dei quattro stili: Notte, Carta, Oro o Bianco.',
+        },
+      ],
+    },
+    de: {
+      title: 'Sternkarte als Poster, kostenlos: der Nachthimmel zu jedem Datum und Ort | Sky of Your Day',
+      description:
+        'Erstelle eine Sternkarte des Himmels zu jedem Datum, jeder Uhrzeit und jedem Ort: echte Sterne, Sternbilder, Milchstraße, Mondphase und Planeten. Kostenloses PDF, PNG und SVG in hoher Auflösung, druckfertig.',
+      sections: [
+        {
+          heading: 'Was auf deiner Sternkarte ist',
+          paragraphs: [
+            'Der Himmel genau so, wie er zu einem bestimmten Moment über einem Ort stand: fast 9.000 Sterne in ihren echten Farben, die Sternbilder mit ihren Namen, die Milchstraße, der Mond in seiner Phase jener Nacht und die Planeten, die zu sehen waren.',
+            'Wir markieren auch den Stern jenes Tages: den Stern, dessen Licht an diesem Datum aufgebrochen ist und jetzt ungefähr die Erde erreicht. So wird aus der Karte einer Nacht eine kleine Geschichte über das Licht.',
+          ],
+        },
+        {
+          heading: 'Drucken',
+          paragraphs: [
+            'Wähle A4, A3, 30 × 40 oder 50 × 70 cm und lade das PDF herunter: Es hat genau die Papiergröße, bereit für den Copyshop oder den Drucker zu Hause. Für sehr große Drucke nimm das SVG, das in jeder Größe scharf bleibt. Die Formate quadratisch, 4:5 und Handy sind zum Teilen und für den Sperrbildschirm gedacht.',
+          ],
+        },
+      ],
+      faqTitle: 'Fragen',
+      faq: [
+        {
+          q: 'Ist die Sternkarte genau?',
+          a: 'Ja. Die Positionen werden für den genauen Ort und die genaue Uhrzeit berechnet, einschließlich der damals geltenden Sommerzeit, aus einem Katalog auf Basis der Hipparcos-Messungen. Mond und Planeten werden mit Astronomy Engine berechnet.',
+        },
+        {
+          q: 'Ist es wirklich kostenlos? Gibt es ein Wasserzeichen?',
+          a: 'Es ist kostenlos, ohne Anmeldung und ohne Wasserzeichen auf dem Himmel. Unten auf dem Poster steht klein die Adresse der Website.',
+        },
+        {
+          q: 'Ich kenne die genaue Uhrzeit nicht. Was soll ich wählen?',
+          a: 'Lass einfach 22:00. Der Himmel dreht sich um etwa 15 Grad pro Stunde, die Uhrzeit ändert also, welche Sterne hoch stehen; jede Abendstunde ergibt einen vollständigen und echten Nachthimmel für dieses Datum.',
+        },
+        {
+          q: 'Kann ich eine für eine Hochzeit, einen Jahrestag oder eine Geburt machen?',
+          a: 'Ja: jedes Datum, jeder Ort. Füge einen Titel und eine Widmung hinzu und wähle einen von vier Stilen: Nacht, Papier, Gold oder Weiß.',
+        },
+      ],
+    },
+    fr: {
+      title: 'Carte du ciel en poster, gratuite : le ciel de n’importe quelle date et lieu | Sky of Your Day',
+      description:
+        'Crée une carte du ciel de n’importe quelle date, heure et lieu : vraies étoiles, constellations, Voie lactée, phase de la Lune et planètes. PDF, PNG et SVG gratuits en haute résolution, prêts à imprimer.',
+      sections: [
+        {
+          heading: 'Ce qu’il y a sur ta carte du ciel',
+          paragraphs: [
+            'Le ciel exactement tel qu’il était au-dessus d’un lieu à un moment donné : près de 9 000 étoiles dans leurs vraies couleurs, les constellations avec leurs noms, la Voie lactée, la Lune dans sa phase de cette nuit-là et les planètes qui étaient levées.',
+            'Nous indiquons aussi l’étoile de ce jour-là : celle dont la lumière est partie à cette date et atteint la Terre à peu près maintenant. La carte d’une nuit devient une petite histoire de lumière.',
+          ],
+        },
+        {
+          heading: 'L’imprimer',
+          paragraphs: [
+            'Choisis A4, A3, 30 × 40 ou 50 × 70 cm et télécharge le PDF : il est au format du papier, prêt pour un imprimeur ou une imprimante à la maison. Pour les très grands tirages, utilise le SVG, qui reste net à toutes les tailles. Les formats carré, 4:5 et téléphone sont faits pour le partage et pour l’écran de verrouillage.',
+          ],
+        },
+      ],
+      faqTitle: 'Questions',
+      faq: [
+        {
+          q: 'La carte du ciel est-elle exacte ?',
+          a: 'Oui. Les positions sont calculées pour le lieu et l’heure exacts, y compris l’heure d’été en vigueur à l’époque, à partir d’un catalogue fondé sur les mesures d’Hipparcos. La Lune et les planètes sont calculées avec Astronomy Engine.',
+        },
+        {
+          q: 'C’est vraiment gratuit ? Y a-t-il un filigrane ?',
+          a: 'C’est gratuit, sans inscription et sans filigrane sur le ciel. L’adresse du site figure en petit en bas du poster.',
+        },
+        {
+          q: 'Je ne connais pas l’heure exacte. Que choisir ?',
+          a: 'Laisse 22:00. Le ciel tourne d’environ 15 degrés par heure, donc l’heure change les étoiles qui sont hautes ; n’importe quelle heure du soir donne un ciel nocturne complet et vrai pour cette date.',
+        },
+        {
+          q: 'Puis-je en faire une pour un mariage, un anniversaire ou une naissance ?',
+          a: 'Oui : n’importe quelle date, n’importe quel lieu. Ajoute un titre et une dédicace, et choisis l’un des quatre styles : Nuit, Papier, Or ou Blanc.',
+        },
+      ],
+    },
+    pt: {
+      title: 'Mapa estelar em pôster grátis: o céu de qualquer data e lugar | Sky of Your Day',
+      description:
+        'Crie um mapa estelar do céu de qualquer data, hora e lugar: estrelas reais, constelações, Via Láctea, fase da Lua e planetas. PDF, PNG e SVG grátis em alta resolução, prontos para imprimir.',
+      sections: [
+        {
+          heading: 'O que tem no seu mapa estelar',
+          paragraphs: [
+            'O céu exatamente como estava sobre um lugar num certo momento: quase 9.000 estrelas com suas cores reais, as constelações com seus nomes, a Via Láctea, a Lua na fase daquela noite e os planetas que estavam no céu.',
+            'Também marcamos a estrela daquele dia: a estrela cuja luz partiu naquela data e está chegando à Terra mais ou menos agora. O mapa de uma noite vira uma pequena história sobre a luz.',
+          ],
+        },
+        {
+          heading: 'Como imprimir',
+          paragraphs: [
+            'Escolha A4, A3, 30 × 40 ou 50 × 70 cm e baixe o PDF: ele já tem o tamanho do papel, pronto para a gráfica ou para a impressora de casa. Para impressões muito grandes use o SVG, que fica nítido em qualquer tamanho. Os formatos quadrado, 4:5 e celular são feitos para compartilhar e para a tela de bloqueio.',
+          ],
+        },
+      ],
+      faqTitle: 'Perguntas',
+      faq: [
+        {
+          q: 'O mapa estelar é preciso?',
+          a: 'Sim. As posições são calculadas para o lugar e a hora exatos, incluindo o horário de verão em vigor na época, a partir de um catálogo baseado nas medições do Hipparcos. A Lua e os planetas são calculados com o Astronomy Engine.',
+        },
+        {
+          q: 'É grátis mesmo? Tem marca d’água?',
+          a: 'É grátis, sem cadastro e sem marca d’água no céu. O endereço do site aparece pequeno na parte de baixo do pôster.',
+        },
+        {
+          q: 'Não sei a hora exata. O que escolho?',
+          a: 'Deixe 22:00. O céu gira cerca de 15 graus por hora, então a hora muda quais estrelas estão altas; qualquer hora da noite dá um céu noturno completo e real para aquela data.',
+        },
+        {
+          q: 'Posso fazer um para um casamento, um aniversário ou um nascimento?',
+          a: 'Sim: qualquer data, qualquer lugar. Adicione um título e uma dedicatória e escolha um dos quatro estilos: Noite, Papel, Ouro ou Branco.',
         },
       ],
     },

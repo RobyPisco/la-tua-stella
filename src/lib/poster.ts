@@ -2,7 +2,7 @@ import { assets } from '$app/paths';
 import { Body, Equator, Illumination, Observer } from 'astronomy-engine';
 import { equatorialVector, horizonMatrix, toHorizon, type HorizonPos, type Place } from './astro';
 import { starRgb } from './color';
-import { properName } from './names';
+import { constellationPlain, properName } from './names';
 
 // ---------------------------------------------------------------------------------------
 // Data
@@ -39,8 +39,9 @@ export function loadPosterData(): Promise<PosterData> {
       stars.push({ v: equatorialVector(p.stars[i], p.stars[i + 1]), mag: p.stars[i + 2], ci: p.stars[i + 3] });
     }
     const names = p.names.map(([name, ra, dec, mag]) => ({ name, v: equatorialVector(ra, dec), mag }));
-    const labels = Object.values(cons.default as unknown as Record<string, [number, number, number, Record<string, string>]>)
-      .map(([ra, dec, rank, n]) => ({ v: equatorialVector(ra, dec), rank, names: n }));
+    // d3-celestial has no Portuguese names: those come from our own table.
+    const labels = Object.entries(cons.default as unknown as Record<string, [number, number, number, Record<string, string>]>)
+      .map(([code, [ra, dec, rank, n]]) => ({ v: equatorialVector(ra, dec), rank, names: { ...n, pt: constellationPlain(code, 'pt') } }));
     const lineData = (sky.default as unknown as { lines: Record<string, number[][]> }).lines;
     const lines = Object.values(lineData).flatMap((polys) =>
       polys.map((poly) => {

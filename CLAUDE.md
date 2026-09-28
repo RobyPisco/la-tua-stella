@@ -10,8 +10,11 @@ l'utente: italiano.
 - **Poster del cielo** (`/star-map/`, `/it/mappa-stellare/`): cielo vero di qualsiasi data/ora/luogo,
   Via Lattea, Luna, pianeti, 4 stili, 7 formati, PDF/PNG/SVG gratuiti.
 - **Pagine SEO generate** (~3.700): fasi lunari per mese/anno dal 1930, "nati nel…" per anno,
-  schede delle 464 stelle con nome IAU. In inglese (radice, lingua principale), spagnolo (`/es/`)
-  e italiano (`/it/`): ~5.500 pagine. Ordine del selettore: English, Español, Italiano.
+  schede delle 464 stelle con nome IAU. In inglese (radice, lingua principale), spagnolo (`/es/`),
+  italiano (`/it/`), tedesco (`/de/`), francese (`/fr/`) e portoghese del Brasile (`/pt/`): ~11.000
+  pagine. Ordine del selettore: English, Español, Italiano, Deutsch, Français, Português (sotto 1100 px
+  solo le sigle). Le schede delle stelle calcolano "quando si vede" con `PT[lang].visibilityLat`
+  (42° N per en/es/it, 50° N de, 47° N fr, 23° S pt: il Brasile è nell'emisfero sud).
 
 ## Vincoli decisi con l'utente (non cambiarli senza chiedere)
 
@@ -86,7 +89,8 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 Contatore anche in home (per ora solo nel poster) ·
 licenza del repository (ora MIT, permette a chiunque di copiare e vendere: l'utente valuta di riservare
 grafica e testi; le Condizioni d'uso in `TermsPage.svelte` vietano già la rivendita dei poster) ·
-altre lingue (de, fr, pt: ~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`,
-`CONTENT`, `PT`, `CONSTELLATIONS`/`PROPER` in names.ts, `PAGES` e cartella in `src/routes/`) ·
+altre lingue (~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`, `DIRECTIONS`/`CARDINALS`,
+`CONTENT`, `PT`, `TERMS`, `CONSTELLATIONS`/`PROPER`/`COLUMN` in names.ts, `PAGES`, `OG_LOCALE`,
+`LANG_NAMES` e cartella in `src/routes/` copiata da `es/`) ·
 immagini di anteprima per pagina ·
 analisi dei dati di Search Console dopo 2–3 settimane.

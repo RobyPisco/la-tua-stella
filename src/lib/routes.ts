@@ -3,17 +3,26 @@ import { SITE_URL } from './site';
 import type { Lang } from './i18n.svelte';
 
 /** Order of the language switcher: English first (the default, at the root). */
-export const LANGS: Lang[] = ['en', 'es', 'it'];
+export const LANGS: Lang[] = ['en', 'es', 'it', 'de', 'fr', 'pt'];
 export const DEFAULT_LANG: Lang = 'en';
 
 /** Every page, with its path in each language. Slugs are localized for search. */
 export const PAGES = {
-  home: { en: '/', es: '/es/', it: '/it/' },
-  poster: { en: '/star-map/', es: '/es/mapa-estelar/', it: '/it/mappa-stellare/' },
-  moonHub: { en: '/moon/', es: '/es/luna/', it: '/it/luna/' },
-  bornHub: { en: '/born-in/', es: '/es/nacidos-en/', it: '/it/nati-nel/' },
-  starsHub: { en: '/stars/', es: '/es/estrellas/', it: '/it/stelle/' },
-  terms: { en: '/terms/', es: '/es/condiciones/', it: '/it/condizioni/' },
+  home: { en: '/', es: '/es/', it: '/it/', de: '/de/', fr: '/fr/', pt: '/pt/' },
+  poster: {
+    en: '/star-map/', es: '/es/mapa-estelar/', it: '/it/mappa-stellare/',
+    de: '/de/sternkarte/', fr: '/fr/carte-du-ciel/', pt: '/pt/mapa-estelar/',
+  },
+  moonHub: { en: '/moon/', es: '/es/luna/', it: '/it/luna/', de: '/de/mond/', fr: '/fr/lune/', pt: '/pt/lua/' },
+  bornHub: {
+    en: '/born-in/', es: '/es/nacidos-en/', it: '/it/nati-nel/',
+    de: '/de/geburtsjahr/', fr: '/fr/annee-de-naissance/', pt: '/pt/nascidos-em/',
+  },
+  starsHub: { en: '/stars/', es: '/es/estrellas/', it: '/it/stelle/', de: '/de/sterne/', fr: '/fr/etoiles/', pt: '/pt/estrelas/' },
+  terms: {
+    en: '/terms/', es: '/es/condiciones/', it: '/it/condizioni/',
+    de: '/de/nutzungsbedingungen/', fr: '/fr/conditions/', pt: '/pt/termos/',
+  },
 } satisfies Record<string, Record<Lang, string>>;
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -48,5 +57,5 @@ export function absolute(path: string): string {
 
 export function langFromPath(pathname: string): Lang {
   const first = pathname.slice(base.length).split('/')[1];
-  return first === 'it' || first === 'es' ? first : 'en';
+  return (LANGS as string[]).includes(first) ? (first as Lang) : 'en';
 }
