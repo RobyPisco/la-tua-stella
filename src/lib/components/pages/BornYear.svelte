@@ -3,7 +3,7 @@
   import { instrument } from '$lib/describe';
   import type { Lang } from '$lib/i18n.svelte';
   import { fmtNum } from '$lib/i18n.svelte';
-  import { constellationName } from '$lib/names';
+  import { constellationPlain } from '$lib/names';
   import { monthName, PT } from '$lib/pageText';
   import { absolute, href, PAGES, paths } from '$lib/routes';
   import { starName, type Star } from '$lib/stars';
@@ -74,7 +74,7 @@
               {/if}
             </td>
             <td>{p.lightYears(fmtNum(r.star.ly, 1))}</td>
-            <td class="hide-sm">{constellationName(r.star.con, lang).replace(/^(di|del|della|dell’|dell'|dei|delle|dello) /, '')}</td>
+            <td class="hide-sm">{constellationPlain(r.star.con, lang)}</td>
             <td class="hide-sm">{instrument(r.star.mag)}</td>
           </tr>
         {/each}

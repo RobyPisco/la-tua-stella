@@ -49,6 +49,44 @@ export const CONTENT: Record<'home' | 'poster', Record<Lang, PageContent>> = {
         },
       ],
     },
+    es: {
+      title: 'Tu estrella: la estrella cuya luz salió el día de tu nacimiento | Sky of Your Day',
+      description:
+        'Introduce tu fecha de nacimiento y descubre la estrella cuya luz salió el día de tu nacimiento y está llegando ahora a la Tierra. Te decimos dónde mirarla esta noche. Gratis, sin registro.',
+      sections: [
+        {
+          heading: 'Cómo funciona',
+          paragraphs: [
+            'La luz tarda en viajar. De una estrella a 40 años luz, la luz que ves esta noche salió hace 40 años.',
+            'Así que para cada edad hay una estrella a la distancia justa: la luz que salió de ella el día de tu nacimiento está llegando a la Tierra justo ahora. La buscamos entre más de 4.000 estrellas cercanas, en un catálogo construido con los datos del satélite Hipparcos y los catálogos Yale y Gliese, y preferimos las que se ven a simple vista.',
+            'Después calculamos, desde donde estás, cuándo sale, cuánto sube y hacia dónde mirar, y dibujamos el cielo real sobre ti con tu estrella. Con el móvil puedes levantarlo hacia el cielo y seguir la flecha.',
+          ],
+        },
+      ],
+      faqTitle: 'Preguntas',
+      faq: [
+        {
+          q: '¿Es una estrella real?',
+          a: 'Sí. Cada estrella es una estrella real con una distancia medida. No inventamos nada ni "ponemos nombre" a una estrella: es aquella cuya distancia en años luz coincide con tu edad.',
+        },
+        {
+          q: '¿Qué precisión tiene la fecha?',
+          a: 'Las distancias de las estrellas se miden por paralaje. Para las estrellas cercanas el margen va de unas semanas a unos meses de viaje de la luz: la fecha es una estimación cercana, no exacta al día.',
+        },
+        {
+          q: '¿Y si mi estrella es demasiado débil para verla?',
+          a: 'Preferimos las estrellas visibles a simple vista. Para algunas edades la más cercana a la fecha es débil: te decimos si hace falta un cielo oscuro, unos prismáticos o un telescopio, y te mostramos las demás estrellas de tu edad.',
+        },
+        {
+          q: '¿Y para bebés y niños pequeños?',
+          a: 'La estrella más cercana, Próxima Centauri, está a 4,2 años luz. Para quien tiene menos de cuatro años, la luz que salió de una estrella el día de su nacimiento todavía no ha llegado: te mostramos cuál es y el día en que llegará.',
+        },
+        {
+          q: '¿Es gratis? ¿Qué pasa con mis datos?',
+          a: 'Es gratis y sin registro. Tu fecha de nacimiento se queda en tu navegador y no se envía a nadie. Si buscas una ciudad, solo su nombre se envía al servicio de geocodificación de Open-Meteo.',
+        },
+      ],
+    },
     it: {
       title: 'La tua stella: la stella la cui luce è partita il giorno della tua nascita | Sky of Your Day',
       description:
@@ -125,6 +163,45 @@ export const CONTENT: Record<'home' | 'poster', Record<Lang, PageContent>> = {
         {
           q: 'Can I make one for a wedding, an anniversary or a birth?',
           a: 'Yes: any date, any place. Add a title and a dedication, and pick one of four styles: Night, Paper, Gold or White.',
+        },
+      ],
+    },
+    es: {
+      title: 'Mapa estelar personalizado gratis: el cielo de una fecha y un lugar | Sky of Your Day',
+      description:
+        'Crea el mapa del cielo de cualquier fecha, hora y lugar: estrellas reales, constelaciones, Vía Láctea, fase de la Luna y planetas. PDF, PNG y SVG en alta resolución, gratis y listos para imprimir.',
+      sections: [
+        {
+          heading: 'Qué hay en tu mapa estelar',
+          paragraphs: [
+            'El cielo exactamente como estaba sobre un lugar en un momento dado: casi 9.000 estrellas con sus colores reales, las constelaciones con sus nombres, la Vía Láctea, la Luna con su fase de aquella noche y los planetas que estaban en el cielo.',
+            'También marcamos la estrella de aquel día: aquella cuya luz salió en esa fecha y está llegando a la Tierra más o menos ahora. Convierte el mapa de una noche en una pequeña historia sobre la luz.',
+          ],
+        },
+        {
+          heading: 'Cómo imprimirlo',
+          paragraphs: [
+            'Elige A4, A3, 30 × 40 o 50 × 70 cm y descarga el PDF: ya tiene la medida del papel, listo para la imprenta o la impresora de casa. Para impresiones muy grandes usa el SVG, que se mantiene nítido a cualquier tamaño. Los formatos cuadrado, 4:5 y móvil están pensados para las redes sociales y para el fondo de pantalla.',
+          ],
+        },
+      ],
+      faqTitle: 'Preguntas',
+      faq: [
+        {
+          q: '¿El mapa estelar es preciso?',
+          a: 'Sí. Las posiciones se calculan para el lugar y la hora exactos, incluido el horario de verano vigente entonces, a partir de un catálogo basado en las medidas del satélite Hipparcos. La Luna y los planetas se calculan con Astronomy Engine.',
+        },
+        {
+          q: '¿Es gratis de verdad? ¿Tiene marca de agua?',
+          a: 'Es gratis, sin registro y sin marca de agua sobre el cielo. Abajo del póster solo aparece la pequeña dirección del sitio.',
+        },
+        {
+          q: 'No sé la hora exacta. ¿Qué elijo?',
+          a: 'Deja las 22:00. El cielo gira unos 15 grados por hora, así que la hora cambia qué estrellas están altas; cualquier hora de la noche da un cielo nocturno completo y real para esa fecha.',
+        },
+        {
+          q: '¿Puedo hacerlo para una boda, un aniversario o un nacimiento?',
+          a: 'Sí: cualquier fecha, cualquier lugar. Añade un título y una dedicatoria y elige uno de los cuatro estilos: Noche, Papel, Oro o Blanco.',
         },
       ],
     },

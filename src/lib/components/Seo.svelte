@@ -14,6 +14,7 @@
   }
   let { title, description, lang, alternates, image = '/og.png', jsonLd = [] }: Props = $props();
 
+  const OG_LOCALE: Record<Lang, string> = { en: 'en_US', es: 'es_ES', it: 'it_IT' };
   const canonical = $derived(absolute(alternates[lang] ?? '/'));
   // "</" can't appear inside a <script> element.
   const ld = (o: object) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</` + 'script>';
@@ -35,7 +36,7 @@
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={absolute(image)} />
-  <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+  <meta property="og:locale" content={OG_LOCALE[lang]} />
   <meta name="twitter:card" content="summary_large_image" />
   {#each jsonLd as o}
     {@html ld(o)}

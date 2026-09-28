@@ -2,7 +2,7 @@
   import { base } from '$app/paths';
   import { facts, starKind, visibility as seeWith } from '$lib/describe';
   import { fmtNum, t, type Lang } from '$lib/i18n.svelte';
-  import { constellationName, properName } from '$lib/names';
+  import { constellationName, constellationPlain, properName } from '$lib/names';
   import { monthName, PT } from '$lib/pageText';
   import { absolute, FIRST_YEAR, href, PAGES, paths } from '$lib/routes';
   import type { NamedStar, Visibility } from '$lib/server/catalog';
@@ -29,7 +29,7 @@
   const kind = $derived(starKind(s));
   const lyText = $derived(fmtNum(s.ly, s.ly < 100 ? 1 : 0));
   const conName = $derived(constellationName(s.con, lang));
-  const conPlain = $derived(conName.replace(/^(di|del|della|dell’|dell'|dei|delle|dello) /, ''));
+  const conPlain = $derived(constellationPlain(s.con, lang));
 
   const where = $derived.by(() => {
     const v = data.visibility;
@@ -97,7 +97,7 @@
 
   {#if data.sameCon.length}
     <section>
-      <h2>{p.sameConstellation(lang === 'it' ? conName : conPlain)}</h2>
+      <h2>{p.sameConstellation(lang === 'en' ? conPlain : conName)}</h2>
       <ul class="grid-links wide">
         {#each data.sameCon as o (o.slug)}
           <li><a href={base + paths.star(lang, o.slug)}>{properName(o.proper, lang)}</a></li>

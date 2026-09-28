@@ -10,7 +10,8 @@ l'utente: italiano.
 - **Poster del cielo** (`/star-map/`, `/it/mappa-stellare/`): cielo vero di qualsiasi data/ora/luogo,
   Via Lattea, Luna, pianeti, 4 stili, 7 formati, PDF/PNG/SVG gratuiti.
 - **Pagine SEO generate** (~3.700): fasi lunari per mese/anno dal 1930, "nati nel…" per anno,
-  schede delle 464 stelle con nome IAU. In inglese (radice) e italiano (`/it/`).
+  schede delle 464 stelle con nome IAU. In inglese (radice, lingua principale), spagnolo (`/es/`)
+  e italiano (`/it/`): ~5.500 pagine. Ordine del selettore: English, Español, Italiano.
 
 ## Vincoli decisi con l'utente (non cambiarli senza chiedere)
 
@@ -77,6 +78,9 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 
 ## Idee aperte
 
-Altre lingue (es, de, fr, pt: ~1.840 pagine ciascuna) · link Ko-fi quando l'utente lo crea ·
+**Contatore pubblico** (visite o mappe create; vedi issue su GitHub: solo numeri veri) ·
+altre lingue (de, fr, pt: ~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`,
+`CONTENT`, `PT`, `CONSTELLATIONS`/`PROPER` in names.ts, `PAGES` e cartella in `src/routes/`) ·
+link Ko-fi quando l'utente lo crea ·
 l'editor del poster perde la data cambiando lingua · immagini di anteprima per pagina ·
 analisi dei dati di Search Console dopo 2–3 settimane.

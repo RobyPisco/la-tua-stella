@@ -24,7 +24,7 @@
     (page.data.alternates as Partial<Record<Lang, string>> | undefined) ??
       (page.data.page ? PAGES[page.data.page as PageId] : undefined),
   );
-  const LANG_NAMES: Record<Lang, string> = { en: 'English', it: 'Italiano' };
+  const LANG_NAMES: Record<Lang, string> = { en: 'English', es: 'Español', it: 'Italiano' };
 </script>
 
 <div class="shell">

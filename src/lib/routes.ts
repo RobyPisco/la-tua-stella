@@ -2,16 +2,17 @@ import { base } from '$app/paths';
 import { SITE_URL } from './site';
 import type { Lang } from './i18n.svelte';
 
-export const LANGS: Lang[] = ['en', 'it'];
+/** Order of the language switcher: English first (the default, at the root). */
+export const LANGS: Lang[] = ['en', 'es', 'it'];
 export const DEFAULT_LANG: Lang = 'en';
 
 /** Every page, with its path in each language. Slugs are localized for search. */
 export const PAGES = {
-  home: { en: '/', it: '/it/' },
-  poster: { en: '/star-map/', it: '/it/mappa-stellare/' },
-  moonHub: { en: '/moon/', it: '/it/luna/' },
-  bornHub: { en: '/born-in/', it: '/it/nati-nel/' },
-  starsHub: { en: '/stars/', it: '/it/stelle/' },
+  home: { en: '/', es: '/es/', it: '/it/' },
+  poster: { en: '/star-map/', es: '/es/mapa-estelar/', it: '/it/mappa-stellare/' },
+  moonHub: { en: '/moon/', es: '/es/luna/', it: '/it/luna/' },
+  bornHub: { en: '/born-in/', es: '/es/nacidos-en/', it: '/it/nati-nel/' },
+  starsHub: { en: '/stars/', es: '/es/estrellas/', it: '/it/stelle/' },
 } satisfies Record<string, Record<Lang, string>>;
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -45,6 +46,6 @@ export function absolute(path: string): string {
 }
 
 export function langFromPath(pathname: string): Lang {
-  const p = pathname.slice(base.length);
-  return p === '/it' || p.startsWith('/it/') ? 'it' : 'en';
+  const first = pathname.slice(base.length).split('/')[1];
+  return first === 'it' || first === 'es' ? first : 'en';
 }

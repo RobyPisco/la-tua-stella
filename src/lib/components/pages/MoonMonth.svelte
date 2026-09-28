@@ -27,7 +27,7 @@
   const mName = $derived(monthName(lang, data.month));
   const fmtDate = (iso: string) => new Date(iso).toLocaleDateString(lang, { day: 'numeric', month: 'long', timeZone: tz });
   const fmtTime = (iso: string) => new Date(iso).toLocaleTimeString(lang, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: tz });
-  const when = (iso: string) => p.at(fmtDate(iso), fmtTime(iso)) + (lang === 'en' ? ' UTC' : '');
+  const when = (iso: string) => p.at(fmtDate(iso), fmtTime(iso)) + (tz === 'UTC' ? ' UTC' : '');
 
   const firstFull = $derived(data.events.find((e) => e.phase === 'full'));
   const firstNew = $derived(data.events.find((e) => e.phase === 'new'));
