@@ -83,6 +83,8 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 ## Idee aperte
 
 Contatore anche in home (per ora solo nel poster) ·
+licenza del repository (ora MIT, permette a chiunque di copiare e vendere: l'utente valuta di riservare
+grafica e testi; le Condizioni d'uso in `TermsPage.svelte` vietano già la rivendita dei poster) ·
 altre lingue (de, fr, pt: ~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`,
 `CONTENT`, `PT`, `CONSTELLATIONS`/`PROPER` in names.ts, `PAGES` e cartella in `src/routes/`) ·
 link Ko-fi quando l'utente lo crea ·
