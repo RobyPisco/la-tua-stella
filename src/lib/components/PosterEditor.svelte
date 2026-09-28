@@ -6,7 +6,7 @@
   import { href } from '../routes';
   import { countMap, mapsCount } from '../counter';
   import { facts, starKind } from '../describe';
-  import { fmtDate, fmtNum, fmtTime, locale, t } from '../i18n.svelte';
+  import { fmtDate, fmtTime, locale, t } from '../i18n.svelte';
   import {
     buildPoster, FORMATS, loadPosterData, renderMilkyWay, THEMES,
     type PosterOptions, type PosterSpec,
@@ -15,6 +15,7 @@
   import { arrivalDate, findStars, loadCatalog, starName, type Star } from '../stars';
   import { zonedToUtc } from '../timezone';
   import DateField from './DateField.svelte';
+  import MapsCount from './MapsCount.svelte';
   import PlacePicker from './PlacePicker.svelte';
 
   const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -223,6 +224,7 @@
     <a class="link" href={href('home', locale.lang)}>{t().posterHome}</a>
     <h1>{t().posterHeading}</h1>
     <p class="intro">{t().posterIntro}</p>
+    {#if mapsMade}<MapsCount n={mapsMade} />{/if}
   </header>
 
   <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
@@ -325,7 +327,6 @@
         <button class="btn ghost" type="button" disabled={busy || !svg} onclick={() => save('svg')}>{t().dlSvg}</button>
       </div>
       {#if status}<p class="status" role="status">{status}</p>{/if}
-      {#if mapsMade}<p class="count">{t().mapsMade(mapsMade, fmtNum(mapsMade))}</p>{/if}
       {#if format.print}<p class="hint">{t().posterPrintHint}</p>{/if}
       <p class="hint">
         {t().posterTerms} <a href={href('terms', locale.lang)}>{t().termsLink}</a>
@@ -559,11 +560,6 @@
   }
   .status {
     color: var(--ink);
-  }
-  .count {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--muted);
   }
   .kofi {
     display: grid;

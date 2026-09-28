@@ -4,12 +4,13 @@
   import Sky from './Sky.svelte';
   import Result, { type Step } from './Result.svelte';
   import DateField from './DateField.svelte';
+  import MapsCount from './MapsCount.svelte';
   import { nextDark, type Place } from '../astro';
   import { starCss } from '../color';
   import { sighting as computeSighting, type Sighting } from '../describe';
   import { guessPlace, savePlace, savedPlace } from '../geo';
   import { mapsCount } from '../counter';
-  import { fmtNum, fmtTime, locale, t } from '../i18n.svelte';
+  import { fmtTime, locale, t } from '../i18n.svelte';
   import { href } from '../routes';
   import { renderCard, share, shareUrl } from '../share';
   import { findStars, loadCatalog, starById, starName, type Star } from '../stars';
@@ -204,6 +205,7 @@
           <div class="intro">
             <h1>{t().title}</h1>
             <p class="lead">{t().lead}</p>
+            {#if mapsMade}<MapsCount n={mapsMade} href={href('poster', locale.lang)} />{/if}
             <form class="finder" onsubmit={find} novalidate>
               <DateField bind:value={birthInput} invalid={!!error} describedby={error ? 'birth-error' : undefined} />
               {#if error}<p id="birth-error" class="error" role="alert">{error}</p>{/if}
@@ -211,7 +213,6 @@
             </form>
             <p class="privacy">{t().privacy}</p>
             <a class="link other-date" href={href('poster', locale.lang)}>{t().posterOther}</a>
-            {#if mapsMade}<p class="count">{t().mapsMade(mapsMade, fmtNum(mapsMade))}</p>{/if}
           </div>
         {/if}
       </div>
@@ -302,12 +303,6 @@
     display: grid;
     gap: 1.75rem;
     max-width: 32rem;
-  }
-  .count {
-    margin-top: -1rem;
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--muted);
   }
   .intro h1 {
     font-size: clamp(2.8rem, 6.5vw, 5rem);
