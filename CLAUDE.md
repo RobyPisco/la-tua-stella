@@ -17,8 +17,9 @@ l'utente: italiano.
 
 - L'utente **non ha e non può aprire partita IVA** e vuole essere **legale al 100%**: niente vendite,
   niente contenuti a pagamento, per ora niente pubblicità né affiliazioni. Solo **donazioni
-  volontarie** (Ko-fi collegato a PayPal) che **non sbloccano nulla**. `KOFI_URL` in
-  `src/lib/brand.ts` è vuota finché l'utente non crea la pagina. Consigliata verifica al CAF.
+  volontarie** (Ko-fi collegato a PayPal) che **non sbloccano nulla**. Pagina
+  `https://ko-fi.com/skyofyourday` (`KOFI_URL` in `src/lib/brand.ts`), PayPal **personale**, niente
+  Shop/Commissions/Memberships. Consigliata verifica al CAF.
 - Testi italiani **senza genere** dove possibile ("il giorno della tua nascita", non "quando sei nato").
 - Design: blu notte, Bodoni Moda + Atkinson Hyperlegible Next; l'unico accento è il colore reale
   della stella (`--star`). Il sito è a passi (4 step), su mobile e desktop.
@@ -87,6 +88,5 @@ licenza del repository (ora MIT, permette a chiunque di copiare e vendere: l'ute
 grafica e testi; le Condizioni d'uso in `TermsPage.svelte` vietano già la rivendita dei poster) ·
 altre lingue (de, fr, pt: ~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`,
 `CONTENT`, `PT`, `CONSTELLATIONS`/`PROPER` in names.ts, `PAGES` e cartella in `src/routes/`) ·
-link Ko-fi quando l'utente lo crea ·
 immagini di anteprima per pagina ·
 analisi dei dati di Search Console dopo 2–3 settimane.
