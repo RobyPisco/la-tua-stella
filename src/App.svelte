@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Sky from './components/Sky.svelte';
-  import Result from './components/Result.svelte';
+  import Result, { type Step } from './components/Result.svelte';
+  import DateField from './components/DateField.svelte';
   import { nextDark, type Place } from './lib/astro';
   import { starCss } from './lib/color';
   import { sighting as computeSighting, type Sighting } from './lib/describe';
@@ -17,6 +18,7 @@
   let place = $state<Place | null>(savedPlace());
   let error = $state('');
   let busy = $state(false);
+  let step = $state<Step>('date');
   let now = $state(new Date());
 
   const skyPlace = $derived(place ?? guessPlace());
@@ -34,7 +36,10 @@
     if (id) {
       loadCatalog().then((stars) => {
         const s = starById(stars, id);
-        if (s) star = s;
+        if (s) {
+          star = s;
+          step = 'star';
+        }
       });
     }
     // Keep the intro sky turning with the real sky.
@@ -70,6 +75,7 @@
       birth = d;
       star = found.best;
       others = found.others;
+      step = 'star';
       history.replaceState(null, '', location.pathname);
       scrollTo({ top: 0 });
     });
@@ -80,9 +86,29 @@
       star = null;
       birth = null;
       others = [];
+      step = 'date';
       history.replaceState(null, '', location.pathname);
     });
   }
+
+  function go(s: Step) {
+    transition(() => {
+      step = s;
+      scrollTo({ top: 0 });
+    });
+  }
+
+  function jump(s: Step) {
+    if (s === 'date') restart();
+    else if (star) go(s);
+  }
+
+  const stepNames = $derived([
+    ['date', star && !birth ? t().findYours : t().stepDate],
+    ['star', t().stepStar],
+    ['look', t().tonightTitle],
+    ['more', t().aboutTitle],
+  ] as [Step, string][]);
 
   function pickPlace(p: Place) {
     place = p;
@@ -93,6 +119,7 @@
     transition(() => {
       if (star) others = [star, ...others.filter((o) => o.id !== s.id)].sort((a, b) => a.mag - b.mag);
       star = s;
+      step = 'star';
       scrollTo({ top: 0 });
     });
   }
@@ -119,7 +146,7 @@
   }
 </script>
 
-<div class="page" class:has-result={!!star}>
+<div class="page step-{step}" class:has-result={!!star}>
   <nav class="lang" aria-label="Language">
     <button type="button" class="link" aria-pressed={locale.lang === 'it'} onclick={() => setLang('it')}>Italiano</button>
     <button type="button" class="link" aria-pressed={locale.lang === 'en'} onclick={() => setLang('en')}>English</button>
@@ -127,6 +154,23 @@
 
   <main class="layout">
     <div class="text">
+      <nav class="steps" aria-label={t().stepsLabel}>
+        <ol>
+          {#each stepNames as [id, label], i}
+            <li>
+              <button
+                type="button"
+                aria-current={step === id ? 'step' : undefined}
+                disabled={id !== 'date' && !star}
+                onclick={() => jump(id)}
+              >
+                <span class="num">{i + 1}</span>
+                <span class="label">{label}</span>
+              </button>
+            </li>
+          {/each}
+        </ol>
+      </nav>
       {#if star}
         <Result
           {star}
@@ -138,28 +182,17 @@
           onpickstar={pickStar}
           onrestart={restart}
           onshare={doShare}
+          {step}
+          ongo={go}
         />
       {:else}
         <div class="intro">
           <h1>{t().title}</h1>
           <p class="lead">{t().lead}</p>
           <form class="finder" onsubmit={find} novalidate>
-            <label for="birth">{t().birthLabel}</label>
-            <div class="row">
-              <input
-                id="birth"
-                class="field"
-                type="date"
-                min="1900-01-01"
-                max={new Date().toISOString().slice(0, 10)}
-                required
-                bind:value={birthInput}
-                aria-invalid={!!error}
-                aria-describedby={error ? 'birth-error' : undefined}
-              />
-              <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
-            </div>
-            {#if error}<p id="birth-error" class="error">{error}</p>{/if}
+            <DateField bind:value={birthInput} invalid={!!error} describedby={error ? 'birth-error' : undefined} />
+            {#if error}<p id="birth-error" class="error" role="alert">{error}</p>{/if}
+            <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
           </form>
           <p class="privacy">{t().privacy}</p>
         </div>
@@ -220,6 +253,53 @@
   }
   .text {
     view-transition-name: text;
+    display: grid;
+    gap: 2.5rem;
+    align-content: start;
+  }
+  .steps ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+  .steps button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .steps button:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .steps button:focus-visible {
+    outline: 2px solid var(--star);
+    outline-offset: 2px;
+  }
+  .steps .num {
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .steps [aria-current='step'] {
+    color: var(--ink);
+  }
+  .steps [aria-current='step'] .num {
+    background: var(--star);
+    border-color: var(--star);
+    color: var(--night);
   }
   .intro {
     display: grid;
@@ -237,19 +317,12 @@
   }
   .finder {
     display: grid;
-    gap: 0.4rem;
+    gap: 1rem;
+    justify-items: start;
   }
-  .finder label {
-    color: var(--muted);
-  }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-  .row input {
-    flex: 1 1 11rem;
-    color-scheme: dark;
+  .finder :global(.date) {
+    width: 100%;
+    max-width: 26rem;
   }
   .error {
     color: #ffb4a8;
@@ -266,17 +339,70 @@
     font-size: 0.85rem;
   }
   @media (max-width: 760px) {
+    .page {
+      padding-inline: 1rem;
+    }
+    .lang .link {
+      padding: 0.5rem 0.25rem;
+    }
     .layout {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
-    .has-result .sky-col {
-      position: static;
-      order: -1;
+    .intro h1 {
+      font-size: clamp(2.5rem, 12vw, 3.25rem);
+    }
+    .lead {
+      font-size: 1.125rem;
+    }
+    .finder .btn {
+      width: 100%;
     }
     .sky-col {
       max-width: 30rem;
       width: 100%;
       margin: 0 auto;
+    }
+    .steps ol {
+      gap: 0.5rem;
+    }
+    .steps .label {
+      display: none;
+    }
+    .steps [aria-current='step'] .label {
+      display: inline;
+    }
+    /* One thing per screen: the sky only where it helps. */
+    .step-date .sky-col,
+    .step-more .sky-col {
+      display: none;
+    }
+    /* On phones a result step reads top to bottom: steps, the star's name, the sky showing it,
+       then the step's content. Flatten the two columns into one sequence to interleave them. */
+    .has-result .layout {
+      gap: 0;
+    }
+    .has-result .text,
+    .has-result .text :global(.result) {
+      display: contents;
+    }
+    .has-result .steps {
+      order: 0;
+      margin-bottom: 1rem;
+    }
+    .has-result .text :global(.result > *) {
+      order: 3;
+      margin-bottom: 1.75rem;
+    }
+    .has-result .text :global(.result > .shared),
+    .has-result .text :global(.result > header) {
+      order: 1;
+      margin-bottom: 1rem;
+    }
+    .has-result .sky-col {
+      position: static;
+      order: 2;
+      margin-bottom: 1.5rem;
     }
   }
 </style>

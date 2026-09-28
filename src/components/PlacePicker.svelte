@@ -86,6 +86,11 @@
     color: var(--ink);
     border: 1px solid var(--rule);
   }
+  @media (max-width: 760px) {
+    .picker > .btn {
+      width: 100%;
+    }
+  }
   .status {
     color: var(--muted);
     font-size: 0.95rem;

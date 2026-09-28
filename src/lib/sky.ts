@@ -137,7 +137,7 @@ export class SkyRenderer {
     ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fillStyle = 'rgb(214 222 240 / 0.8)';
-    ctx.font = `600 ${Math.round(13 * scale)}px "Atkinson Hyperlegible Next Variable", system-ui, sans-serif`;
+    ctx.font = `600 ${Math.round(13 * Math.max(1, scale))}px "Atkinson Hyperlegible Next Variable", system-ui, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     const rim = R + (size / 2 - R) / 2;
@@ -194,7 +194,7 @@ export class SkyRenderer {
     // Label, kept inside the chart and away from the rim.
     const label = below ? `${t.label} (${view.belowHorizon})` : t.label;
     ctx.globalAlpha = ease;
-    ctx.font = `italic 500 ${Math.round(17 * scale)}px "Bodoni Moda Variable", Georgia, serif`;
+    ctx.font = `italic 500 ${Math.round(17 * Math.max(1, scale))}px "Bodoni Moda Variable", Georgia, serif`;
     const w = ctx.measureText(label).width;
     const size = (R + Math.max(22, R * 0.06)) * 2;
     const onRight = x + 22 * scale + w < size - 8;

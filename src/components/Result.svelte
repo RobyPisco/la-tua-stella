@@ -1,3 +1,7 @@
+<script lang="ts" module>
+  export type Step = 'date' | 'star' | 'look' | 'more';
+</script>
+
 <script lang="ts">
   import type { Place } from '../lib/astro';
   import { facts, instrument, starKind, visibility, type Sighting } from '../lib/describe';
@@ -17,8 +21,10 @@
     onpickstar: (s: Star) => void;
     onrestart: () => void;
     onshare: () => Promise<string>;
+    step: Step;
+    ongo: (step: Step) => void;
   }
-  let { star, others, birth, place, sighting, onpickplace, onpickstar, onrestart, onshare }: Props = $props();
+  let { star, others, birth, place, sighting, onpickplace, onpickstar, onrestart, onshare, step, ongo }: Props = $props();
 
   let choosingPlace = $state(false);
   let pointing = $state(false);
@@ -67,11 +73,9 @@
   }
 </script>
 
-<article class="result">
-  {#if birth}
-    <button class="link back" type="button" onclick={onrestart}>{t().changeDate}</button>
-  {:else}
-    <p class="shared">{t().sharedIntro} <button class="link" type="button" onclick={onrestart}>{t().findYours}</button></p>
+<article class="result" class:compact={step !== 'star'}>
+  {#if !birth && step === 'star'}
+    <p class="shared">{t().sharedIntro}</p>
   {/if}
 
   <header>
@@ -79,63 +83,75 @@
     {#if designation}<p class="designation">{designation}</p>{/if}
   </header>
 
-  <div class="story">
-    {#each story as line}<p>{line}</p>{/each}
-  </div>
-
-  <section>
-    <h2>{t().tonightTitle}</h2>
-    {#if place && !choosingPlace}
-      <p class="place">
-        {t().placeFrom(place.name)}
-        <button class="link" type="button" onclick={() => (choosingPlace = true)}>{t().changePlace}</button>
-      </p>
-      {#if sighting}
-        {#each sighting.lines as line}<p>{line}</p>{/each}
-      {/if}
-      <p>{visibility(star.mag)}</p>
-      {#if canPoint}
-        <div class="point">
-          <button class="btn" type="button" onclick={startPointing}>{t().pointButton}</button>
-          {#if pointError}<p role="alert">{pointError}</p>{/if}
-        </div>
-      {/if}
-    {:else}
-      <p>{t().needPlace}</p>
-      <PlacePicker onpick={pickPlace} />
-    {/if}
-  </section>
-
-  <section>
-    <h2>{t().aboutTitle}</h2>
-    <p>{t().isA(name, starKind(star))}</p>
-    {#each facts(star) as line}<p>{line}</p>{/each}
-  </section>
-
-  {#if others.length}
-    <section>
-      <h2>{t().othersTitle}</h2>
-      <ul class="others">
-        {#each others as o (o.id)}
-          <li>
-            <button type="button" class="other" onclick={() => onpickstar(o)}>
-              <span class="other-name">{starName(o, locale.lang)}</span>
-              <span class="other-meta">{t().lightYears(fmtNum(o.ly, 1))}, {instrument(o.mag)}</span>
-            </button>
-          </li>
-        {/each}
-      </ul>
-    </section>
-  {/if}
-
-  {#if birth}
-    <div class="share">
-      <button class="btn" type="button" onclick={doShare} disabled={sharing}>{t().share}</button>
-      {#if shareStatus}<p role="status">{shareStatus}</p>{/if}
+  {#if step === 'star'}
+    <div class="story">
+      {#each story as line}<p>{line}</p>{/each}
     </div>
-  {/if}
+    <div class="step-nav">
+      <button class="btn" type="button" onclick={() => ongo('look')}>{t().nextLook}</button>
+      <button class="link" type="button" onclick={onrestart}>{birth ? t().changeDate : t().findYours}</button>
+    </div>
+  {:else if step === 'look'}
+    <section>
+      <h2>{t().tonightTitle}</h2>
+      {#if place && !choosingPlace}
+        <p class="place">
+          <span>{t().placeFrom(place.name)}</span>
+          <button class="link" type="button" onclick={() => (choosingPlace = true)}>{t().changePlace}</button>
+        </p>
+        {#if sighting}
+          {#each sighting.lines as line}<p>{line}</p>{/each}
+        {/if}
+        <p>{visibility(star.mag)}</p>
+        {#if canPoint}
+          <div class="point">
+            <button class="btn" type="button" onclick={startPointing}>{t().pointButton}</button>
+            {#if pointError}<p role="alert">{pointError}</p>{/if}
+          </div>
+        {/if}
+      {:else}
+        <p>{t().needPlace}</p>
+        <PlacePicker onpick={pickPlace} />
+      {/if}
+    </section>
+    <div class="step-nav">
+      <button class="btn" class:ghost={canPoint && !!place} type="button" onclick={() => ongo('more')}>{t().nextMore}</button>
+      <button class="link" type="button" onclick={() => ongo('star')}>{t().back}</button>
+    </div>
+  {:else}
+    <section>
+      <h2>{t().aboutTitle}</h2>
+      <p>{t().isA(name, starKind(star))}</p>
+      {#each facts(star) as line}<p>{line}</p>{/each}
+    </section>
 
-  <p class="note">{t().precision}</p>
+    {#if others.length}
+      <section>
+        <h2>{t().othersTitle}</h2>
+        <ul class="others">
+          {#each others as o (o.id)}
+            <li>
+              <button type="button" class="other" onclick={() => onpickstar(o)}>
+                <span class="other-name">{starName(o, locale.lang)}</span>
+                <span class="other-meta">{t().lightYears(fmtNum(o.ly, 1))}, {instrument(o.mag)}</span>
+              </button>
+            </li>
+          {/each}
+        </ul>
+      </section>
+    {/if}
+
+    <div class="step-nav">
+      {#if birth}
+        <button class="btn" type="button" onclick={doShare} disabled={sharing}>{t().share}</button>
+      {:else}
+        <button class="btn" type="button" onclick={onrestart}>{t().findYours}</button>
+      {/if}
+      <button class="link" type="button" onclick={() => ongo('look')}>{t().back}</button>
+    </div>
+    {#if shareStatus}<p class="status" role="status">{shareStatus}</p>{/if}
+    <p class="note">{t().precision}</p>
+  {/if}
 </article>
 
 {#if pointing && place}
@@ -152,9 +168,6 @@
     gap: 2.25rem;
     max-width: 34rem;
   }
-  .back {
-    justify-self: start;
-  }
   .shared {
     color: var(--muted);
   }
@@ -168,6 +181,9 @@
     color: var(--star);
     letter-spacing: -0.01em;
     view-transition-name: star-name;
+  }
+  .compact .name {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
   }
   .designation {
     color: var(--muted);
@@ -192,8 +208,10 @@
   .place {
     color: var(--muted);
   }
-  .place .link {
-    margin-left: 0.5rem;
+  .place {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.75rem;
   }
   .others {
     list-style: none;
@@ -228,21 +246,44 @@
     font-size: 0.95rem;
     text-align: right;
   }
-  .share {
-    display: grid;
-    gap: 0.5rem;
-    justify-items: start;
+  @media (max-width: 760px) {
+    .name {
+      font-size: clamp(2.6rem, 13vw, 3.5rem);
+    }
+    .story {
+      font-size: 1.15rem;
+    }
+    .other {
+      flex-direction: column;
+      align-items: start;
+      gap: 0.1rem;
+    }
+    .other-meta {
+      text-align: left;
+    }
+    .point .btn,
+    .step-nav .btn {
+      width: 100%;
+    }
+    .step-nav {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
   }
-  .share p {
-    color: var(--muted);
+  .step-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    padding-top: 0.5rem;
   }
-  .point {
-    display: grid;
-    gap: 0.5rem;
-    justify-items: start;
-    margin-top: 0.5rem;
+  .ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
   }
-  .point p {
+  .status {
     color: var(--muted);
   }
   .note {

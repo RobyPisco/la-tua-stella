@@ -43,7 +43,7 @@ export function starName(s: Star, lang: string): string {
   if (s.proper) return properName(s.proper, lang);
   if (s.bayer && s.con) return `${bayer(s.bayer)} ${genitive(s.con)}${component(s)}`;
   if (s.flam && s.con) return `${s.flam} ${genitive(s.con)}${component(s)}`;
-  if (s.gl) return s.gl.replace(/^Gl /, 'Gliese ').replace(/^GJ /, 'GJ ');
+  if (s.gl) return s.gl.replace(/^Gl /, 'Gliese ').replace(/(\d)([A-D])$/, '$1 $2');
   if (s.hd) return `HD ${s.hd}`;
   if (s.hip) return `HIP ${s.hip}`;
   return `HYG ${s.id}`;
