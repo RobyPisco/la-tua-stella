@@ -41,11 +41,11 @@ npm run build      # build/ con tutte le pagine in HTML
 npm run catalog    # rigenera i dati da HYG e d3-celestial
 ```
 
-Il deploy su GitHub Pages è automatico a ogni push su `main`
-(`.github/workflows/deploy.yml`). Due variabili governano gli indirizzi:
-`BASE_PATH` (la sottocartella, per GitHub Pages `/la-tua-stella`) e `VITE_SITE_URL`
-(l'indirizzo pubblico, usato per canonical, hreflang, sitemap e anteprime social).
-Con un dominio proprio: `BASE_PATH` vuoto e `VITE_SITE_URL=https://dominio`.
+Il sito è pubblicato su **https://skyofyourday.com** tramite GitHub Pages, con deploy
+automatico a ogni push su `main` e ogni lunedì (`.github/workflows/deploy.yml`). I DNS del
+dominio sono su Cloudflare (record A verso GitHub Pages, senza proxy). Due variabili governano
+gli indirizzi: `BASE_PATH` (sottocartella, vuota con il dominio) e `VITE_SITE_URL` (indirizzo
+pubblico, usato per canonical, hreflang, sitemap e anteprime social).
 
 Le pagine e i loro indirizzi in ogni lingua sono in `src/lib/routes.ts`; i testi per i
 motori di ricerca in `src/lib/content.ts`.

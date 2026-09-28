@@ -30,10 +30,10 @@ jobs:
       - run: npm run check
       - run: npm run build
         env:
-          # Served from https://robypisco.github.io/la-tua-stella/. With a custom domain:
-          # BASE_PATH '' and VITE_SITE_URL set to the domain.
-          BASE_PATH: /la-tua-stella
-          VITE_SITE_URL: https://robypisco.github.io/la-tua-stella
+          # Served at the root of the custom domain (set in the repository's Pages settings);
+          # GitHub redirects the old robypisco.github.io/la-tua-stella/ addresses here.
+          BASE_PATH: ''
+          VITE_SITE_URL: https://skyofyourday.com
       - uses: actions/upload-pages-artifact@v4
         with:
           path: build
