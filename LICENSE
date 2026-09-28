@@ -1,24 +1,22 @@
-MIT License
+Copyright (c) 2026 RobyPisco. All rights reserved.
 
-Copyright (c) 2026 RobyPisco
+This repository is public so that the site can be published and so that anyone can see how it
+works. That does not grant any licence: without written permission, you may not copy, modify,
+redistribute or use the code, the design, the poster layouts or the texts of Sky of Your Day
+(skyofyourday.com), in whole or in part, including to build or sell a similar service.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Versions published before 28 September 2026 were released under the MIT licence; copies obtained
+under those terms keep them. This notice applies from that date on.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Third-party material keeps its own licence and is not covered by the reservation above:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- Star data in src/data/ and src/lib/server/named-stars.json is derived from the HYG Database
+  by David Nash (https://github.com/astronexus/HYG-Database) and is licensed under
+  CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+- Constellation lines, names and the Milky Way outline come from d3-celestial by Olaf Frohn
+  (https://github.com/ofrohn/d3-celestial), BSD-3-Clause.
+- Libraries installed through npm (Astronomy Engine, jsPDF, SvelteKit and others) and the fonts
+  (Bodoni Moda, Atkinson Hyperlegible Next: SIL Open Font License) remain under their licences.
 
-Star data in src/data/ is derived from the HYG Database (CC BY-SA 4.0) and is
-licensed under CC BY-SA 4.0. Constellation lines are from d3-celestial (BSD-3-Clause).
+Using the site to make posters for yourself or as gifts is covered by its terms of use:
+https://skyofyourday.com/terms/
