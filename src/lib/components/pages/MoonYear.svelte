@@ -30,6 +30,7 @@
   description={p.moonYearDescription(data.year, fulls)}
   {lang}
   alternates={data.alternates}
+  image={`/og/${lang}/moonHub.png`}
   jsonLd={[
     breadcrumbs([
       ['Sky of Your Day', absolute(PAGES.home[lang])],

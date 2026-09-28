@@ -28,7 +28,7 @@
   );
 </script>
 
-<Seo title={p.starsHubTitle} description={p.starsHubDescription} {lang} alternates={data.alternates} />
+<Seo title={p.starsHubTitle} description={p.starsHubDescription} {lang} alternates={data.alternates} image={`/og/${lang}/starsHub.png`} />
 
 <article class="doc">
   <header>

@@ -52,6 +52,7 @@
   {description}
   {lang}
   alternates={data.alternates}
+  image={`/og/star/${s.id}.png`}
   jsonLd={[
     breadcrumbs([
       ['Sky of Your Day', absolute(PAGES.home[lang])],

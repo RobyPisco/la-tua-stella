@@ -15,6 +15,7 @@
   description={c.description}
   lang={locale.lang}
   alternates={PAGES.poster}
+  image={`/og/${locale.lang}/poster.png`}
   jsonLd={toolJsonLd(c, absolute(PAGES.poster[locale.lang]), locale.lang, 'DesignApplication')}
 />
 <PosterEditor />

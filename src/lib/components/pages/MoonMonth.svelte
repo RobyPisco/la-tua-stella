@@ -49,6 +49,7 @@
   {description}
   {lang}
   alternates={data.alternates}
+  image={`/og/moon/${data.year}-${String(data.month).padStart(2, '0')}.png`}
   jsonLd={[
     breadcrumbs([
       ['Sky of Your Day', absolute(PAGES.home[lang])],

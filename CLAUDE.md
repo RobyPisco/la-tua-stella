@@ -56,6 +56,11 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 - `src/lib/poster.ts` + `posterExport.ts` — SVG del poster, Via Lattea proiettata, export.
 - `src/lib/components/pages/` — componenti delle pagine generate (senza JavaScript: `csr = false`).
 - `scripts/` — costruzione dei dati da HYG (CC BY-SA 4.0) e d3-celestial (BSD-3).
+- `src/lib/server/og.ts` + `src/routes/og/` — immagini di anteprima 1200×630 generate in build con
+  `@resvg/resvg-js` (~1.770 PNG, ~100 MB): una per lingua per home/poster/indici/condizioni, una per
+  stella, anno di nascita e mese lunare (senza parole, valgono per tutte le lingue). Caratteri TTF in
+  `src/lib/server/fonts/` (OFL). **Non** passare `defaultFontFamily` a Resvg: fa ignorare il Bodoni.
+  La build ora dura ~6 minuti.
 - `worker/` — contatore pubblico "mappe create" (Cloudflare Worker + D1 su `api.skyofyourday.com`,
   istruzioni in `worker/README.md`) · `src/lib/counter.ts` — lato sito. Mostrato da subito (scelta
   dell'utente), sotto i pulsanti di scaricamento; conta una volta per mappa, non per file.
@@ -92,5 +97,4 @@ Contatore anche in home (per ora solo nel poster) ·
 altre lingue (~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`, `DIRECTIONS`/`CARDINALS`,
 `CONTENT`, `PT`, `TERMS`, `CONSTELLATIONS`/`PROPER`/`COLUMN` in names.ts, `PAGES`, `OG_LOCALE`,
 `LANG_NAMES` e cartella in `src/routes/` copiata da `es/`) ·
-immagini di anteprima per pagina ·
 analisi dei dati di Search Console dopo 2–3 settimane.

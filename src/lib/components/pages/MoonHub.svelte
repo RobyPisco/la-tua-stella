@@ -33,6 +33,7 @@
   description={p.moonHubDescription}
   {lang}
   alternates={data.alternates}
+  image={`/og/${lang}/moonHub.png`}
   jsonLd={[
     {
       '@context': 'https://schema.org',

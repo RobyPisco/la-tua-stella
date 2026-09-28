@@ -16,7 +16,7 @@
   const p = $derived(PT[lang]);
 </script>
 
-<Seo title={p.bornHubTitle} description={p.bornHubDescription} {lang} alternates={data.alternates} />
+<Seo title={p.bornHubTitle} description={p.bornHubDescription} {lang} alternates={data.alternates} image={`/og/${lang}/bornHub.png`} />
 
 <article class="doc">
   <header>

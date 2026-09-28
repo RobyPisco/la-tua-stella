@@ -304,7 +304,7 @@
   const c = $derived(TERMS[lang]);
 </script>
 
-<Seo title={`${c.title} | ${SITE_NAME}`} description={c.description} {lang} alternates={PAGES.terms} />
+<Seo title={`${c.title} | ${SITE_NAME}`} description={c.description} {lang} alternates={PAGES.terms} image={`/og/${lang}/terms.png`} />
 
 <article class="doc">
   <header>

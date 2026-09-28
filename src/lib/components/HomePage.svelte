@@ -15,6 +15,7 @@
   description={c.description}
   lang={locale.lang}
   alternates={PAGES.home}
+  image={`/og/${locale.lang}/home.png`}
   jsonLd={toolJsonLd(c, absolute(PAGES.home[locale.lang]), locale.lang, 'EducationalApplication')}
 />
 <StarApp />

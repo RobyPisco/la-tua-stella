@@ -32,6 +32,7 @@
   description={p.bornDescription(data.year, headline ? starName(headline.star, lang) : '', fmtNum(data.typicalLy))}
   {lang}
   alternates={data.alternates}
+  image={`/og/born/${data.year}.png`}
   jsonLd={[
     breadcrumbs([
       ['Sky of Your Day', absolute(PAGES.home[lang])],

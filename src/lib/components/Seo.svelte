@@ -36,6 +36,8 @@
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={absolute(image)} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content={OG_LOCALE[lang]} />
   <meta name="twitter:card" content="summary_large_image" />
   {#each jsonLd as o}
