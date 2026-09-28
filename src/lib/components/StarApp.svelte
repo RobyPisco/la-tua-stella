@@ -8,7 +8,8 @@
   import { starCss } from '../color';
   import { sighting as computeSighting, type Sighting } from '../describe';
   import { guessPlace, savePlace, savedPlace } from '../geo';
-  import { fmtTime, locale, t } from '../i18n.svelte';
+  import { mapsCount } from '../counter';
+  import { fmtNum, fmtTime, locale, t } from '../i18n.svelte';
   import { href } from '../routes';
   import { renderCard, share, shareUrl } from '../share';
   import { findStars, loadCatalog, starById, starName, type Star } from '../stars';
@@ -22,6 +23,7 @@
   let busy = $state(false);
   let step = $state<Step>('date');
   let now = $state(new Date());
+  let mapsMade = $state<number | null>(null);
 
   const skyPlace = $derived(place ?? guessPlace());
   const introDate = $derived(nextDark(skyPlace, now));
@@ -33,6 +35,7 @@
   });
 
   onMount(() => {
+    mapsCount().then((n) => (mapsMade = n));
     birthInput = loadBirth();
     place = savedPlace();
     // Links from the first version: /?poster opened the poster editor.
@@ -208,6 +211,7 @@
             </form>
             <p class="privacy">{t().privacy}</p>
             <a class="link other-date" href={href('poster', locale.lang)}>{t().posterOther}</a>
+            {#if mapsMade}<p class="count">{t().mapsMade(mapsMade, fmtNum(mapsMade))}</p>{/if}
           </div>
         {/if}
       </div>
@@ -298,6 +302,12 @@
     display: grid;
     gap: 1.75rem;
     max-width: 32rem;
+  }
+  .count {
+    margin-top: -1rem;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--muted);
   }
   .intro h1 {
     font-size: clamp(2.8rem, 6.5vw, 5rem);
