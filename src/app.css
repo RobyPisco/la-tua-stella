@@ -1,0 +1,137 @@
+:root {
+  --night: #0d1830;
+  --night-2: #16264a;
+  --rule: #2c3f69;
+  --ink: #ebe6d9;
+  --muted: #a0abc4;
+  /* The one accent: the real colour of the star on screen. Starts as sunlight. */
+  --star: #f6e2b4;
+  --serif: 'Bodoni Moda Variable', 'Bodoni 72', Didot, Georgia, serif;
+  --sans: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--night);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--star);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--star);
+  color: var(--night);
+  font-weight: 700;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.link {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--rule);
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+.field {
+  appearance: none;
+  background: var(--night-2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  min-height: 3rem;
+}
+
+.field:focus-visible {
+  border-color: var(--star);
+  outline-offset: 1px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+::view-transition-old(text),
+::view-transition-new(text) {
+  animation-duration: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
