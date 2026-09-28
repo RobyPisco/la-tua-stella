@@ -3,6 +3,7 @@
   import Sky from './components/Sky.svelte';
   import Result, { type Step } from './components/Result.svelte';
   import DateField from './components/DateField.svelte';
+  import PosterEditor from './components/PosterEditor.svelte';
   import { nextDark, type Place } from './lib/astro';
   import { starCss } from './lib/color';
   import { sighting as computeSighting, type Sighting } from './lib/describe';
@@ -19,6 +20,7 @@
   let error = $state('');
   let busy = $state(false);
   let step = $state<Step>('date');
+  let view = $state<'journey' | 'poster'>(new URL(location.href).searchParams.has('poster') ? 'poster' : 'journey');
   let now = $state(new Date());
 
   const skyPlace = $derived(place ?? guessPlace());
@@ -42,10 +44,31 @@
         }
       });
     }
+    const onpop = () => (view = new URL(location.href).searchParams.has('poster') ? 'poster' : 'journey');
+    addEventListener('popstate', onpop);
     // Keep the intro sky turning with the real sky.
     const timer = setInterval(() => { if (!star) now = new Date(); }, 60000);
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      removeEventListener('popstate', onpop);
+    };
   });
+
+  function openPoster() {
+    transition(() => {
+      view = 'poster';
+      history.pushState(null, '', `${location.pathname}?poster`);
+      scrollTo({ top: 0 });
+    });
+  }
+
+  function closePoster() {
+    transition(() => {
+      view = 'journey';
+      history.pushState(null, '', location.pathname);
+      scrollTo({ top: 0 });
+    });
+  }
 
   function loadBirth(): string {
     try { return localStorage.getItem('birth') ?? ''; } catch { return ''; }
@@ -146,71 +169,80 @@
   }
 </script>
 
-<div class="page step-{step}" class:has-result={!!star}>
+<div class="page step-{step}" class:has-result={!!star && view === 'journey'}>
   <nav class="lang" aria-label="Language">
     <button type="button" class="link" aria-pressed={locale.lang === 'it'} onclick={() => setLang('it')}>Italiano</button>
     <button type="button" class="link" aria-pressed={locale.lang === 'en'} onclick={() => setLang('en')}>English</button>
   </nav>
 
+  {#if view === 'poster'}
+    <main class="poster-view">
+      <PosterEditor {birth} {place} hasStar={!!star} onplace={pickPlace} onback={closePoster} />
+    </main>
+  {:else}
   <main class="layout">
-    <div class="text">
-      <nav class="steps" aria-label={t().stepsLabel}>
-        <ol>
-          {#each stepNames as [id, label], i}
-            <li>
-              <button
-                type="button"
-                aria-current={step === id ? 'step' : undefined}
-                disabled={id !== 'date' && !star}
-                onclick={() => jump(id)}
-              >
-                <span class="num">{i + 1}</span>
-                <span class="label">{label}</span>
-              </button>
-            </li>
-          {/each}
-        </ol>
-      </nav>
-      {#if star}
-        <Result
-          {star}
-          {others}
-          {birth}
-          {place}
-          {sighting}
-          onpickplace={pickPlace}
-          onpickstar={pickStar}
-          onrestart={restart}
-          onshare={doShare}
-          {step}
-          ongo={go}
+      <div class="text">
+        <nav class="steps" aria-label={t().stepsLabel}>
+          <ol>
+            {#each stepNames as [id, label], i}
+              <li>
+                <button
+                  type="button"
+                  aria-current={step === id ? 'step' : undefined}
+                  disabled={id !== 'date' && !star}
+                  onclick={() => jump(id)}
+                >
+                  <span class="num">{i + 1}</span>
+                  <span class="label">{label}</span>
+                </button>
+              </li>
+            {/each}
+          </ol>
+        </nav>
+        {#if star}
+          <Result
+            {star}
+            {others}
+            {birth}
+            {place}
+            {sighting}
+            onpickplace={pickPlace}
+            onpickstar={pickStar}
+            onrestart={restart}
+            onshare={doShare}
+            {step}
+            ongo={go}
+            onposter={openPoster}
+          />
+        {:else}
+          <div class="intro">
+            <h1>{t().title}</h1>
+            <p class="lead">{t().lead}</p>
+            <form class="finder" onsubmit={find} novalidate>
+              <DateField bind:value={birthInput} invalid={!!error} describedby={error ? 'birth-error' : undefined} />
+              {#if error}<p id="birth-error" class="error" role="alert">{error}</p>{/if}
+              <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
+            </form>
+            <p class="privacy">{t().privacy}</p>
+          <button class="link other-date" type="button" onclick={openPoster}>{t().posterOther}</button>
+          </div>
+        {/if}
+      </div>
+  
+      <div class="sky-col">
+        <Sky
+          date={sighting?.when ?? introDate}
+          place={skyPlace}
+          facing={sighting?.facing ?? 180}
+          {target}
+          caption={sighting?.best
+            ? t().skyAt(fmtTime(sighting.when, place?.timeZone))
+            : introDate === now ? t().skyNow : t().skyTonight}
         />
-      {:else}
-        <div class="intro">
-          <h1>{t().title}</h1>
-          <p class="lead">{t().lead}</p>
-          <form class="finder" onsubmit={find} novalidate>
-            <DateField bind:value={birthInput} invalid={!!error} describedby={error ? 'birth-error' : undefined} />
-            {#if error}<p id="birth-error" class="error" role="alert">{error}</p>{/if}
-            <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
-          </form>
-          <p class="privacy">{t().privacy}</p>
-        </div>
-      {/if}
-    </div>
-
-    <div class="sky-col">
-      <Sky
-        date={sighting?.when ?? introDate}
-        place={skyPlace}
-        facing={sighting?.facing ?? 180}
-        {target}
-        caption={sighting?.best
-          ? t().skyAt(fmtTime(sighting.when, place?.timeZone))
-          : introDate === now ? t().skyNow : t().skyTonight}
-      />
-    </div>
-  </main>
+      </div>
+    </main>
+  
+  {/if}
 
   <footer>
     <p>{t().credits}</p>
@@ -326,6 +358,12 @@
   }
   .error {
     color: #ffb4a8;
+  }
+  .other-date {
+    justify-self: start;
+  }
+  .poster-view {
+    width: 100%;
   }
   .privacy {
     color: var(--muted);

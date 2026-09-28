@@ -23,8 +23,9 @@
     onshare: () => Promise<string>;
     step: Step;
     ongo: (step: Step) => void;
+    onposter: () => void;
   }
-  let { star, others, birth, place, sighting, onpickplace, onpickstar, onrestart, onshare, step, ongo }: Props = $props();
+  let { star, others, birth, place, sighting, onpickplace, onpickstar, onrestart, onshare, step, ongo, onposter }: Props = $props();
 
   let choosingPlace = $state(false);
   let pointing = $state(false);
@@ -143,7 +144,8 @@
 
     <div class="step-nav">
       {#if birth}
-        <button class="btn" type="button" onclick={doShare} disabled={sharing}>{t().share}</button>
+        <button class="btn" type="button" onclick={onposter}>{t().posterCta}</button>
+        <button class="btn ghost" type="button" onclick={doShare} disabled={sharing}>{t().share}</button>
       {:else}
         <button class="btn" type="button" onclick={onrestart}>{t().findYours}</button>
       {/if}

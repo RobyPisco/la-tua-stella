@@ -3,7 +3,7 @@
 
   // Three plain fields instead of <input type="date">: native pickers differ wildly between
   // phones, and scrolling back decades to a birth year is painful on all of them.
-  let { value = $bindable(''), invalid = false, describedby }: { value?: string; invalid?: boolean; describedby?: string } = $props();
+  let { value = $bindable(''), invalid = false, describedby, legend }: { value?: string; invalid?: boolean; describedby?: string; legend?: string } = $props();
 
   const [y0, m0, d0] = value ? value.split('-') : ['', '', ''];
   let day = $state(d0 ? String(+d0) : '');
@@ -24,7 +24,7 @@
 </script>
 
 <fieldset class="date" aria-describedby={describedby}>
-  <legend>{t().birthLabel}</legend>
+  <legend>{legend ?? t().birthLabel}</legend>
   <div class="fields">
     <label class="day">
       <span>{t().day}</span>
