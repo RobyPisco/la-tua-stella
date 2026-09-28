@@ -52,7 +52,8 @@ motori di ricerca in `src/lib/content.ts`.
 
 ## Licenze
 
-- Codice: MIT.
+- Codice, grafica e testi: tutti i diritti riservati (vedi `LICENSE`). Le versioni pubblicate
+  prima del 28/09/2026 erano MIT e le copie ottenute allora restano MIT.
 - `src/data/near-stars.json` e `src/data/sky.json` derivano dall'[HYG Database](https://github.com/astronexus/HYG-Database)
   di David Nash, CC BY-SA 4.0, e sono distribuiti con la stessa licenza.
 - Linee delle costellazioni: [d3-celestial](https://github.com/ofrohn/d3-celestial) di Olaf Frohn, BSD-3-Clause.

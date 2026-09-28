@@ -23,6 +23,8 @@ l'utente: italiano.
   volontarie** (Ko-fi collegato a PayPal) che **non sbloccano nulla**. Pagina
   `https://ko-fi.com/skyofyourday` (`KOFI_URL` in `src/lib/brand.ts`), PayPal **personale**, niente
   Shop/Commissions/Memberships. Consigliata verifica al CAF.
+- Licenza: **tutti i diritti riservati** dal 28/09/2026 (prima MIT); dati HYG restano CC BY-SA.
+  Le Condizioni d'uso (`TermsPage.svelte`) vietano la rivendita dei poster.
 - Testi italiani **senza genere** dove possibile ("il giorno della tua nascita", non "quando sei nato").
 - Design: blu notte, Bodoni Moda + Atkinson Hyperlegible Next; l'unico accento è il colore reale
   della stella (`--star`). Il sito è a passi (4 step), su mobile e desktop.
@@ -87,8 +89,6 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 ## Idee aperte
 
 Contatore anche in home (per ora solo nel poster) ·
-licenza del repository (ora MIT, permette a chiunque di copiare e vendere: l'utente valuta di riservare
-grafica e testi; le Condizioni d'uso in `TermsPage.svelte` vietano già la rivendita dei poster) ·
 altre lingue (~1.840 pagine ciascuna; per aggiungerne una: `Lang`, `strings`, `DIRECTIONS`/`CARDINALS`,
 `CONTENT`, `PT`, `TERMS`, `CONSTELLATIONS`/`PROPER`/`COLUMN` in names.ts, `PAGES`, `OG_LOCALE`,
 `LANG_NAMES` e cartella in `src/routes/` copiata da `es/`) ·
