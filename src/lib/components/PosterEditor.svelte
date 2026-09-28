@@ -5,6 +5,7 @@
   import { guessPlace, savePlace, savedPlace } from '../geo';
   import { href } from '../routes';
   import { countMap, mapsCount } from '../counter';
+  import { facts, starKind } from '../describe';
   import { fmtDate, fmtNum, fmtTime, locale, t } from '../i18n.svelte';
   import {
     buildPoster, FORMATS, loadPosterData, renderMilkyWay, THEMES,
@@ -335,6 +336,18 @@
   </form>
 </section>
 
+<!-- Outside the editor grid: the sticky preview would slide over it. -->
+{#if star}
+  <section class="about" aria-live="polite">
+    <div>
+      <h2>{starName(star, locale.lang)}</h2>
+      <h3>{t().aboutTitle}</h3>
+      <p>{t().isA(starName(star, locale.lang), starKind(star))}</p>
+      {#each facts(star) as line}<p>{line}</p>{/each}
+    </div>
+  </section>
+{/if}
+
 <style>
   .editor {
     display: grid;
@@ -550,6 +563,32 @@
     color: var(--ink);
     border: 1px solid var(--rule);
     text-decoration: none;
+  }
+  .about {
+    max-width: 78rem;
+    width: 100%;
+    margin: 3rem auto 0;
+  }
+  .about > div {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 44rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .about h2 {
+    margin: 0;
+    font-style: italic;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+  }
+  .about h3 {
+    margin: 0.75rem 0 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.45rem;
+  }
+  .about p {
+    margin: 0;
   }
   .status {
     color: var(--ink);
