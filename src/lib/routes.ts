@@ -13,6 +13,7 @@ export const PAGES = {
   moonHub: { en: '/moon/', es: '/es/luna/', it: '/it/luna/' },
   bornHub: { en: '/born-in/', es: '/es/nacidos-en/', it: '/it/nati-nel/' },
   starsHub: { en: '/stars/', es: '/es/estrellas/', it: '/it/stelle/' },
+  terms: { en: '/terms/', es: '/es/condiciones/', it: '/it/condizioni/' },
 } satisfies Record<string, Record<Lang, string>>;
 
 const pad = (n: number) => String(n).padStart(2, '0');

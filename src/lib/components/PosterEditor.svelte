@@ -327,6 +327,7 @@
       {#if status}<p class="status" role="status">{status}</p>{/if}
       {#if mapsMade}<p class="count">{t().mapsMade(mapsMade, fmtNum(mapsMade))}</p>{/if}
       {#if format.print}<p class="hint">{t().posterPrintHint}</p>{/if}
+      <p class="hint">{t().posterTerms} <a href={href('terms', locale.lang)}>{t().termsLink}</a></p>
       {#if downloaded && KOFI_URL}
         <div class="kofi">
           <p>{t().kofi}</p>

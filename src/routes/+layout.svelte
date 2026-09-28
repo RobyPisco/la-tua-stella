@@ -52,7 +52,7 @@
       <a href={href('starsHub', locale.lang)}>{PT[locale.lang].starsHubH1}</a>
     </nav>
     <p>{t().credits}</p>
-    <p>{t().privacy}</p>
+    <p>{t().privacy} <a href={href('terms', locale.lang)}>{t().termsLink}</a></p>
   </footer>
 </div>
 
