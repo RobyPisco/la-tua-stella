@@ -282,7 +282,7 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
   const id = `p${Math.random().toString(36).slice(2, 8)}`;
 
   out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${L.H}" width="${W}" height="${L.H}">`);
-  out.push(`<metadata>Star positions: HYG Database (CC BY-SA 4.0). Constellations and Milky Way: d3-celestial (BSD-3-Clause). ${esc(spec.credit)}</metadata>`);
+  out.push(`<metadata>Sky of Your Day (https://skyofyourday.com). This poster is licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Star data: HYG Database by David Nash (CC BY-SA 4.0). Constellation figures and Milky Way: d3-celestial by Olaf Frohn (BSD-3-Clause).</metadata>`);
   out.push('<defs>');
   out.push(`<clipPath id="${id}-chart"><circle cx="${L.cx}" cy="${L.cy}" r="${L.R}"/></clipPath>`);
   out.push(`<radialGradient id="${id}-disk" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="${th.disk[0]}"/><stop offset="1" stop-color="${th.disk[1]}"/></radialGradient>`);

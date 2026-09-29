@@ -13,7 +13,7 @@
   const TERMS: Record<Lang, Terms> = {
     it: {
       title: 'Condizioni d’uso',
-      description: 'Cosa puoi fare con i poster del cielo creati su Sky of Your Day: gratis per uso personale e per i regali, non per la rivendita.',
+      description: 'Cosa puoi fare con i poster del cielo creati su Sky of Your Day: sono gratis e distribuiti con licenza CC BY-SA 4.0, come i dati stellari da cui nascono.',
       lead: 'Sky of Your Day è gratuito e lo resterà. Queste poche regole servono a tenerlo così.',
       sections: [
         {
@@ -22,20 +22,20 @@
             'Creare, scaricare e stampare tutti i poster e le immagini che vuoi, senza pagare nulla.',
             'Usarli per te, appenderli a casa, regalarli, condividerli sui social o in un messaggio.',
             'Portare il file in copisteria o a una stamperia online per farlo stampare.',
+            'I poster e le immagini che crei sono distribuiti con licenza Creative Commons BY-SA 4.0, la stessa dei dati stellari da cui nascono: puoi usarli, modificarli e anche venderli, purché citi la fonte e condivida le versioni modificate con la stessa licenza.',
           ],
         },
         {
-          h: 'Cosa non è consentito',
+          h: 'Cosa resta riservato',
           p: [
-            'Vendere i poster o i file creati con il sito, anche modificati: per esempio su Etsy, Amazon, eBay o in un negozio.',
-            'Offrire a pagamento la creazione di poster fatti con il sito.',
-            'Togliere l’indirizzo skyofyourday.com dai poster per presentarli come un lavoro proprio.',
+            'Il nome e il marchio Sky of Your Day, il codice, la grafica del sito e i testi delle pagine: non si possono copiare per creare un servizio simile né usare per far credere che un prodotto venga da Sky of Your Day.',
+            'Se ripubblichi o vendi un poster, lascia l’indirizzo skyofyourday.com e cita i dati, come chiede la licenza: per esempio «Sky of Your Day (skyofyourday.com), dati stellari HYG Database, CC BY-SA 4.0».',
           ],
         },
         {
           h: 'Di chi sono le cose',
           p: [
-            'La grafica, l’impaginazione dei poster e i testi del sito sono di Sky of Your Day.',
+            'Il nome Sky of Your Day, il codice, la grafica del sito e i testi delle pagine sono di Sky of Your Day: tutti i diritti riservati.',
             'Le posizioni e i dati delle stelle vengono dall’HYG Database (CC BY-SA 4.0), le figure delle costellazioni da d3-celestial (BSD-3) e i calcoli da Astronomy Engine (MIT): restano liberi secondo le loro licenze.',
           ],
         },
@@ -61,7 +61,7 @@
     },
     en: {
       title: 'Terms of use',
-      description: 'What you can do with the sky posters made on Sky of Your Day: free for personal use and gifts, not for resale.',
+      description: 'What you can do with the sky posters made on Sky of Your Day: they are free and released under CC BY-SA 4.0, like the star data they come from.',
       lead: 'Sky of Your Day is free and will stay free. These few rules help keep it that way.',
       sections: [
         {
@@ -70,20 +70,20 @@
             'Make, download and print as many posters and images as you like, without paying anything.',
             'Use them yourself, hang them at home, give them as gifts, share them on social media or in a message.',
             'Take the file to a print shop or an online printing service to have it printed.',
+            'The posters and images you make are released under the Creative Commons BY-SA 4.0 licence, the same as the star data they come from: you can use them, change them and even sell them, as long as you credit the source and share changed versions under the same licence.',
           ],
         },
         {
-          h: 'What is not allowed',
+          h: 'What stays reserved',
           p: [
-            'Selling posters or files made with the site, even modified ones: for example on Etsy, Amazon, eBay or in a shop.',
-            'Offering paid poster-making made with the site.',
-            'Removing the skyofyourday.com address from posters to present them as your own work.',
+            'The Sky of Your Day name and brand, the code, the site design and the page texts: they may not be copied to build a similar service or used to suggest that a product comes from Sky of Your Day.',
+            'If you republish or sell a poster, keep the skyofyourday.com address and credit the data, as the licence requires: for example “Sky of Your Day (skyofyourday.com), star data HYG Database, CC BY-SA 4.0”.',
           ],
         },
         {
           h: 'Who owns what',
           p: [
-            'The design, the poster layout and the texts of the site belong to Sky of Your Day.',
+            'The Sky of Your Day name, the code, the site design and the page texts belong to Sky of Your Day: all rights reserved.',
             'Star positions and data come from the HYG Database (CC BY-SA 4.0), constellation figures from d3-celestial (BSD-3) and calculations from Astronomy Engine (MIT): they remain free under their own licences.',
           ],
         },
@@ -109,7 +109,7 @@
     },
     es: {
       title: 'Condiciones de uso',
-      description: 'Qué puedes hacer con los pósters del cielo creados en Sky of Your Day: gratis para uso personal y para regalar, no para revender.',
+      description: 'Qué puedes hacer con los pósters del cielo creados en Sky of Your Day: son gratis y se distribuyen con licencia CC BY-SA 4.0, como los datos estelares de los que nacen.',
       lead: 'Sky of Your Day es gratis y lo seguirá siendo. Estas pocas reglas sirven para que siga así.',
       sections: [
         {
@@ -118,20 +118,20 @@
             'Crear, descargar e imprimir todos los pósters e imágenes que quieras, sin pagar nada.',
             'Usarlos para ti, colgarlos en casa, regalarlos, compartirlos en redes sociales o en un mensaje.',
             'Llevar el archivo a una copistería o a una imprenta online para imprimirlo.',
+            'Los pósters y las imágenes que creas se distribuyen con licencia Creative Commons BY-SA 4.0, la misma de los datos estelares de los que nacen: puedes usarlos, modificarlos e incluso venderlos, siempre que cites la fuente y compartas las versiones modificadas con la misma licencia.',
           ],
         },
         {
-          h: 'Qué no está permitido',
+          h: 'Qué queda reservado',
           p: [
-            'Vender los pósters o los archivos creados con el sitio, aunque estén modificados: por ejemplo en Etsy, Amazon, eBay o en una tienda.',
-            'Ofrecer como servicio de pago la creación de pósters hechos con el sitio.',
-            'Quitar la dirección skyofyourday.com de los pósters para presentarlos como un trabajo propio.',
+            'El nombre y la marca Sky of Your Day, el código, el diseño del sitio y los textos de las páginas: no se pueden copiar para crear un servicio similar ni usar para dar a entender que un producto viene de Sky of Your Day.',
+            'Si vuelves a publicar o vendes un póster, deja la dirección skyofyourday.com y cita los datos, como pide la licencia: por ejemplo «Sky of Your Day (skyofyourday.com), datos estelares HYG Database, CC BY-SA 4.0».',
           ],
         },
         {
           h: 'De quién es cada cosa',
           p: [
-            'El diseño, la maquetación de los pósters y los textos del sitio son de Sky of Your Day.',
+            'El nombre Sky of Your Day, el código, el diseño del sitio y los textos de las páginas son de Sky of Your Day: todos los derechos reservados.',
             'Las posiciones y los datos de las estrellas proceden de HYG Database (CC BY-SA 4.0), las figuras de las constelaciones de d3-celestial (BSD-3) y los cálculos de Astronomy Engine (MIT): siguen siendo libres según sus licencias.',
           ],
         },
@@ -157,7 +157,7 @@
     },
     de: {
       title: 'Nutzungsbedingungen',
-      description: 'Was du mit den Himmelspostern von Sky of Your Day machen darfst: kostenlos für den persönlichen Gebrauch und als Geschenk, nicht zum Weiterverkauf.',
+      description: 'Was du mit den Himmelspostern von Sky of Your Day machen darfst: Sie sind kostenlos und stehen unter CC BY-SA 4.0, wie die Sterndaten, aus denen sie entstehen.',
       lead: 'Sky of Your Day ist kostenlos und bleibt es. Diese wenigen Regeln sorgen dafür, dass es so bleibt.',
       sections: [
         {
@@ -166,20 +166,20 @@
             'So viele Poster und Bilder erstellen, herunterladen und drucken, wie du willst, ohne etwas zu bezahlen.',
             'Sie selbst nutzen, zu Hause aufhängen, verschenken, in sozialen Medien oder in einer Nachricht teilen.',
             'Die Datei in einen Copyshop oder zu einer Online-Druckerei bringen, um sie drucken zu lassen.',
+            'Die Poster und Bilder, die du erstellst, stehen unter der Lizenz Creative Commons BY-SA 4.0, derselben wie die Sterndaten, aus denen sie entstehen: Du darfst sie nutzen, verändern und sogar verkaufen, solange du die Quelle nennst und veränderte Fassungen unter derselben Lizenz weitergibst.',
           ],
         },
         {
-          h: 'Was nicht erlaubt ist',
+          h: 'Was vorbehalten bleibt',
           p: [
-            'Mit der Website erstellte Poster oder Dateien verkaufen, auch verändert: zum Beispiel auf Etsy, Amazon, eBay oder in einem Geschäft.',
-            'Die Erstellung von Postern mit der Website als bezahlte Dienstleistung anbieten.',
-            'Die Adresse skyofyourday.com von den Postern entfernen, um sie als eigene Arbeit auszugeben.',
+            'Der Name und die Marke Sky of Your Day, der Code, die Gestaltung der Website und die Texte der Seiten: Sie dürfen nicht kopiert werden, um einen ähnlichen Dienst aufzubauen, und nicht verwendet werden, um den Eindruck zu erwecken, ein Produkt stamme von Sky of Your Day.',
+            'Wenn du ein Poster erneut veröffentlichst oder verkaufst, lass die Adresse skyofyourday.com stehen und nenne die Daten, wie es die Lizenz verlangt: zum Beispiel „Sky of Your Day (skyofyourday.com), Sterndaten HYG Database, CC BY-SA 4.0“.',
           ],
         },
         {
           h: 'Wem was gehört',
           p: [
-            'Die Gestaltung, das Layout der Poster und die Texte der Website gehören Sky of Your Day.',
+            'Der Name Sky of Your Day, der Code, die Gestaltung der Website und die Texte der Seiten gehören Sky of Your Day: alle Rechte vorbehalten.',
             'Positionen und Daten der Sterne stammen aus der HYG Database (CC BY-SA 4.0), die Sternbildfiguren aus d3-celestial (BSD-3) und die Berechnungen aus Astronomy Engine (MIT): Sie bleiben unter ihren eigenen Lizenzen frei.',
           ],
         },
@@ -205,7 +205,7 @@
     },
     fr: {
       title: 'Conditions d’utilisation',
-      description: 'Ce que tu peux faire avec les posters du ciel créés sur Sky of Your Day : gratuits pour un usage personnel et pour offrir, pas pour la revente.',
+      description: 'Ce que tu peux faire avec les posters du ciel créés sur Sky of Your Day : ils sont gratuits et diffusés sous licence CC BY-SA 4.0, comme les données stellaires dont ils sont issus.',
       lead: 'Sky of Your Day est gratuit et le restera. Ces quelques règles servent à ce qu’il le reste.',
       sections: [
         {
@@ -214,20 +214,20 @@
             'Créer, télécharger et imprimer autant de posters et d’images que tu veux, sans rien payer.',
             'Les utiliser pour toi, les accrocher chez toi, les offrir, les partager sur les réseaux sociaux ou dans un message.',
             'Apporter le fichier chez un imprimeur ou à un service d’impression en ligne pour le faire imprimer.',
+            'Les posters et les images que tu crées sont diffusés sous licence Creative Commons BY-SA 4.0, la même que celle des données stellaires dont ils sont issus : tu peux les utiliser, les modifier et même les vendre, à condition de citer la source et de partager les versions modifiées sous la même licence.',
           ],
         },
         {
-          h: 'Ce qui n’est pas autorisé',
+          h: 'Ce qui reste réservé',
           p: [
-            'Vendre les posters ou les fichiers créés avec le site, même modifiés : par exemple sur Etsy, Amazon, eBay ou dans une boutique.',
-            'Proposer contre paiement la création de posters faits avec le site.',
-            'Retirer l’adresse skyofyourday.com des posters pour les présenter comme ton propre travail.',
+            'Le nom et la marque Sky of Your Day, le code, le graphisme du site et les textes des pages : ils ne peuvent pas être copiés pour créer un service similaire ni utilisés pour laisser croire qu’un produit vient de Sky of Your Day.',
+            'Si tu republies ou vends un poster, laisse l’adresse skyofyourday.com et cite les données, comme le demande la licence : par exemple « Sky of Your Day (skyofyourday.com), données stellaires HYG Database, CC BY-SA 4.0 ».',
           ],
         },
         {
           h: 'À qui appartient quoi',
           p: [
-            'Le graphisme, la mise en page des posters et les textes du site appartiennent à Sky of Your Day.',
+            'Le nom Sky of Your Day, le code, le graphisme du site et les textes des pages appartiennent à Sky of Your Day : tous droits réservés.',
             'Les positions et les données des étoiles viennent de la HYG Database (CC BY-SA 4.0), les figures des constellations de d3-celestial (BSD-3) et les calculs d’Astronomy Engine (MIT) : elles restent libres selon leurs licences.',
           ],
         },
@@ -253,7 +253,7 @@
     },
     pt: {
       title: 'Termos de uso',
-      description: 'O que você pode fazer com os pôsteres do céu criados no Sky of Your Day: grátis para uso pessoal e para presentear, não para revenda.',
+      description: 'O que você pode fazer com os pôsteres do céu criados no Sky of Your Day: são grátis e distribuídos com licença CC BY-SA 4.0, como os dados estelares de onde vêm.',
       lead: 'O Sky of Your Day é grátis e vai continuar assim. Estas poucas regras servem para manter as coisas assim.',
       sections: [
         {
@@ -262,20 +262,20 @@
             'Criar, baixar e imprimir quantos pôsteres e imagens quiser, sem pagar nada.',
             'Usá-los para você, pendurá-los em casa, dar de presente, compartilhar nas redes sociais ou numa mensagem.',
             'Levar o arquivo a uma gráfica ou a um serviço de impressão online para imprimir.',
+            'Os pôsteres e as imagens que você cria são distribuídos com a licença Creative Commons BY-SA 4.0, a mesma dos dados estelares de onde vêm: você pode usá-los, modificá-los e até vendê-los, desde que cite a fonte e compartilhe as versões modificadas com a mesma licença.',
           ],
         },
         {
-          h: 'O que não é permitido',
+          h: 'O que continua reservado',
           p: [
-            'Vender os pôsteres ou os arquivos criados com o site, mesmo modificados: por exemplo na Etsy, na Amazon, no eBay ou numa loja.',
-            'Oferecer como serviço pago a criação de pôsteres feitos com o site.',
-            'Tirar o endereço skyofyourday.com dos pôsteres para apresentá-los como trabalho próprio.',
+            'O nome e a marca Sky of Your Day, o código, o design do site e os textos das páginas: não podem ser copiados para criar um serviço parecido nem usados para dar a entender que um produto vem do Sky of Your Day.',
+            'Se você republicar ou vender um pôster, mantenha o endereço skyofyourday.com e cite os dados, como pede a licença: por exemplo “Sky of Your Day (skyofyourday.com), dados estelares HYG Database, CC BY-SA 4.0”.',
           ],
         },
         {
           h: 'De quem é cada coisa',
           p: [
-            'O design, a diagramação dos pôsteres e os textos do site são do Sky of Your Day.',
+            'O nome Sky of Your Day, o código, o design do site e os textos das páginas são do Sky of Your Day: todos os direitos reservados.',
             'As posições e os dados das estrelas vêm do HYG Database (CC BY-SA 4.0), as figuras das constelações do d3-celestial (BSD-3) e os cálculos do Astronomy Engine (MIT): continuam livres segundo as suas licenças.',
           ],
         },

@@ -87,3 +87,14 @@ online. Le decisioni operative sono anche in `CLAUDE.md`; qui c'è il ragionamen
 - Pagina Ko-fi da creare e collegare.
 - Tra 2–3 settimane: leggere i dati di Search Console e decidere dove spingere.
 - Richiedere l'indicizzazione delle pagine principali e aggiungere Bing Webmaster Tools.
+
+## 8. La licenza dei poster (29 settembre)
+
+- A casa l'utente aveva messo il sito sotto "tutti i diritti riservati" e scritto nelle condizioni
+  d'uso che i poster non si possono rivendere.
+- Problema segnalato: i poster sono disegnati con i dati HYG, che sono CC BY-SA 4.0. Quella licenza
+  permette l'uso commerciale e chiede che le opere derivate restino sotto la stessa licenza: un
+  divieto di rivendita dei poster sarebbe probabilmente inapplicabile e in contrasto con la licenza.
+- Soluzione scelta: i poster generati sono dichiarati CC BY-SA 4.0 (con attribuzione stampata sul
+  poster e nei metadati del file); restano riservati nome e marchio, codice, grafica del sito e testi.
+

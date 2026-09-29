@@ -24,7 +24,11 @@ l'utente: italiano.
   `https://ko-fi.com/skyofyourday` (`KOFI_URL` in `src/lib/brand.ts`), PayPal **personale**, niente
   Shop/Commissions/Memberships. Consigliata verifica al CAF.
 - Licenza: **tutti i diritti riservati** dal 28/09/2026 (prima MIT); dati HYG restano CC BY-SA.
-  Le Condizioni d'uso (`TermsPage.svelte`) vietano la rivendita dei poster.
+  **I poster generati sono CC BY-SA 4.0** (sono adattamenti dei dati HYG, che sono CC BY-SA con
+  "condividi allo stesso modo"): chiunque può usarli e anche venderli citando la fonte. Riservati
+  restano nome e marchio, codice, grafica del sito e testi. Non reintrodurre divieti di rivendita dei
+  poster: contrasterebbero con la licenza dei dati. Attribuzione stampata sul poster:
+  `POSTER_CREDIT` in `src/lib/brand.ts`; testi in `TermsPage.svelte` e `posterTerms`.
 - Testi italiani **senza genere** dove possibile ("il giorno della tua nascita", non "quando sei nato").
 - Design: blu notte, Bodoni Moda + Atkinson Hyperlegible Next; l'unico accento è il colore reale
   della stella (`--star`). Il sito è a passi (4 step), su mobile e desktop.

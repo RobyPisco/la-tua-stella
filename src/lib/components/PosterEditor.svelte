@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { sunAltitude, type Place } from '../astro';
-  import { KOFI_URL, SITE } from '../brand';
+  import { KOFI_URL, POSTER_CREDIT } from '../brand';
   import { guessPlace, savePlace, savedPlace } from '../geo';
   import { href } from '../routes';
   import { countMap, mapsCount } from '../counter';
@@ -93,7 +93,7 @@
       placeLine: placeLine(where),
       starLine: s ? starLine(s, instant) : '',
       starFacts: s ? [t().isA(starName(s, locale.lang), starKind(s)), ...facts(s)] : undefined,
-      credit: SITE,
+      credit: POSTER_CREDIT,
       target: s ? { raH: s.raH, dec: s.dec, ci: s.ci, label: starName(s, locale.lang) } : undefined,
       planetNames: t().planetNames,
       moonName: t().moon,
