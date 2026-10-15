@@ -59,7 +59,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
           paragraphs: [
             'La luz tarda en viajar. De una estrella a 40 años luz, la luz que ves esta noche salió hace 40 años.',
             'Así que para cada edad hay una estrella a la distancia justa: la luz que salió de ella el día de tu nacimiento está llegando a la Tierra justo ahora. La buscamos entre más de 4.000 estrellas cercanas, en un catálogo construido con los datos del satélite Hipparcos y los catálogos Yale y Gliese, y preferimos las que se ven a simple vista.',
-            'Después calculamos, desde donde estás, cuándo sale, cuánto sube y hacia dónde mirar, y dibujamos el cielo real sobre ti con tu estrella. Con el móvil puedes levantarlo hacia el cielo y seguir la flecha.',
+            'Después calculamos, desde donde estás, cuándo sale, cuánto sube y hacia dónde mirar, y dibujamos el cielo real sobre ti con tu estrella. Con el teléfono puedes levantarlo hacia el cielo y seguir la flecha.',
           ],
         },
       ],
@@ -295,7 +295,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
         {
           heading: 'Cómo imprimirlo',
           paragraphs: [
-            'Elige A4, A3, 30 × 40 o 50 × 70 cm y descarga el PDF: ya tiene la medida del papel, listo para la imprenta o la impresora de casa. Para impresiones muy grandes usa el SVG, que se mantiene nítido a cualquier tamaño. Los formatos cuadrado, 4:5 y móvil están pensados para las redes sociales y para el fondo de pantalla.',
+            'Elige A4, A3, 30 × 40 o 50 × 70 cm y descarga el PDF: ya tiene la medida del papel, listo para la imprenta o la impresora de casa. Para impresiones muy grandes usa el SVG, que se mantiene nítido a cualquier tamaño. Los formatos cuadrado, 4:5 y teléfono están pensados para las redes sociales y para el fondo de pantalla.',
           ],
         },
       ],
