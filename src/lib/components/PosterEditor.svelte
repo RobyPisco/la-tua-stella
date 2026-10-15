@@ -222,11 +222,12 @@
 </script>
 
 <section class="editor">
+  <!-- This is the first screen of the site: the pitch comes before any way out of it. -->
   <header class="head">
-    <a class="link" href={href('star', locale.lang)}>{t().starLink}</a>
     <h1>{t().posterHeading}</h1>
     <p class="intro">{t().posterIntro}</p>
     {#if mapsMade}<MapsCount n={mapsMade} />{/if}
+    <a class="link" href={href('star', locale.lang)}>{t().starLink}</a>
   </header>
 
   <div class="preview" role="img" aria-label={t().posterPreviewLabel}>
