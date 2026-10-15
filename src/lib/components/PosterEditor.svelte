@@ -327,17 +327,22 @@
         <button class="btn ghost" type="button" disabled={busy || !svg} onclick={() => save('svg')}>{t().dlSvg}</button>
       </div>
       {#if status}<p class="status" role="status">{status}</p>{/if}
+      <!--
+        The invitation sits right under the buttons, where someone who has just got their file
+        still has it in view: at the foot of the fieldset it fell below the fold on a phone.
+      -->
+      {#if downloaded && KOFI_URL}
+        <div class="kofi">
+          <p>{t().kofi}</p>
+          <a class="btn" href={KOFI_URL} target="_blank" rel="noopener">{t().kofiButton}</a>
+          <p class="note">{t().kofiNote}</p>
+        </div>
+      {/if}
       {#if format.print}<p class="hint">{t().posterPrintHint}</p>{/if}
       <p class="hint">
         {t().posterTerms} <a href={href('terms', locale.lang)}>{t().termsLink}</a>
         {#if !downloaded && KOFI_URL}<br />{t().kofiHint} <a href={KOFI_URL} target="_blank" rel="noopener">{t().kofiHintLink}</a>.{/if}
       </p>
-      {#if downloaded && KOFI_URL}
-        <div class="kofi">
-          <p>{t().kofi}</p>
-          <a class="btn ghost" href={KOFI_URL} target="_blank" rel="noopener">{t().kofiButton}</a>
-        </div>
-      {/if}
     </fieldset>
   </form>
 </section>
@@ -568,6 +573,10 @@
     padding: 1rem;
     border: 1px solid var(--rule);
     border-radius: 12px;
+  }
+  .kofi .note {
+    color: var(--muted);
+    font-size: 0.9rem;
   }
   @media (max-width: 860px) {
     .editor {

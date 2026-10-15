@@ -5,9 +5,13 @@ l'utente: italiano.
 
 ## Cos'è
 
-- **La tua stella**: dalla data di nascita trova la stella la cui luce è partita quel giorno e
-  arriva ora; dove guardarla stasera; modalità "Cercala col telefono" (bussola + sensori).
-- **Poster del cielo** (`/star-map/`, `/it/mappa-stellare/`): cielo vero di qualsiasi data/ora/luogo,
+- **La tua stella** (`/your-star/`, `/it/la-tua-stella/`, …): dalla data di nascita trova la stella la cui
+  luce è partita quel giorno e arriva ora; dove guardarla stasera; modalità "Cercala col telefono"
+  (bussola + sensori). È il contorno e porta al poster.
+  I vecchi indirizzi del poster (`/star-map/`, `/it/mappa-stellare/`, …) restano come pagine che
+  dichiarano la radice come canonical e reindirizzano: sono fuori da `PAGES` (`MOVED_POSTER`) così
+  non entrano nella sitemap. GitHub Pages è statico e non può fare un 301 vero.
+- **Poster del cielo** (alla radice: `/`, `/it/`, …): il prodotto principale. Cielo vero di qualsiasi data/ora/luogo,
   Via Lattea, Luna, pianeti, 4 stili, 7 formati, PDF/PNG/SVG gratuiti.
 - **Pagine SEO generate** (~3.700): fasi lunari per mese/anno dal 1930, "nati nel…" per anno,
   schede delle 464 stelle con nome IAU. In inglese (radice, lingua principale), spagnolo (`/es/`),
@@ -31,7 +35,9 @@ l'utente: italiano.
   `POSTER_CREDIT` in `src/lib/brand.ts`; testi in `TermsPage.svelte` e `posterTerms`.
 - Testi italiani **senza genere** dove possibile ("il giorno della tua nascita", non "quando sei nato").
 - Design: blu notte, Bodoni Moda + Atkinson Hyperlegible Next; l'unico accento è il colore reale
-  della stella (`--star`). Il sito è a passi (4 step), su mobile e desktop.
+  della stella (`--star`). Il percorso stella è a passi (stella → dove guardarla → com'è fatta), su
+  mobile e desktop: la lista dei passi compare solo quando c'è un risultato, e cambiare data è un
+  pulsante esplicito dentro il risultato, non un passo.
 - Aspettative di traffico dette onestamente all'utente: poche migliaia di visite al mese a 6 mesi
   nello scenario normale; la SEO è lenta.
 
@@ -55,7 +61,8 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
 
 - `src/lib/routes.ts` — pagine e slug per lingua, `paths.*` per le pagine generate, `FIRST_YEAR`.
 - `src/lib/i18n.svelte.ts` — testi dell'interfaccia; la lingua viene dall'URL (layout).
-- `src/lib/content.ts` — testi SEO di home e poster · `src/lib/pageText.ts` — testi pagine generate.
+- `src/lib/content.ts` — testi SEO del poster (radice) e del percorso stella · `src/lib/pageText.ts`
+  — testi delle pagine generate.
 - `src/lib/server/` — dati e loader usati solo in build (stelle con nome, pagine generate).
 - `src/lib/poster.ts` + `posterExport.ts` — SVG del poster, Via Lattea proiettata, export.
 - `src/lib/components/pages/` — componenti delle pagine generate (senza JavaScript: `csr = false`).
