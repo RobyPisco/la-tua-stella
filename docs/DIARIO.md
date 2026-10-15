@@ -98,3 +98,60 @@ online. Le decisioni operative sono anche in `CLAUDE.md`; qui c'è il ragionamen
 - Soluzione scelta: i poster generati sono dichiarati CC BY-SA 4.0 (con attribuzione stampata sul
   poster e nei metadati del file); restano riservati nome e marchio, codice, grafica del sito e testi.
 
+
+## 9. La ristrutturazione (15 ottobre)
+
+- Punto di partenza: l'utente trovava la **logica del sito confusa** e voleva rifare la grafica.
+  Letto il codice, la grafica era la parte sana: il problema era l'architettura.
+- **Due prodotti in un imbuto solo.** La radice — l'URL con più autorità — era spesa su
+  "la stella la cui luce è partita il giorno della tua nascita", un concetto bellissimo che
+  nessuno cerca; il poster, cioè il mercato vero ("star map", "mapa estelar"), stava un livello
+  sotto. Invertiti: poster alla radice in sei lingue, percorso stella su slug propri.
+  Fatto **adesso** proprio perché il dominio ha 17 giorni: spostare costa due settimane di
+  indicizzazione, cioè niente. Fra sei mesi sarebbe costato traffico.
+- GitHub Pages è statico: niente 301. I vecchi indirizzi restano come pagine con `canonical`
+  verso la nuova posizione più un refresh, **senza `noindex`** (bloccherebbe il trasferimento
+  dell'autorità), e fuori dalla sitemap.
+- **Il percorso a 4 passi era un falso percorso:** il passo 1 non tornava indietro, chiamava
+  `restart()` e cancellava il risultato. Ora la lista compare solo con un risultato ed elenca
+  i tre passi reali.
+- **Donazioni: 287 mappe, zero donazioni.** Chiesto di "forzare la mano" con il PDF a pagamento.
+  Rifiutato per tre ragioni indipendenti, la terza decisiva: sarebbe una vendita (serve partita
+  IVA), i poster sono CC BY-SA quindi il divieto di ridistribuzione non regge, e il file è già
+  nel browser prima del pagamento — un cancello sarebbe teatro. Fatto invece quello che
+  funziona: l'invito spostato **sotto i pulsanti** (stava sotto la piega su telefono, probabile
+  causa vera dello zero), testo onesto e concreto, pannello Ko-fi dentro la pagina ma caricato
+  **solo al clic**, così chi non dona non contatta mai terzi.
+  Nota statistica detta all'utente: 0 su 287 è rumore, non segnale — allo 0,5% di conversione
+  te ne aspetti 1,4, e la probabilità di osservarne zero è circa il 25%. E 287 mappe non sono
+  287 persone: il contatore conta le mappe.
+- **Search Console, il dato che decide tutto:** 11.046 pagine rilevate, 1.400 indicizzate.
+  Delle 9.646 non indicizzate, **9.629 non sono mai state scaricate** contro sole 17 scartate
+  dopo la lettura. Il limite è l'**autorità**, non la qualità. Conseguenza: aggiungere lingue
+  o pagine adesso fa danno. La leva sono i link in entrata.
+- Geografia: il blocco ispanofono (Spagna 14% + Argentina 10% + Messico 7%) vale **il doppio**
+  dell'Italia (16%). Corretti sette "móvil" in `i18n.svelte.ts` e due in `content.ts` →
+  "teléfono", neutro: l'America Latina pesa più della Spagna.
+- Titoli allineati alle ricerche ("La mappa stellare del tuo cielo" invece di "Il poster del
+  tuo cielo") e introduzione che chiude su gratis / senza registrazione / senza filigrana.
+  **Attenzione al limite:** la scheda social taglia il sottotitolo a tre righe da ~41 caratteri
+  (`og.ts`, `pageImage`). La prima versione da 148 caratteri veniva mozzata; accorciata a ~105
+  e verificata guardando le PNG generate in italiano e tedesco.
+- **Falso allarme da non ripetere:** il "soft 404" del Controllo URL in tempo reale su
+  `/es/tu-estrella/` era una cilecca dello strumento — il sorgente servito era completo e
+  corretto. Prima di allarmarsi, rifare il test.
+
+## 10. Prossimi passi (dal 15 ottobre)
+
+- Finire le richieste di indicizzazione: le sei radici, poi `/fr/ton-etoile/` e
+  `/pt/a-tua-estrela/` (la quota giornaliera si esaurisce dopo poche richieste).
+- **Far rileggere le traduzioni nuove in tedesco, francese e portoghese**: scritte senza
+  madrelingua in tre giri successivi.
+- Verificare dal telefono che l'invito Ko-fi si veda e che il pannello si apra.
+- I **link in entrata** sono l'unica leva che sposta il numero che conta: Show HN, Product Hunt,
+  subreddit di astronomia (link `nofollow`: il valore è indiretto, chi ti scopre lì ti linka dal
+  proprio sito). Valutato un test TikTok in spagnolo, dieci video in due settimane, con la
+  scadenza decisa prima di cominciare.
+- Verifica falsificabile della ristrutturazione: a 4-6 settimane, `/` deve ricevere impression
+  su query tipo "star map"/"mapa estelar" e i clic tornare almeno ai livelli di oggi. Se non
+  succede nessuna delle due, la mossa non ha pagato e si torna indietro.
