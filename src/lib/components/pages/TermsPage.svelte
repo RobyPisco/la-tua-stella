@@ -56,7 +56,10 @@
       ],
       donate: {
         h: 'Donazioni',
-        p: ['Chi vuole può sostenere il sito con una donazione volontaria. Non sblocca nulla: tutto resta gratis per tutti.'],
+        p: [
+          'Chi vuole può sostenere il sito con una donazione volontaria. Non sblocca nulla: tutto resta gratis per tutti.',
+          'Il modulo per donare è di Ko-fi e si apre dentro la pagina solo se scegli di aprirlo: finché non lo fai, il sito non contatta Ko-fi e non gli manda nulla.',
+        ],
       },
     },
     en: {
@@ -104,7 +107,10 @@
       ],
       donate: {
         h: 'Donations',
-        p: ['Anyone who wants to can support the site with a voluntary donation. It unlocks nothing: everything stays free for everyone.'],
+        p: [
+          'Anyone who wants to can support the site with a voluntary donation. It unlocks nothing: everything stays free for everyone.',
+          'The donation form is Ko-fi\u2019s and opens inside the page only if you choose to open it: until you do, the site does not contact Ko-fi and sends it nothing.',
+        ],
       },
     },
     es: {
@@ -152,7 +158,10 @@
       ],
       donate: {
         h: 'Donaciones',
-        p: ['Quien quiera puede apoyar el sitio con una donación voluntaria. No desbloquea nada: todo sigue siendo gratis para todos.'],
+        p: [
+          'Quien quiera puede apoyar el sitio con una donación voluntaria. No desbloquea nada: todo sigue siendo gratis para todos.',
+          'El formulario para donar es de Ko-fi y se abre dentro de la página solo si decides abrirlo: hasta entonces, el sitio no contacta con Ko-fi ni le envía nada.',
+        ],
       },
     },
     de: {
@@ -200,7 +209,10 @@
       ],
       donate: {
         h: 'Spenden',
-        p: ['Wer möchte, kann die Website mit einer freiwilligen Spende unterstützen. Sie schaltet nichts frei: Alles bleibt für alle kostenlos.'],
+        p: [
+          'Wer möchte, kann die Website mit einer freiwilligen Spende unterstützen. Sie schaltet nichts frei: Alles bleibt für alle kostenlos.',
+          'Das Spendenformular stammt von Ko-fi und öffnet sich nur dann in der Seite, wenn du es öffnest: bis dahin nimmt die Seite keinen Kontakt zu Ko-fi auf und sendet nichts dorthin.',
+        ],
       },
     },
     fr: {
@@ -248,7 +260,10 @@
       ],
       donate: {
         h: 'Dons',
-        p: ['Qui le souhaite peut soutenir le site par un don volontaire. Il ne débloque rien : tout reste gratuit pour tout le monde.'],
+        p: [
+          'Qui le souhaite peut soutenir le site par un don volontaire. Il ne débloque rien : tout reste gratuit pour tout le monde.',
+          'Le formulaire de don vient de Ko-fi et s\u2019ouvre dans la page seulement si tu choisis de l\u2019ouvrir : jusque-là, le site ne contacte pas Ko-fi et ne lui envoie rien.',
+        ],
       },
     },
     pt: {
@@ -296,7 +311,10 @@
       ],
       donate: {
         h: 'Doações',
-        p: ['Quem quiser pode apoiar o site com uma doação voluntária. Ela não libera nada: tudo continua grátis para todos.'],
+        p: [
+          'Quem quiser pode apoiar o site com uma doação voluntária. Ela não libera nada: tudo continua grátis para todos.',
+          'O formulário de doação é do Ko-fi e abre dentro da página somente se você escolher abri-lo: até lá, o site não contacta o Ko-fi nem envia nada para lá.',
+        ],
       },
     },
   };

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { sunAltitude, type Place } from '../astro';
-  import { KOFI_URL, POSTER_CREDIT } from '../brand';
+  import { KOFI_EMBED, KOFI_URL, POSTER_CREDIT } from '../brand';
   import { guessPlace, savePlace, savedPlace } from '../geo';
   import { href } from '../routes';
   import { countMap, mapsCount } from '../counter';
@@ -37,6 +37,8 @@
   let status = $state('');
   let busy = $state(false);
   let downloaded = $state(false);
+  // Ko-fi is only contacted once someone asks to donate, never on a plain page view.
+  let showKofi = $state(false);
   let mapsMade = $state<number | null>(null);
   // One count per map: downloading the same map again, or in another file type, is not a new map.
   const counted = new Set<string>();
@@ -334,7 +336,12 @@
       {#if downloaded && KOFI_URL}
         <div class="kofi">
           <p>{t().kofi}</p>
-          <a class="btn" href={KOFI_URL} target="_blank" rel="noopener">{t().kofiButton}</a>
+          {#if showKofi}
+            <iframe class="panel" src={KOFI_EMBED} title={t().kofiButton} loading="lazy"></iframe>
+            <a class="link" href={KOFI_URL} target="_blank" rel="noopener">{t().kofiNewTab}</a>
+          {:else}
+            <button class="btn" type="button" onclick={() => (showKofi = true)}>{t().kofiButton}</button>
+          {/if}
           <p class="note">{t().kofiNote}</p>
         </div>
       {/if}
@@ -577,6 +584,14 @@
   .kofi .note {
     color: var(--muted);
     font-size: 0.9rem;
+  }
+  /* Ko-fi's panel is light; give it a rounded frame so it sits in the night sky on purpose. */
+  .kofi .panel {
+    width: 100%;
+    height: min(42rem, 70vh);
+    border: 0;
+    border-radius: 10px;
+    background: #f9f9f9;
   }
   @media (max-width: 860px) {
     .editor {
