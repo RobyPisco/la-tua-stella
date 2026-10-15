@@ -6,12 +6,16 @@ import type { Lang } from './i18n.svelte';
 export const LANGS: Lang[] = ['en', 'es', 'it', 'de', 'fr', 'pt'];
 export const DEFAULT_LANG: Lang = 'en';
 
-/** Every page, with its path in each language. Slugs are localized for search. */
+/**
+ * Every page, with its path in each language. Slugs are localized for search.
+ * The poster sits at the root: it is the product, and "star map" is what people search for.
+ * The star journey has its own page and leads to it.
+ */
 export const PAGES = {
-  home: { en: '/', es: '/es/', it: '/it/', de: '/de/', fr: '/fr/', pt: '/pt/' },
-  poster: {
-    en: '/star-map/', es: '/es/mapa-estelar/', it: '/it/mappa-stellare/',
-    de: '/de/sternkarte/', fr: '/fr/carte-du-ciel/', pt: '/pt/mapa-estelar/',
+  poster: { en: '/', es: '/es/', it: '/it/', de: '/de/', fr: '/fr/', pt: '/pt/' },
+  star: {
+    en: '/your-star/', es: '/es/tu-estrella/', it: '/it/la-tua-stella/',
+    de: '/de/dein-stern/', fr: '/fr/ton-etoile/', pt: '/pt/a-tua-estrela/',
   },
   moonHub: { en: '/moon/', es: '/es/luna/', it: '/it/luna/', de: '/de/mond/', fr: '/fr/lune/', pt: '/pt/lua/' },
   bornHub: {
@@ -24,6 +28,16 @@ export const PAGES = {
     de: '/de/nutzungsbedingungen/', fr: '/fr/conditions/', pt: '/pt/termos/',
   },
 } satisfies Record<string, Record<Lang, string>>;
+
+/**
+ * Where the poster used to live, before it moved to the root. These paths stay as pages that
+ * point at the new address (canonical plus a redirect), so links and search results still work.
+ * They are deliberately outside PAGES: they must not enter the sitemap.
+ */
+export const MOVED_POSTER: Record<Lang, string> = {
+  en: '/star-map/', es: '/es/mapa-estelar/', it: '/it/mappa-stellare/',
+  de: '/de/sternkarte/', fr: '/fr/carte-du-ciel/', pt: '/pt/mapa-estelar/',
+};
 
 const pad = (n: number) => String(n).padStart(2, '0');
 

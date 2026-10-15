@@ -7,16 +7,16 @@
   import Seo from './Seo.svelte';
   import StarApp from './StarApp.svelte';
 
-  const c = $derived(CONTENT.home[locale.lang]);
+  const c = $derived(CONTENT.star[locale.lang]);
 </script>
 
 <Seo
   title={c.title}
   description={c.description}
   lang={locale.lang}
-  alternates={PAGES.home}
-  image={`/og/${locale.lang}/home.png`}
-  jsonLd={toolJsonLd(c, absolute(PAGES.home[locale.lang]), locale.lang, 'EducationalApplication')}
+  alternates={PAGES.star}
+  image={`/og/${locale.lang}/star.png`}
+  jsonLd={toolJsonLd(c, absolute(PAGES.star[locale.lang]), locale.lang, 'EducationalApplication')}
 />
 <StarApp />
 <PageContent content={c} />

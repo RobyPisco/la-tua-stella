@@ -39,11 +39,6 @@
     mapsCount().then((n) => (mapsMade = n));
     birthInput = loadBirth();
     place = savedPlace();
-    // Links from the first version: /?poster opened the poster editor.
-    if (new URL(location.href).searchParams.has('poster')) {
-      goto(href('poster', locale.lang), { replaceState: true });
-      return;
-    }
     const id = Number(new URL(location.href).searchParams.get('s'));
     if (id) {
       loadCatalog().then((stars) => {
@@ -118,13 +113,7 @@
     });
   }
 
-  function jump(s: Step) {
-    if (s === 'date') restart();
-    else if (star) go(s);
-  }
-
   const stepNames = $derived([
-    ['date', star && !birth ? t().findYours : t().stepDate],
     ['star', t().stepStar],
     ['look', t().tonightTitle],
     ['more', t().aboutTitle],
@@ -169,23 +158,24 @@
 <div class="journey step-{step}" class:has-result={!!star}>
   <section class="layout">
       <div class="text">
-        <nav class="steps" aria-label={t().stepsLabel}>
-          <ol>
-            {#each stepNames as [id, label], i}
-              <li>
-                <button
-                  type="button"
-                  aria-current={step === id ? 'step' : undefined}
-                  disabled={id !== 'date' && !star}
-                  onclick={() => jump(id)}
-                >
-                  <span class="num">{i + 1}</span>
-                  <span class="label">{label}</span>
-                </button>
-              </li>
-            {/each}
-          </ol>
-        </nav>
+        {#if star}
+          <nav class="steps" aria-label={t().stepsLabel}>
+            <ol>
+              {#each stepNames as [id, label], i}
+                <li>
+                  <button
+                    type="button"
+                    aria-current={step === id ? 'step' : undefined}
+                    onclick={() => go(id)}
+                  >
+                    <span class="num">{i + 1}</span>
+                    <span class="label">{label}</span>
+                  </button>
+                </li>
+              {/each}
+            </ol>
+          </nav>
+        {/if}
         {#if star}
           <Result
             {star}
@@ -212,7 +202,7 @@
               <button class="btn" type="submit" disabled={busy}>{busy ? t().loading : t().find}</button>
             </form>
             <p class="privacy">{t().privacy}</p>
-            <a class="link other-date" href={href('poster', locale.lang)}>{t().posterOther}</a>
+            <a class="link other-date" href={href('poster', locale.lang)}>{t().posterLink}</a>
           </div>
         {/if}
       </div>

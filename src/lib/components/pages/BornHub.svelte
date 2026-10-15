@@ -22,7 +22,10 @@
   <header>
     <h1>{p.bornHubH1}</h1>
     <p class="lead">{p.bornHubLead}</p>
-    <p><a class="btn" href={href('home', lang)}>{p.findStar}</a></p>
+    <div class="actions">
+      <a class="btn" href={href('poster', lang)}>{p.makePoster}</a>
+      <a class="btn ghost" href={href('star', lang)}>{p.findStar}</a>
+    </div>
   </header>
 
   <section>

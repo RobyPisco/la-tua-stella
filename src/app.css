@@ -198,7 +198,8 @@ body:has(dialog[open]) {
   border-radius: 14px;
   max-width: 44rem;
 }
-.doc .cta .actions {
+/* Rows of buttons, inside a call-to-action box or straight under a page's heading. */
+.doc .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;

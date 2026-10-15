@@ -1,1 +1,1 @@
-export const load = () => ({ page: 'poster' as const });
+export const csr = false;

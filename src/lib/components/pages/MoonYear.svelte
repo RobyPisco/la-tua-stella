@@ -33,7 +33,7 @@
   image={`/og/${lang}/moonHub.png`}
   jsonLd={[
     breadcrumbs([
-      ['Sky of Your Day', absolute(PAGES.home[lang])],
+      ['Sky of Your Day', absolute(PAGES.poster[lang])],
       [p.moonHubH1, absolute(PAGES.moonHub[lang])],
       [String(data.year), absolute(paths.moonYear(lang, data.year))],
     ]),
@@ -72,7 +72,8 @@
   <aside class="cta">
     <p>{p.bornCta}</p>
     <div class="actions">
-      <a class="btn" href={href('home', lang)}>{p.findStar}</a>
+      <a class="btn" href={href('poster', lang)}>{p.makePoster}</a>
+      <a class="btn ghost" href={href('star', lang)}>{p.findStar}</a>
       {#if data.hasBornPage}
         <a class="btn ghost" href={base + paths.born(lang, data.year)}>{p.bornH1(data.year).split(':')[0]}</a>
       {/if}

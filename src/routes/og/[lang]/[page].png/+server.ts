@@ -8,8 +8,8 @@ export const prerender = true;
 
 /** Title in each language and the piece of sky behind it (RA, Dec in degrees). */
 const PAGES: Record<string, { title: (l: Lang) => string; sub?: (l: Lang) => string; sky: [number, number] }> = {
-  home: { title: (l) => strings[l].title, sky: [84, 2] },
   poster: { title: (l) => strings[l].posterHeading, sub: (l) => strings[l].posterIntro, sky: [305, 40] },
+  star: { title: (l) => strings[l].title, sky: [84, 2] },
   moonHub: { title: (l) => PT[l].moonHubH1, sky: [62, 20] },
   bornHub: { title: (l) => PT[l].bornHubH1, sky: [282, 36] },
   starsHub: { title: (l) => PT[l].starsHubH1, sky: [170, 55] },

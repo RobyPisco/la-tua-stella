@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PosterPage from '$lib/components/PosterPage.svelte';
+  import MovedPage from '$lib/components/MovedPage.svelte';
 </script>
 
-<PosterPage />
+<MovedPage to="poster" />

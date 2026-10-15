@@ -221,7 +221,7 @@
 
 <section class="editor">
   <header class="head">
-    <a class="link" href={href('home', locale.lang)}>{t().posterHome}</a>
+    <a class="link" href={href('star', locale.lang)}>{t().starLink}</a>
     <h1>{t().posterHeading}</h1>
     <p class="intro">{t().posterIntro}</p>
     {#if mapsMade}<MapsCount n={mapsMade} />{/if}

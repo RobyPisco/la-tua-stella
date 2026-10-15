@@ -90,6 +90,9 @@
     </div>
     <div class="step-nav">
       <button class="btn" type="button" onclick={() => ongo('look')}>{t().nextLook}</button>
+      {#if birth}
+        <button class="btn ghost" type="button" onclick={onposter}>{t().posterCta}</button>
+      {/if}
       <button class="link" type="button" onclick={onrestart}>{birth ? t().changeDate : t().findYours}</button>
     </div>
   {:else if step === 'look'}

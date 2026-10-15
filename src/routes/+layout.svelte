@@ -31,7 +31,7 @@
 
 <div class="shell">
   <header class="top">
-    <a class="brand" href={href('home', locale.lang)}>{SITE_NAME}</a>
+    <a class="brand" href={href('poster', locale.lang)}>{SITE_NAME}</a>
     <nav class="lang" aria-label="Language">
       {#each LANGS as l (l)}
         {#if alternates?.[l]}
@@ -53,8 +53,8 @@
 
   <footer>
     <nav aria-label={t().footerNav}>
-      <a href={href('home', locale.lang)}>{t().stepStar}</a>
       <a href={href('poster', locale.lang)}>{t().posterHeading}</a>
+      <a href={href('star', locale.lang)}>{t().stepStar}</a>
       <a href={href('moonHub', locale.lang)}>{PT[locale.lang].moonHubH1.replace(/\?$/, '')}</a>
       <a href={href('bornHub', locale.lang)}>{PT[locale.lang].bornHubH1}</a>
       <a href={href('starsHub', locale.lang)}>{PT[locale.lang].starsHubH1}</a>

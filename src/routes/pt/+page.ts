@@ -1,1 +1,1 @@
-export const load = () => ({ page: 'home' as const });
+export const load = () => ({ page: 'poster' as const });

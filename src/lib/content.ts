@@ -9,8 +9,8 @@ export interface PageContent {
 }
 
 /** Copy for search engines and curious readers: shown under each tool, prerendered. */
-export const CONTENT: Record<'home' | 'poster', Record<Lang, PageContent>> = {
-  home: {
+export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
+  star: {
     en: {
       title: 'Your Star: the star whose light left it the day you were born | Sky of Your Day',
       description:
