@@ -108,6 +108,30 @@ export const THEMES: Theme[] = [
     labels: 'rgb(17 17 17 / 0.62)', grid: 'rgb(17 17 17 / 0.1)', text: '#111', muted: '#555',
     milkyWay: [40, 50, 80, 0.13], moonLit: '#fff', moonDark: '#222', planet: '#111', highlight: '#111',
   },
+  {
+    id: 'blueprint', bg: '#0b3a6b', disk: ['#10508f', '#0a3466'], diskStroke: 'rgb(255 255 255 / 0.7)',
+    glow: null, realColors: false, star: '#fff', lines: 'rgb(255 255 255 / 0.45)',
+    labels: 'rgb(255 255 255 / 0.85)', grid: 'rgb(255 255 255 / 0.2)', text: '#f2f7ff', muted: 'rgb(220 235 255 / 0.75)',
+    milkyWay: [255, 255, 255, 0.18], moonLit: '#fff', moonDark: '#0a3466', planet: '#fff', highlight: '#fff',
+  },
+  {
+    id: 'aurora', bg: '#0a1a1f', disk: ['#0f3a3a', '#0a1620'], diskStroke: 'rgb(120 240 200 / 0.5)',
+    glow: 'rgb(60 200 160 / 0.18)', realColors: true, star: '#fff', lines: 'rgb(140 240 210 / 0.32)',
+    labels: 'rgb(190 245 230 / 0.75)', grid: 'rgb(140 240 210 / 0.12)', text: '#dff7ee', muted: '#8fb8ad',
+    milkyWay: [150, 240, 210, 0.3], moonLit: '#eafff6', moonDark: '#123035', planet: '#c9ffe9', highlight: null,
+  },
+  {
+    id: 'sepia', bg: '#e9dcc0', disk: ['#f3e8cf', '#e4d4b0'], diskStroke: '#4a3522',
+    glow: null, realColors: false, star: '#3b2a1a', lines: 'rgb(74 53 34 / 0.45)',
+    labels: 'rgb(74 53 34 / 0.8)', grid: 'rgb(74 53 34 / 0.14)', text: '#3b2a1a', muted: '#7a6247',
+    milkyWay: [90, 65, 40, 0.16], moonLit: '#fbf5e6', moonDark: '#4a3522', planet: '#3b2a1a', highlight: '#6b2d12',
+  },
+  {
+    id: 'sunset', bg: '#1c0f2e', disk: ['#3a1850', '#1a0d2c'], diskStroke: 'rgb(255 170 120 / 0.6)',
+    glow: 'rgb(220 90 110 / 0.22)', realColors: true, star: '#fff', lines: 'rgb(255 190 150 / 0.34)',
+    labels: 'rgb(255 210 180 / 0.78)', grid: 'rgb(255 190 150 / 0.13)', text: '#ffe3d0', muted: '#c9a3a8',
+    milkyWay: [255, 190, 170, 0.3], moonLit: '#fff0e0', moonDark: '#3a1850', planet: '#ffd0a0', highlight: null,
+  },
 ];
 
 export interface Format {
