@@ -117,7 +117,7 @@ export const strings = {
     detailLabel: 'Quantità di dettagli',
     detailLevels: { essential: 'Essenziale', balanced: 'Equilibrata', rich: 'Ricca' } as Record<string, string>,
     posterDownload: 'Scarica',
-    themes: { night: 'Notte', paper: 'Carta', gold: 'Oro', white: 'Bianco', blueprint: 'Cianotipo', aurora: 'Aurora', sepia: 'Seppia', sunset: 'Tramonto' } as Record<string, string>,
+    themes: { night: 'Notte', paper: 'Carta', gold: 'Oro', white: 'Bianco', graphite: 'Grafite', aurora: 'Aurora', sepia: 'Seppia', sunset: 'Tramonto' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29,7 cm', a3: 'A3, 29,7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Quadrato per i social', portrait45: 'Post verticale 4:5', phone: 'Sfondo per il telefono',
@@ -280,7 +280,7 @@ export const strings = {
     detailLabel: 'Amount of detail',
     detailLevels: { essential: 'Minimal', balanced: 'Balanced', rich: 'Rich' } as Record<string, string>,
     posterDownload: 'Download',
-    themes: { night: 'Night', paper: 'Paper', gold: 'Gold', white: 'White', blueprint: 'Blueprint', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Sunset' } as Record<string, string>,
+    themes: { night: 'Night', paper: 'Paper', gold: 'Gold', white: 'White', graphite: 'Graphite', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Sunset' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29.7 cm', a3: 'A3, 29.7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Square for social media', portrait45: 'Portrait post 4:5', phone: 'Phone wallpaper',
@@ -443,7 +443,7 @@ export const strings = {
     detailLabel: 'Cantidad de detalles',
     detailLevels: { essential: 'Esencial', balanced: 'Equilibrada', rich: 'Completa' } as Record<string, string>,
     posterDownload: 'Descargar',
-    themes: { night: 'Noche', paper: 'Papel', gold: 'Oro', white: 'Blanco', blueprint: 'Cianotipo', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Atardecer' } as Record<string, string>,
+    themes: { night: 'Noche', paper: 'Papel', gold: 'Oro', white: 'Blanco', graphite: 'Grafito', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Atardecer' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29,7 cm', a3: 'A3, 29,7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Cuadrado para redes sociales', portrait45: 'Publicación vertical 4:5', phone: 'Fondo de pantalla del teléfono',
@@ -606,7 +606,7 @@ export const strings = {
     detailLabel: 'Menge an Details',
     detailLevels: { essential: 'Schlicht', balanced: 'Ausgewogen', rich: 'Reich' } as Record<string, string>,
     posterDownload: 'Herunterladen',
-    themes: { night: 'Nacht', paper: 'Papier', gold: 'Gold', white: 'Weiß', blueprint: 'Blaupause', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Abendrot' } as Record<string, string>,
+    themes: { night: 'Nacht', paper: 'Papier', gold: 'Gold', white: 'Weiß', graphite: 'Graphit', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Abendrot' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29,7 cm', a3: 'A3, 29,7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Quadratisch für soziale Medien', portrait45: 'Hochformat-Post 4:5', phone: 'Handy-Hintergrund',
@@ -769,7 +769,7 @@ export const strings = {
     detailLabel: 'Quantité de détails',
     detailLevels: { essential: 'Épuré', balanced: 'Équilibré', rich: 'Riche' } as Record<string, string>,
     posterDownload: 'Télécharger',
-    themes: { night: 'Nuit', paper: 'Papier', gold: 'Or', white: 'Blanc', blueprint: 'Cyanotype', aurora: 'Aurore', sepia: 'Sépia', sunset: 'Crépuscule' } as Record<string, string>,
+    themes: { night: 'Nuit', paper: 'Papier', gold: 'Or', white: 'Blanc', graphite: 'Graphite', aurora: 'Aurore', sepia: 'Sépia', sunset: 'Crépuscule' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29,7 cm', a3: 'A3, 29,7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Carré pour les réseaux sociaux', portrait45: 'Publication portrait 4:5', phone: 'Fond d’écran de téléphone',
@@ -932,7 +932,7 @@ export const strings = {
     detailLabel: 'Quantidade de detalhes',
     detailLevels: { essential: 'Essencial', balanced: 'Equilibrado', rich: 'Rico' } as Record<string, string>,
     posterDownload: 'Baixar',
-    themes: { night: 'Noite', paper: 'Papel', gold: 'Ouro', white: 'Branco', blueprint: 'Cianótipo', aurora: 'Aurora', sepia: 'Sépia', sunset: 'Entardecer' } as Record<string, string>,
+    themes: { night: 'Noite', paper: 'Papel', gold: 'Ouro', white: 'Branco', graphite: 'Grafite', aurora: 'Aurora', sepia: 'Sépia', sunset: 'Entardecer' } as Record<string, string>,
     formats: {
       a4: 'A4, 21 × 29,7 cm', a3: 'A3, 29,7 × 42 cm', '30x40': '30 × 40 cm', '50x70': '50 × 70 cm',
       square: 'Quadrado para redes sociais', portrait45: 'Post vertical 4:5', phone: 'Papel de parede do celular',

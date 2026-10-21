@@ -109,10 +109,10 @@ export const THEMES: Theme[] = [
     milkyWay: [40, 50, 80, 0.13], moonLit: '#fff', moonDark: '#222', planet: '#111', highlight: '#111',
   },
   {
-    id: 'blueprint', bg: '#0b3a6b', disk: ['#10508f', '#0a3466'], diskStroke: 'rgb(255 255 255 / 0.7)',
-    glow: null, realColors: false, star: '#fff', lines: 'rgb(255 255 255 / 0.45)',
-    labels: 'rgb(255 255 255 / 0.85)', grid: 'rgb(255 255 255 / 0.2)', text: '#f2f7ff', muted: 'rgb(220 235 255 / 0.75)',
-    milkyWay: [255, 255, 255, 0.18], moonLit: '#fff', moonDark: '#0a3466', planet: '#fff', highlight: '#fff',
+    id: 'graphite', bg: '#1e1f22', disk: ['#2b2d31', '#18191c'], diskStroke: 'rgb(210 214 220 / 0.6)',
+    glow: null, realColors: false, star: '#e8eaed', lines: 'rgb(200 205 212 / 0.4)',
+    labels: 'rgb(215 219 225 / 0.8)', grid: 'rgb(200 205 212 / 0.14)', text: '#eceef1', muted: '#9ba0a9',
+    milkyWay: [210, 215, 225, 0.2], moonLit: '#eceef1', moonDark: '#2b2d31', planet: '#eceef1', highlight: '#fff',
   },
   {
     id: 'aurora', bg: '#0a1a1f', disk: ['#0f3a3a', '#0a1620'], diskStroke: 'rgb(120 240 200 / 0.5)',
