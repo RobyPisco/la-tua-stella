@@ -2,6 +2,16 @@
   import '@fontsource-variable/bodoni-moda/opsz.css';
   import '@fontsource-variable/bodoni-moda/opsz-italic.css';
   import '@fontsource-variable/atkinson-hyperlegible-next';
+  // Poster title fonts: declared here (so the editor can switch instantly) but only
+  // downloaded by the browser once a poster actually asks for one of them.
+  import '@fontsource-variable/cormorant-garamond/wght.css';
+  import '@fontsource-variable/cormorant-garamond/wght-italic.css';
+  import '@fontsource-variable/playfair-display/wght.css';
+  import '@fontsource-variable/playfair-display/wght-italic.css';
+  import '@fontsource-variable/fraunces/opsz.css';
+  import '@fontsource-variable/fraunces/opsz-italic.css';
+  import '@fontsource-variable/jost/wght.css';
+  import '@fontsource-variable/jost/wght-italic.css';
   import '../app.css';
   import { page } from '$app/state';
   import { base } from '$app/paths';

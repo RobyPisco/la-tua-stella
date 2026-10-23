@@ -4,12 +4,31 @@ import bodoniItLatin from '@fontsource-variable/bodoni-moda/files/bodoni-moda-la
 import bodoniItLatinExt from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-opsz-italic.woff2?url';
 import atkLatin from '@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2?url';
 import atkLatinExt from '@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2?url';
+import garamondLatin from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2?url';
+import garamondLatinExt from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-ext-wght-normal.woff2?url';
+import garamondItLatin from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-italic.woff2?url';
+import garamondItLatinExt from '@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-ext-wght-italic.woff2?url';
+import playfairLatin from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url';
+import playfairLatinExt from '@fontsource-variable/playfair-display/files/playfair-display-latin-ext-wght-normal.woff2?url';
+import playfairItLatin from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-italic.woff2?url';
+import playfairItLatinExt from '@fontsource-variable/playfair-display/files/playfair-display-latin-ext-wght-italic.woff2?url';
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import frauncesLatinExt from '@fontsource-variable/fraunces/files/fraunces-latin-ext-opsz-normal.woff2?url';
+import frauncesItLatin from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2?url';
+import frauncesItLatinExt from '@fontsource-variable/fraunces/files/fraunces-latin-ext-opsz-italic.woff2?url';
+import jostLatin from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
+import jostLatinExt from '@fontsource-variable/jost/files/jost-latin-ext-wght-normal.woff2?url';
+import jostItLatin from '@fontsource-variable/jost/files/jost-latin-wght-italic.woff2?url';
+import jostItLatinExt from '@fontsource-variable/jost/files/jost-latin-ext-wght-italic.woff2?url';
 import type { Format } from './poster';
 
 const LATIN = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
 const LATIN_EXT = 'U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF';
 
-const FACES: [family: string, style: string, weight: string, url: string, range: string][] = [
+type Face = [family: string, style: string, weight: string, url: string, range: string];
+
+/** Always embedded: body text (every poster) and the default title font. */
+const BASE_FACES: Face[] = [
   ['Bodoni Moda Variable', 'normal', '400 900', bodoniLatin, LATIN],
   ['Bodoni Moda Variable', 'normal', '400 900', bodoniLatinExt, LATIN_EXT],
   ['Bodoni Moda Variable', 'italic', '400 900', bodoniItLatin, LATIN],
@@ -18,7 +37,35 @@ const FACES: [family: string, style: string, weight: string, url: string, range:
   ['Atkinson Hyperlegible Next Variable', 'normal', '200 800', atkLatinExt, LATIN_EXT],
 ];
 
-let fontCss: Promise<string> | undefined;
+/** The other title fonts: embedded only for the poster that actually uses them. */
+const OPTIONAL_FACES: Record<string, Face[]> = {
+  garamond: [
+    ['Cormorant Garamond Variable', 'normal', '300 700', garamondLatin, LATIN],
+    ['Cormorant Garamond Variable', 'normal', '300 700', garamondLatinExt, LATIN_EXT],
+    ['Cormorant Garamond Variable', 'italic', '300 700', garamondItLatin, LATIN],
+    ['Cormorant Garamond Variable', 'italic', '300 700', garamondItLatinExt, LATIN_EXT],
+  ],
+  playfair: [
+    ['Playfair Display Variable', 'normal', '400 900', playfairLatin, LATIN],
+    ['Playfair Display Variable', 'normal', '400 900', playfairLatinExt, LATIN_EXT],
+    ['Playfair Display Variable', 'italic', '400 900', playfairItLatin, LATIN],
+    ['Playfair Display Variable', 'italic', '400 900', playfairItLatinExt, LATIN_EXT],
+  ],
+  fraunces: [
+    ['Fraunces Variable', 'normal', '100 900', frauncesLatin, LATIN],
+    ['Fraunces Variable', 'normal', '100 900', frauncesLatinExt, LATIN_EXT],
+    ['Fraunces Variable', 'italic', '100 900', frauncesItLatin, LATIN],
+    ['Fraunces Variable', 'italic', '100 900', frauncesItLatinExt, LATIN_EXT],
+  ],
+  jost: [
+    ['Jost Variable', 'normal', '100 900', jostLatin, LATIN],
+    ['Jost Variable', 'normal', '100 900', jostLatinExt, LATIN_EXT],
+    ['Jost Variable', 'italic', '100 900', jostItLatin, LATIN],
+    ['Jost Variable', 'italic', '100 900', jostItLatinExt, LATIN_EXT],
+  ],
+};
+
+const fontCss = new Map<string, Promise<string>>();
 
 function toDataUrl(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -30,18 +77,23 @@ function toDataUrl(blob: Blob): Promise<string> {
 }
 
 /** @font-face rules with the fonts inlined, so the SVG renders the same anywhere. */
-function embeddedFonts(): Promise<string> {
-  fontCss ??= Promise.all(
-    FACES.map(async ([family, style, weight, url, range]) => {
-      const data = await toDataUrl(await (await fetch(url)).blob());
-      return `@font-face{font-family:'${family}';font-style:${style};font-weight:${weight};src:url(${data}) format('woff2');unicode-range:${range};}`;
-    }),
-  ).then((rules) => rules.join(''));
-  return fontCss;
+function embeddedFonts(fontId: string): Promise<string> {
+  let p = fontCss.get(fontId);
+  if (!p) {
+    const faces = [...BASE_FACES, ...(OPTIONAL_FACES[fontId] ?? [])];
+    p = Promise.all(
+      faces.map(async ([family, style, weight, url, range]) => {
+        const data = await toDataUrl(await (await fetch(url)).blob());
+        return `@font-face{font-family:'${family}';font-style:${style};font-weight:${weight};src:url(${data}) format('woff2');unicode-range:${range};}`;
+      }),
+    ).then((rules) => rules.join(''));
+    fontCss.set(fontId, p);
+  }
+  return p;
 }
 
-export async function standaloneSvg(svg: string): Promise<string> {
-  const css = await embeddedFonts();
+export async function standaloneSvg(svg: string, fontId: string): Promise<string> {
+  const css = await embeddedFonts(fontId);
   return svg.replace(/(<svg[^>]*>)/, `$1<style>${css}</style>`);
 }
 
@@ -54,8 +106,8 @@ export function outputSize(format: Format): [number, number] {
   return [Math.floor(w * scale), Math.floor(h * scale)];
 }
 
-async function renderCanvas(svg: string, format: Format): Promise<HTMLCanvasElement> {
-  const full = await standaloneSvg(svg);
+async function renderCanvas(svg: string, format: Format, fontId: string): Promise<HTMLCanvasElement> {
+  const full = await standaloneSvg(svg, fontId);
   const url = URL.createObjectURL(new Blob([full], { type: 'image/svg+xml' }));
   try {
     const img = new Image();
@@ -81,8 +133,8 @@ function toBlob(canvas: HTMLCanvasElement, type: string, quality?: number): Prom
   );
 }
 
-export async function renderPng(svg: string, format: Format): Promise<Blob> {
-  return toBlob(await renderCanvas(svg, format), 'image/png');
+export async function renderPng(svg: string, format: Format, fontId: string): Promise<Blob> {
+  return toBlob(await renderCanvas(svg, format, fontId), 'image/png');
 }
 
 const PAPER_MM: Record<string, [number, number]> = {
@@ -93,8 +145,8 @@ const PAPER_MM: Record<string, [number, number]> = {
 };
 
 /** A print-ready PDF at the paper's exact size, with the poster as a high-quality JPEG. */
-export async function renderPdf(svg: string, format: Format): Promise<Blob> {
-  const [{ jsPDF }, canvas] = await Promise.all([import('jspdf'), renderCanvas(svg, format)]);
+export async function renderPdf(svg: string, format: Format, fontId: string): Promise<Blob> {
+  const [{ jsPDF }, canvas] = await Promise.all([import('jspdf'), renderCanvas(svg, format, fontId)]);
   const jpeg = new Uint8Array(await (await toBlob(canvas, 'image/jpeg', 0.95)).arrayBuffer());
   const [wmm, hmm] = PAPER_MM[format.id] ?? [210, 210 * format.ratio];
   const pdf = new jsPDF({ unit: 'mm', format: [wmm, hmm], orientation: 'portrait' });

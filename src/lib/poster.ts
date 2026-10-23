@@ -134,6 +134,20 @@ export const THEMES: Theme[] = [
   },
 ];
 
+export interface Font {
+  id: string;
+  /** The title/subtitle/star-line family; body text always stays on Atkinson, for legibility. */
+  family: string;
+}
+
+export const FONTS: Font[] = [
+  { id: 'classic', family: "'Bodoni Moda Variable', 'Bodoni 72', Didot, Georgia, serif" },
+  { id: 'garamond', family: "'Cormorant Garamond Variable', Garamond, Georgia, serif" },
+  { id: 'playfair', family: "'Playfair Display Variable', Georgia, serif" },
+  { id: 'fraunces', family: "'Fraunces Variable', Georgia, serif" },
+  { id: 'jost', family: "'Jost Variable', system-ui, sans-serif" },
+];
+
 export interface Format {
   id: string;
   /** Height / width. */
@@ -181,6 +195,7 @@ export interface PosterSpec {
   place: Place;
   lang: string;
   theme: Theme;
+  font: Font;
   format: Format;
   options: PosterOptions;
   title: string;
@@ -200,7 +215,6 @@ export type Measure = (text: string, font: string) => number;
 
 const RAD = Math.PI / 180;
 const W = 1000;
-const FONT_SERIF = "'Bodoni Moda Variable', 'Bodoni 72', Didot, Georgia, serif";
 const FONT_SANS = "'Atkinson Hyperlegible Next Variable', system-ui, sans-serif";
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -418,25 +432,26 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
     }
   }
 
-  out.push(bodiesSvg, targetSvg, placeLabels(labels, obstacles, measure, L, k));
+  const titleFamily = spec.font.family;
+  out.push(bodiesSvg, targetSvg, placeLabels(labels, obstacles, measure, L, k, titleFamily));
   out.push('</g>');
   out.push(`<circle cx="${L.cx}" cy="${L.cy}" r="${L.R}" fill="none" stroke="${th.diskStroke}" stroke-width="${f1(1.6 * k)}"/>`);
 
   // Text block: measured first, then centred in the space between chart and credit line.
   const maxW = W * 0.8;
   const sc = L.scale;
-  const serif = (s: number) => `400 ${s}px ${FONT_SERIF}`;
-  const serifIt = (s: number) => `italic 400 ${s}px ${FONT_SERIF}`;
+  const serif = (s: number) => `400 ${s}px ${titleFamily}`;
+  const serifIt = (s: number) => `italic 400 ${s}px ${titleFamily}`;
   const sans = (s: number) => `500 ${s}px ${FONT_SANS}`;
   type Line = { text: string; size: number; before: number; attrs: string };
   const block: Line[] = [];
   if (spec.title) {
     const size = fitSize(measure, spec.title, serif, 72 * sc, maxW);
-    block.push({ text: spec.title, size, before: 0, attrs: `font-family="${esc(FONT_SERIF)}" fill="${th.text}"` });
+    block.push({ text: spec.title, size, before: 0, attrs: `font-family="${esc(titleFamily)}" fill="${th.text}"` });
   }
   if (spec.subtitle) {
     const size = fitSize(measure, spec.subtitle, serifIt, 34 * sc, maxW);
-    block.push({ text: spec.subtitle, size, before: 40 * sc, attrs: `font-family="${esc(FONT_SERIF)}" font-style="italic" fill="${th.text}"` });
+    block.push({ text: spec.subtitle, size, before: 40 * sc, attrs: `font-family="${esc(titleFamily)}" font-style="italic" fill="${th.text}"` });
   }
   [spec.dateLine, spec.placeLine].filter(Boolean).forEach((text, i) => {
     const size = fitSize(measure, text, sans, 19 * sc, maxW);
@@ -444,7 +459,7 @@ export function buildPoster(spec: PosterSpec, d: PosterData, milkyWayHref: strin
   });
   if (o.highlight && spec.starLine) {
     const size = fitSize(measure, spec.starLine, serifIt, 21 * sc, maxW);
-    block.push({ text: spec.starLine, size, before: 30 * sc, attrs: `font-family="${esc(FONT_SERIF)}" font-style="italic" fill="${th.text}" opacity="0.85"` });
+    block.push({ text: spec.starLine, size, before: 30 * sc, attrs: `font-family="${esc(titleFamily)}" font-style="italic" fill="${th.text}" opacity="0.85"` });
   }
   // Cap height ≈ 0.7 em: stack lines by their visible height.
   const measureBlock = () => block.reduce((h, l) => h + l.before + l.size * 0.72, 0);
@@ -545,7 +560,7 @@ interface Label {
   at: [number, number, 'start' | 'middle' | 'end'][];
 }
 
-function placeLabels(labels: Label[], obstacles: Box[], measure: Measure, L: Layout, k: number): string {
+function placeLabels(labels: Label[], obstacles: Box[], measure: Measure, L: Layout, k: number, serifFamily: string): string {
   const placed: Box[] = [...obstacles];
   const pad = 2.5 * k;
   const inside = (b: Box) =>
@@ -554,14 +569,14 @@ function placeLabels(labels: Label[], obstacles: Box[], measure: Measure, L: Lay
   const out: string[] = [];
 
   for (const l of [...labels].sort((a, b) => b.priority - a.priority)) {
-    const font = l.font === 'serif' ? `italic 400 ${l.size}px ${FONT_SERIF}` : `500 ${l.size}px ${FONT_SANS}`;
+    const font = l.font === 'serif' ? `italic 400 ${l.size}px ${serifFamily}` : `500 ${l.size}px ${FONT_SANS}`;
     const w = measure(l.text, font) + (l.spacing ?? 0) * l.text.length;
     for (const [x, y, anchor] of l.at) {
       const x0 = anchor === 'start' ? x : anchor === 'end' ? x - w : x - w / 2;
       const box: Box = [x0 - pad, y - l.size * 0.78 - pad, x0 + w + pad, y + l.size * 0.22 + pad];
       if (!inside(box) || hits(box)) continue;
       placed.push(box);
-      const family = l.font === 'serif' ? `font-family="${esc(FONT_SERIF)}" font-style="italic"` : `font-family="${esc(FONT_SANS)}"`;
+      const family = l.font === 'serif' ? `font-family="${esc(serifFamily)}" font-style="italic"` : `font-family="${esc(FONT_SANS)}"`;
       const spacing = l.spacing ? ` letter-spacing="${f1(l.spacing)}"` : '';
       out.push(`<text x="${f1(x)}" y="${f1(y)}" text-anchor="${anchor}" font-size="${f1(l.size)}" fill="${l.fill}" ${family}${spacing}>${esc(l.text)}</text>`);
       break;

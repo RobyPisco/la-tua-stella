@@ -8,7 +8,7 @@
   import { facts, starKind } from '../describe';
   import { fmtDate, fmtTime, locale, t } from '../i18n.svelte';
   import {
-    buildPoster, FORMATS, loadPosterData, renderMilkyWay, THEMES,
+    buildPoster, FONTS, FORMATS, loadPosterData, renderMilkyWay, THEMES,
     type PosterOptions, type PosterSpec,
   } from '../poster';
   import { download, renderPdf, renderPng, standaloneSvg } from '../posterExport';
@@ -27,6 +27,7 @@
   let title = $state(t().posterTitleDefault);
   let subtitle = $state('');
   let themeId = $state('night');
+  let fontId = $state('classic');
   let formatId = $state('a3');
   let options = $state<PosterOptions>({
     detail: 'balanced',
@@ -46,6 +47,7 @@
   let catalogReady = $state(false);
 
   const theme = $derived(THEMES.find((x) => x.id === themeId)!);
+  const font = $derived(FONTS.find((x) => x.id === fontId)!);
   const format = $derived(FORMATS.find((x) => x.id === formatId)!);
 
   // The moment, as an instant: local wall-clock time at the chosen place.
@@ -87,6 +89,7 @@
       place: where,
       lang: locale.lang,
       theme,
+      font,
       format,
       options: { ...options },
       title,
@@ -125,13 +128,21 @@
     }, 120);
   });
 
+  // Fonts other than the default load on demand: wait for the pick before measuring with it.
+  $effect(() => {
+    const family = font.family;
+    Promise.all([document.fonts.load(`400 40px ${family}`), document.fonts.load(`italic 400 40px ${family}`)]).then(
+      () => (svg = svg), // re-measure once the font is in
+    );
+  });
+
   // Changing language opens another page: keep the choices for the session so nothing is lost.
   // The title is kept only if edited, otherwise it follows the language.
   const STATE_KEY = 'poster-editor';
   let restored = false;
   $effect(() => {
     const s = {
-      dateValue, time, subtitle, themeId, formatId, options: { ...options },
+      dateValue, time, subtitle, themeId, fontId, formatId, options: { ...options },
       title: title === t().posterTitleDefault ? null : title,
     };
     if (!restored) return;
@@ -147,6 +158,7 @@
       if (typeof s.subtitle === 'string') subtitle = s.subtitle;
       if (typeof s.title === 'string') title = s.title;
       if (THEMES.some((x) => x.id === s.themeId)) themeId = s.themeId;
+      if (FONTS.some((x) => x.id === s.fontId)) fontId = s.fontId;
       if (FORMATS.some((x) => x.id === s.formatId)) formatId = s.formatId;
       if (s.options) options = { ...options, ...s.options };
     } catch {}
@@ -173,11 +185,7 @@
       stars = s;
       catalogReady = true;
     });
-    Promise.all([
-      document.fonts.load(`400 40px 'Bodoni Moda Variable'`),
-      document.fonts.load(`italic 400 40px 'Bodoni Moda Variable'`),
-      document.fonts.load(`500 20px 'Atkinson Hyperlegible Next Variable'`),
-    ]).then(() => (svg = svg)); // re-measure once fonts are in
+    document.fonts.load(`500 20px 'Atkinson Hyperlegible Next Variable'`).then(() => (svg = svg));
     return () => clearTimeout(timer);
   });
 
@@ -198,14 +206,14 @@
     status = t().posterPreparing;
     try {
       if (kind === 'svg') {
-        download(new Blob([await standaloneSvg(svg)], { type: 'image/svg+xml' }), fileName('svg'));
+        download(new Blob([await standaloneSvg(svg, font.id)], { type: 'image/svg+xml' }), fileName('svg'));
       } else {
-        if (kind === 'png') download(await renderPng(svg, format), fileName('png'));
-        else download(await renderPdf(svg, format), fileName('pdf'));
+        if (kind === 'png') download(await renderPng(svg, format, font.id), fileName('png'));
+        else download(await renderPdf(svg, format, font.id), fileName('pdf'));
       }
       status = t().posterDone;
       downloaded = true;
-      const key = JSON.stringify([dateValue, time, where.lat, where.lon, title, subtitle, themeId, options]);
+      const key = JSON.stringify([dateValue, time, where.lat, where.lon, title, subtitle, themeId, fontId, options]);
       if (!counted.has(key)) {
         counted.add(key);
         countMap().then((n) => n !== null && (mapsMade = n));
@@ -282,6 +290,16 @@
               <span style:background={th.disk[0]} style:border-color={th.diskStroke}></span>
             </span>
             <span>{t().themes[th.id]}</span>
+          </label>
+        {/each}
+      </div>
+      <span>{t().posterFont}</span>
+      <div class="fonts">
+        {#each FONTS as f (f.id)}
+          <label class="font-option" class:on={fontId === f.id}>
+            <input type="radio" name="font" value={f.id} bind:group={fontId} />
+            <span class="sample" style:font-family={f.family}>Aa</span>
+            <span>{t().fonts[f.id]}</span>
           </label>
         {/each}
       </div>
@@ -499,6 +517,47 @@
     height: 1.8rem;
     border-radius: 50%;
     border: 1px solid;
+  }
+  .fonts {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+  .font-option {
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    padding: 0.6rem 0.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .font-option > span:last-child {
+    color: var(--ink);
+  }
+  .font-option.on {
+    border-color: var(--star);
+    box-shadow: inset 0 0 0 1px var(--star);
+  }
+  .font-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .font-option:has(input:focus-visible) {
+    outline: 2px solid var(--star);
+    outline-offset: 2px;
+  }
+  .font-option .sample {
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  @media (max-width: 1100px) {
+    .fonts {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
   .levels {
     display: grid;
