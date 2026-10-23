@@ -14,6 +14,7 @@ const PAGES: Record<string, { title: (l: Lang) => string; sub?: (l: Lang) => str
   bornHub: { title: (l) => PT[l].bornHubH1, sky: [282, 36] },
   starsHub: { title: (l) => PT[l].starsHubH1, sky: [170, 55] },
   terms: { title: (l) => strings[l].termsLink, sky: [15, 60] },
+  about: { title: (l) => strings[l].aboutLink, sky: [210, -20] },
 };
 
 export const entries = () => LANGS.flatMap((lang) => Object.keys(PAGES).map((page) => ({ lang, page })));

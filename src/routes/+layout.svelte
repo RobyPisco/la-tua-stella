@@ -19,6 +19,7 @@
   import { href, langFromPath, LANGS, PAGES, type PageId } from '$lib/routes';
   import { SITE_NAME } from '$lib/site';
   import { PT } from '$lib/pageText';
+  import { KOFI_URL } from '$lib/brand';
 
   let { children } = $props();
 
@@ -68,7 +69,11 @@
       <a href={href('moonHub', locale.lang)}>{PT[locale.lang].moonHubH1.replace(/\?$/, '')}</a>
       <a href={href('bornHub', locale.lang)}>{PT[locale.lang].bornHubH1}</a>
       <a href={href('starsHub', locale.lang)}>{PT[locale.lang].starsHubH1}</a>
+      <a href={href('about', locale.lang)}>{t().aboutLink}</a>
     </nav>
+    {#if KOFI_URL}
+      <p class="kofi"><a href={KOFI_URL} target="_blank" rel="noopener">{t().footerKofi} {t().kofiButton} ☕</a></p>
+    {/if}
     <p>{t().credits}</p>
     <p>{t().privacy} <a href={href('terms', locale.lang)}>{t().termsLink}</a></p>
   </footer>
@@ -151,5 +156,16 @@
   }
   footer a {
     color: var(--ink);
+  }
+  footer .kofi {
+    font-size: 1rem;
+  }
+  footer .kofi a {
+    color: var(--star);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  footer .kofi a:hover {
+    text-decoration: underline;
   }
 </style>

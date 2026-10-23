@@ -27,6 +27,10 @@ export const PAGES = {
     en: '/terms/', es: '/es/condiciones/', it: '/it/condizioni/',
     de: '/de/nutzungsbedingungen/', fr: '/fr/conditions/', pt: '/pt/termos/',
   },
+  about: {
+    en: '/about/', es: '/es/sobre-mi/', it: '/it/chi-sono/',
+    de: '/de/ueber-mich/', fr: '/fr/a-propos/', pt: '/pt/sobre-mim/',
+  },
 } satisfies Record<string, Record<Lang, string>>;
 
 /**
