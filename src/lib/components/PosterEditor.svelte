@@ -12,6 +12,8 @@
     type PosterOptions, type PosterSpec,
   } from '../poster';
   import { download, renderPdf, renderPng, standaloneSvg } from '../posterExport';
+  import { posterShareUrl, posterStateFromUrl } from '../posterShare';
+  import { share } from '../share';
   import { arrivalDate, findStars, loadCatalog, starName, type Star } from '../stars';
   import { zonedToUtc } from '../timezone';
   import DateField from './DateField.svelte';
@@ -166,21 +168,35 @@
 
   onMount(() => {
     mapsCount().then((n) => (mapsMade = n));
-    restore();
-    restored = true;
-    // Arriving from "your star": start from that birth date and the place already chosen.
-    try {
-      const prefill = sessionStorage.getItem('poster-date');
-      if (prefill) {
-        dateValue = prefill;
-        sessionStorage.removeItem('poster-date');
-      }
-    } catch {}
-    const saved = savedPlace();
-    if (saved) {
-      where = saved;
+    // A shared poster's address wins over anything else: that's what the visitor came to see.
+    const shared = posterStateFromUrl();
+    if (shared) {
+      dateValue = shared.dateValue;
+      time = shared.time;
+      where = shared.where;
       choosingPlace = false;
+      if (shared.title) title = shared.title;
+      subtitle = shared.subtitle;
+      if (THEMES.some((x) => x.id === shared.themeId)) themeId = shared.themeId;
+      if (FONTS.some((x) => x.id === shared.fontId)) fontId = shared.fontId;
+      if (FORMATS.some((x) => x.id === shared.formatId)) formatId = shared.formatId;
+    } else {
+      restore();
+      // Arriving from "your star": start from that birth date and the place already chosen.
+      try {
+        const prefill = sessionStorage.getItem('poster-date');
+        if (prefill) {
+          dateValue = prefill;
+          sessionStorage.removeItem('poster-date');
+        }
+      } catch {}
+      const saved = savedPlace();
+      if (saved) {
+        where = saved;
+        choosingPlace = false;
+      }
     }
+    restored = true;
     loadCatalog().then((s) => {
       stars = s;
       catalogReady = true;
@@ -218,6 +234,23 @@
         counted.add(key);
         countMap().then((n) => n !== null && (mapsMade = n));
       }
+    } catch (e) {
+      console.error(e);
+      status = t().posterFailed;
+    } finally {
+      busy = false;
+    }
+  }
+
+  async function doShare() {
+    if (!svg) return;
+    busy = true;
+    status = t().posterPreparing;
+    try {
+      const card = await renderPng(svg, format, font.id);
+      const url = posterShareUrl({ dateValue, time, where, title, subtitle, themeId, fontId, formatId });
+      const outcome = await share(t().posterShareText(title), url, card, fileName('png'));
+      status = outcome === 'copied' ? t().shared : '';
     } catch (e) {
       console.error(e);
       status = t().posterFailed;
@@ -346,6 +379,7 @@
           {format.print ? t().dlPng : t().dlPdf}
         </button>
         <button class="btn ghost" type="button" disabled={busy || !svg} onclick={() => save('svg')}>{t().dlSvg}</button>
+        <button class="btn ghost" type="button" disabled={busy || !svg} onclick={doShare}>{t().posterShareBtn}</button>
       </div>
       {#if status}<p class="status" role="status">{status}</p>{/if}
       <!--

@@ -68,8 +68,8 @@ function fitText(ctx: CanvasRenderingContext2D, text: string, x: number, y: numb
 
 export type ShareOutcome = 'shared' | 'copied' | 'cancelled';
 
-export async function share(text: string, url: string, card?: Blob): Promise<ShareOutcome> {
-  const file = card && new File([card], 'la-mia-stella.png', { type: 'image/png' });
+export async function share(text: string, url: string, card?: Blob, filename = 'la-mia-stella.png'): Promise<ShareOutcome> {
+  const file = card && new File([card], filename, { type: 'image/png' });
   try {
     if (file && navigator.canShare?.({ files: [file] })) {
       await navigator.share({ files: [file], text: `${text} ${url}` });
@@ -83,7 +83,7 @@ export async function share(text: string, url: string, card?: Blob): Promise<Sha
     if ((e as Error).name === 'AbortError') return 'cancelled';
   }
   await navigator.clipboard.writeText(`${text} ${url}`);
-  if (card) download(card, 'la-mia-stella.png');
+  if (card) download(card, filename);
   return 'copied';
 }
 
