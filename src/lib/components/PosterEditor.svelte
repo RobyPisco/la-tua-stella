@@ -13,7 +13,7 @@
   } from '../poster';
   import { download, renderPdf, renderPng, standaloneSvg } from '../posterExport';
   import { posterShareUrl, posterStateFromUrl } from '../posterShare';
-  import { share } from '../share';
+  import { share, socialLinks } from '../share';
   import { arrivalDate, findStars, loadCatalog, starName, type Star } from '../stars';
   import { zonedToUtc } from '../timezone';
   import DateField from './DateField.svelte';
@@ -136,6 +136,13 @@
     Promise.all([document.fonts.load(`400 40px ${family}`), document.fonts.load(`italic 400 40px ${family}`)]).then(
       () => (svg = svg), // re-measure once the font is in
     );
+  });
+
+  // Direct links to platforms that ignore the Web Share API (or where picking one beats it).
+  let social = $state({ whatsapp: '', facebook: '', x: '', email: '' });
+  $effect(() => {
+    const url = posterShareUrl({ dateValue, time, where, title, subtitle, themeId, fontId, formatId });
+    social = socialLinks(t().posterShareText(title), url);
   });
 
   // Changing language opens another page: keep the choices for the session so nothing is lost.
@@ -382,6 +389,13 @@
         <button class="btn ghost" type="button" disabled={busy || !svg} onclick={doShare}>{t().posterShareBtn}</button>
       </div>
       {#if status}<p class="status" role="status">{status}</p>{/if}
+      <p class="social"
+        >{t().posterShareOn}
+        <a href={social.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+        <a href={social.facebook} target="_blank" rel="noopener">Facebook</a>
+        <a href={social.x} target="_blank" rel="noopener">X</a>
+        <a href={social.email}>Email</a></p
+      >
       <!--
         The invitation sits right under the buttons, where someone who has just got their file
         still has it in view: at the foot of the fieldset it fell below the fold on a phone.
@@ -665,6 +679,16 @@
     text-decoration: none;
   }
   .status {
+    color: var(--ink);
+  }
+  .social {
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.6rem;
+  }
+  .social a {
     color: var(--ink);
   }
   .kofi {

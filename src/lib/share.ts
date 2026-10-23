@@ -66,6 +66,22 @@ function fitText(ctx: CanvasRenderingContext2D, text: string, x: number, y: numb
   ctx.fillText(text, x, y);
 }
 
+/**
+ * Direct links for platforms that ignore the Web Share API's system sheet, or where picking
+ * one explicitly beats it. None of them can carry the image, only the link: WhatsApp and
+ * Facebook fetch their own preview from the page's og:image, X just takes text and a URL.
+ */
+export function socialLinks(text: string, url: string) {
+  const t = encodeURIComponent(text);
+  const u = encodeURIComponent(url);
+  return {
+    whatsapp: `https://wa.me/?text=${t}%20${u}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+    x: `https://twitter.com/intent/tweet?text=${t}&url=${u}`,
+    email: `mailto:?body=${t}%20${u}`,
+  };
+}
+
 export type ShareOutcome = 'shared' | 'copied' | 'cancelled';
 
 export async function share(text: string, url: string, card?: Blob, filename = 'la-mia-stella.png'): Promise<ShareOutcome> {

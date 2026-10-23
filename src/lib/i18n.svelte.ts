@@ -122,6 +122,7 @@ export const strings = {
     posterDownload: 'Scarica',
     posterShareBtn: 'Condividi',
     posterShareText: (title: string) => `${title} — il cielo di quella notte. Fai il tuo poster gratis:`,
+    posterShareOn: 'O condividi su:',
     themes: { night: 'Notte', paper: 'Carta', gold: 'Oro', white: 'Bianco', graphite: 'Grafite', aurora: 'Aurora', sepia: 'Seppia', sunset: 'Tramonto' } as Record<string, string>,
     fonts: { classic: 'Classico', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
@@ -291,6 +292,7 @@ export const strings = {
     posterDownload: 'Download',
     posterShareBtn: 'Share',
     posterShareText: (title: string) => `${title} — the sky that night. Make your own poster free:`,
+    posterShareOn: 'Or share on:',
     themes: { night: 'Night', paper: 'Paper', gold: 'Gold', white: 'White', graphite: 'Graphite', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Sunset' } as Record<string, string>,
     fonts: { classic: 'Classic', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
@@ -460,6 +462,7 @@ export const strings = {
     posterDownload: 'Descargar',
     posterShareBtn: 'Compartir',
     posterShareText: (title: string) => `${title} — el cielo de esa noche. Haz tu póster gratis:`,
+    posterShareOn: 'O comparte en:',
     themes: { night: 'Noche', paper: 'Papel', gold: 'Oro', white: 'Blanco', graphite: 'Grafito', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Atardecer' } as Record<string, string>,
     fonts: { classic: 'Clásica', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
@@ -629,6 +632,7 @@ export const strings = {
     posterDownload: 'Herunterladen',
     posterShareBtn: 'Teilen',
     posterShareText: (title: string) => `${title} — der Himmel dieser Nacht. Erstelle dein eigenes Poster gratis:`,
+    posterShareOn: 'Oder teilen auf:',
     themes: { night: 'Nacht', paper: 'Papier', gold: 'Gold', white: 'Weiß', graphite: 'Graphit', aurora: 'Aurora', sepia: 'Sepia', sunset: 'Abendrot' } as Record<string, string>,
     fonts: { classic: 'Klassisch', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
@@ -798,6 +802,7 @@ export const strings = {
     posterDownload: 'Télécharger',
     posterShareBtn: 'Partager',
     posterShareText: (title: string) => `${title} — le ciel de cette nuit-là. Crée ton poster gratuitement :`,
+    posterShareOn: 'Ou partage sur :',
     themes: { night: 'Nuit', paper: 'Papier', gold: 'Or', white: 'Blanc', graphite: 'Graphite', aurora: 'Aurore', sepia: 'Sépia', sunset: 'Crépuscule' } as Record<string, string>,
     fonts: { classic: 'Classique', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
@@ -967,6 +972,7 @@ export const strings = {
     posterDownload: 'Baixar',
     posterShareBtn: 'Compartilhar',
     posterShareText: (title: string) => `${title} — o céu daquela noite. Faça o seu pôster grátis:`,
+    posterShareOn: 'Ou compartilhe em:',
     themes: { night: 'Noite', paper: 'Papel', gold: 'Ouro', white: 'Branco', graphite: 'Grafite', aurora: 'Aurora', sepia: 'Sépia', sunset: 'Entardecer' } as Record<string, string>,
     fonts: { classic: 'Clássica', garamond: 'Garamond', playfair: 'Playfair', fraunces: 'Fraunces', jost: 'Jost' } as Record<string, string>,
     formats: {
