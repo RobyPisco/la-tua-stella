@@ -12,7 +12,7 @@ export interface PageContent {
 export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
   star: {
     en: {
-      title: 'Your Star: the star whose light left it the day you were born | Sky of Your Day',
+      title: 'Your Star: The Star Whose Light Left the Day You Were Born',
       description:
         'Enter your birth date and find the star whose light set out the day you were born and is reaching Earth now. See where to look for it tonight. Free, no sign-up.',
       sections: [
@@ -50,7 +50,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     es: {
-      title: 'Tu estrella: la estrella cuya luz salió el día de tu nacimiento | Sky of Your Day',
+      title: 'Tu estrella: la estrella cuya luz salió el día que naciste',
       description:
         'Introduce tu fecha de nacimiento y descubre la estrella cuya luz salió el día de tu nacimiento y está llegando ahora a la Tierra. Te decimos dónde mirarla esta noche. Gratis, sin registro.',
       sections: [
@@ -88,7 +88,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     it: {
-      title: 'La tua stella: la stella la cui luce è partita il giorno della tua nascita | Sky of Your Day',
+      title: 'La tua stella: la luce partita il giorno della tua nascita',
       description:
         'Inserisci la data di nascita e scopri la stella la cui luce è partita il giorno della tua nascita e arriva sulla Terra adesso. Ti diciamo dove guardarla stasera. Gratis, senza registrazione.',
       sections: [
@@ -126,7 +126,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     de: {
-      title: 'Dein Stern: der Stern, dessen Licht an deinem Geburtstag aufbrach | Sky of Your Day',
+      title: 'Dein Stern: dessen Licht an deinem Geburtstag aufbrach',
       description:
         'Gib dein Geburtsdatum ein und finde den Stern, dessen Licht an deinem Geburtstag aufgebrochen ist und jetzt die Erde erreicht. Sieh, wo du ihn heute Nacht findest. Kostenlos, ohne Anmeldung.',
       sections: [
@@ -164,7 +164,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     fr: {
-      title: 'Ton étoile : l’étoile dont la lumière est partie le jour de ta naissance | Sky of Your Day',
+      title: 'Ton étoile : celle dont la lumière est partie à ta naissance',
       description:
         'Entre ta date de naissance et trouve l’étoile dont la lumière est partie le jour de ta naissance et atteint la Terre maintenant. Découvre où la regarder ce soir. Gratuit, sans inscription.',
       sections: [
@@ -202,7 +202,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     pt: {
-      title: 'Sua estrela: a estrela cuja luz partiu no dia do seu nascimento | Sky of Your Day',
+      title: 'Sua estrela: a luz que partiu no dia do seu nascimento',
       description:
         'Digite sua data de nascimento e encontre a estrela cuja luz partiu no dia em que você nasceu e está chegando agora à Terra. Veja onde olhar esta noite. Grátis, sem cadastro.',
       sections: [
@@ -242,7 +242,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
   },
   poster: {
     en: {
-      title: 'Free Star Map Poster: the Night Sky of Any Date and Place | Sky of Your Day',
+      title: 'Free Star Map Poster: the Night Sky of Any Date and Place',
       description:
         'Make a star map of the sky on any date, time and place: real stars, constellations, the Milky Way, the Moon’s phase and the planets. Free high-resolution PDF, PNG and SVG, ready to print.',
       sections: [
@@ -281,7 +281,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     es: {
-      title: 'Mapa estelar personalizado gratis: el cielo de una fecha y un lugar | Sky of Your Day',
+      title: 'Mapa estelar personalizado gratis de cualquier fecha y lugar',
       description:
         'Crea el mapa del cielo de cualquier fecha, hora y lugar: estrellas reales, constelaciones, Vía Láctea, fase de la Luna y planetas. PDF, PNG y SVG en alta resolución, gratis y listos para imprimir.',
       sections: [
@@ -320,7 +320,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     it: {
-      title: 'Mappa stellare personalizzata gratis: il cielo di una data e di un luogo | Sky of Your Day',
+      title: 'Mappa stellare personalizzata gratis, per data e luogo',
       description:
         'Crea la mappa del cielo di qualsiasi data, ora e luogo: stelle vere, costellazioni, Via Lattea, fase della Luna e pianeti. PDF, PNG e SVG in alta risoluzione, gratis e pronti da stampare.',
       sections: [
@@ -359,7 +359,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     de: {
-      title: 'Sternkarte als Poster, kostenlos: der Nachthimmel zu jedem Datum und Ort | Sky of Your Day',
+      title: 'Personalisierte Sternkarte als Poster, kostenlos',
       description:
         'Erstelle eine Sternkarte des Himmels zu jedem Datum, jeder Uhrzeit und jedem Ort: echte Sterne, Sternbilder, Milchstraße, Mondphase und Planeten. Kostenloses PDF, PNG und SVG in hoher Auflösung, druckfertig.',
       sections: [
@@ -398,7 +398,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     fr: {
-      title: 'Carte du ciel en poster, gratuite : le ciel de n’importe quelle date et lieu | Sky of Your Day',
+      title: 'Carte du ciel personnalisée gratuite : date et lieu au choix',
       description:
         'Crée une carte du ciel de n’importe quelle date, heure et lieu : vraies étoiles, constellations, Voie lactée, phase de la Lune et planètes. PDF, PNG et SVG gratuits en haute résolution, prêts à imprimer.',
       sections: [
@@ -437,7 +437,7 @@ export const CONTENT: Record<'star' | 'poster', Record<Lang, PageContent>> = {
       ],
     },
     pt: {
-      title: 'Mapa estelar em pôster grátis: o céu de qualquer data e lugar | Sky of Your Day',
+      title: 'Mapa estelar personalizado grátis: qualquer data e lugar',
       description:
         'Crie um mapa estelar do céu de qualquer data, hora e lugar: estrelas reais, constelações, Via Láctea, fase da Lua e planetas. PDF, PNG e SVG grátis em alta resolução, prontos para imprimir.',
       sections: [

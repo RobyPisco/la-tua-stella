@@ -4,7 +4,7 @@
   import type { Lang } from '$lib/i18n.svelte';
   import { PT } from '$lib/pageText';
   import { absolute, paths } from '$lib/routes';
-  import { SITE_NAME } from '$lib/site';
+  import { WEBSITE_REF } from '$lib/structured';
   import DateField from '../DateField.svelte';
   import Seo from '../Seo.svelte';
 
@@ -42,7 +42,7 @@
       description: p.moonHubDescription,
       url: absolute(data.alternates[lang]),
       inLanguage: lang,
-      isPartOf: { '@type': 'WebSite', name: SITE_NAME },
+      isPartOf: WEBSITE_REF,
     },
   ]}
 />

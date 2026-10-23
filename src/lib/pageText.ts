@@ -14,7 +14,7 @@ export const PT = {
     /** Latitude for "when can I see it" on star pages (negative: south). */
     visibilityLat: 42,
 
-    moonHubTitle: 'Moon Phase on Any Date: What Was the Moon the Day You Were Born? | Sky of Your Day',
+    moonHubTitle: 'What Was the Moon the Day You Were Born? Moon Phase by Date',
     moonHubDescription: 'Look up the Moon’s phase on any date since 1930: full moons, new moons and a daily calendar for every month, with exact times.',
     moonHubH1: 'What was the Moon like on the day you were born?',
     moonHubLead: 'Pick a date to see the Moon’s phase that day, how much of it was lit, and when the nearest full and new moons fell. Every month since 1930 has its own calendar.',
@@ -22,7 +22,7 @@ export const PT = {
     dateLabel: 'Date',
     yearsHeading: 'Browse by year',
 
-    moonYearTitle: (y: number) => `Moon Phases ${y}: Every Full Moon and New Moon | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Moon Phases ${y}: Every Full Moon and New Moon`,
     moonYearDescription: (y: number, fulls: number) => `All ${fulls} full moons and every new moon of ${y}, with dates and times, and a daily Moon calendar for each month.`,
     moonYearH1: (y: number) => `Moon phases in ${y}`,
     moonYearLead: (y: number, fulls: number) => `There were ${fulls} full moons in ${y}. Choose a month for the Moon’s phase on every day.`,
@@ -31,7 +31,7 @@ export const PT = {
     colFull: 'Full Moon',
     colNew: 'New Moon',
 
-    moonMonthTitle: (m: string, y: number) => `Moon Phases ${m} ${y}: Full Moon, New Moon & Daily Calendar | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Moon Phases ${m} ${y}: Full Moon, New Moon & Calendar`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Full Moon on ${full}. ` : ''}${nw ? `New Moon on ${nw}. ` : ''}The Moon’s phase and how much of it was lit on every day of ${m} ${y}.`,
     moonMonthH1: (m: string, y: number) => `Moon phases in ${m} ${y}`,
@@ -47,11 +47,11 @@ export const PT = {
     next: 'Next',
     allYears: 'All years',
 
-    bornHubTitle: 'The Star of Your Birth Year: Whose Light Left the Year You Were Born | Sky of Your Day',
+    bornHubTitle: 'Your Birth Year Star: Light That Left the Year You Were Born',
     bornHubDescription: 'For every birth year since 1930, the stars whose light set out that year and is reaching Earth now. Find yours.',
     bornHubH1: 'The star of your birth year',
     bornHubLead: 'Light from a star 40 light years away set out 40 years ago. So every birth year has its stars: the ones whose light left them that year and is arriving now.',
-    bornTitle: (y: number) => `Born in ${y}? The Star Whose Light Left the Year You Were Born | Sky of Your Day`,
+    bornTitle: (y: number) => `Born in ${y}? The Star Whose Light Left That Year`,
     bornDescription: (y: number, star: string, ly: string) =>
       `Light that set out in ${y} is reaching Earth now from stars about ${ly} light years away, like ${star}. See the star for each month of ${y} and where to find it.`,
     bornH1: (y: number) => `Born in ${y}: your star`,
@@ -65,14 +65,14 @@ export const PT = {
     exactDate: 'For the exact star of your birthday, and where to look for it tonight:',
     moonOfYear: (y: number) => `The Moon in ${y}`,
 
-    starsHubTitle: 'Named Stars: Where to Find Them, Distance and Facts | Sky of Your Day',
+    starsHubTitle: 'Named Stars: Where to Find Them, Distance and Facts',
     starsHubDescription: 'Every star with an official name: where it is in the sky, how far away, when you can see it and when the light you see tonight left it.',
     starsHubH1: 'Stars with a name',
     starsHubLead: 'The International Astronomical Union has given official names to a few hundred stars. For each: where to find it, how far away it is, and when the light you see tonight set out.',
     brightestHeading: 'The brightest',
     allHeading: 'All named stars',
 
-    starTitle: (name: string) => `${name}: Where to Find It, Distance and Facts | Sky of Your Day`,
+    starTitle: (name: string) => `${name}: Where to Find It, Distance and Facts`,
     starDescription: (name: string, kind: string, dist: string) => `${name} is ${kind}${dist}. Where to find it in the sky, when you can see it and how bright it is.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, ${ly} light years away: the light you see tonight left it around ${year}` : `, ${ly} light years away`),
     whereHeading: 'Where to find it',
@@ -99,7 +99,7 @@ export const PT = {
     moonTz: 'UTC',
     visibilityLat: 42,
 
-    moonHubTitle: '¿Qué luna había el día que naciste? Fases lunares de cualquier fecha | Sky of Your Day',
+    moonHubTitle: '¿Qué luna había el día que naciste? Fases lunares por fecha',
     moonHubDescription: 'Consulta la fase de la Luna en cualquier fecha desde 1930: lunas llenas, lunas nuevas y el calendario lunar de cada mes, con las horas exactas.',
     moonHubH1: '¿Qué luna había el día de tu nacimiento?',
     moonHubLead: 'Elige una fecha para ver la fase de la Luna ese día, qué parte estaba iluminada y cuándo cayeron la luna llena y la luna nueva más cercanas. Cada mes desde 1930 tiene su calendario.',
@@ -107,7 +107,7 @@ export const PT = {
     dateLabel: 'Fecha',
     yearsHeading: 'Por años',
 
-    moonYearTitle: (y: number) => `Fases lunares ${y}: todas las lunas llenas y lunas nuevas | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Fases lunares ${y}: todas las lunas llenas y nuevas`,
     moonYearDescription: (y: number, fulls: number) => `Las ${fulls} lunas llenas y todas las lunas nuevas de ${y}, con fecha y hora, y el calendario lunar día a día de cada mes.`,
     moonYearH1: (y: number) => `Fases lunares de ${y}`,
     moonYearLead: (y: number, fulls: number) => `En ${y} hubo ${fulls} lunas llenas. Elige un mes para ver la fase de la Luna día a día.`,
@@ -116,7 +116,7 @@ export const PT = {
     colFull: 'Luna llena',
     colNew: 'Luna nueva',
 
-    moonMonthTitle: (m: string, y: number) => `Fases lunares ${m} ${y}: luna llena, luna nueva y calendario | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Fases lunares ${m} ${y}: luna llena, nueva y calendario`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Luna llena el ${full}. ` : ''}${nw ? `Luna nueva el ${nw}. ` : ''}La fase de la Luna y qué parte estaba iluminada cada día de ${m} de ${y}.`,
     moonMonthH1: (m: string, y: number) => `Fases lunares de ${m} de ${y}`,
@@ -132,11 +132,11 @@ export const PT = {
     next: 'Siguiente',
     allYears: 'Todos los años',
 
-    bornHubTitle: 'La estrella de tu año de nacimiento: la luz que salió ese año llega ahora | Sky of Your Day',
+    bornHubTitle: 'La estrella de tu año de nacimiento: su luz llega ahora',
     bornHubDescription: 'Para cada año de nacimiento desde 1930, las estrellas cuya luz salió ese año y está llegando ahora a la Tierra. Encuentra la tuya.',
     bornHubH1: 'La estrella de tu año de nacimiento',
     bornHubLead: 'La luz de una estrella a 40 años luz salió hace 40 años. Así que cada año de nacimiento tiene sus estrellas: aquellas cuya luz salió entonces y está llegando ahora.',
-    bornTitle: (y: number) => `Nacidos en ${y}: la estrella cuya luz salió ese año | Sky of Your Day`,
+    bornTitle: (y: number) => `Nacidos en ${y}: la estrella cuya luz salió ese año`,
     bornDescription: (y: number, star: string, ly: string) =>
       `La luz que salió en ${y} está llegando ahora a la Tierra desde estrellas a unos ${ly} años luz, como ${star}. La estrella de cada mes de ${y} y dónde encontrarla.`,
     bornH1: (y: number) => `Nacidos en ${y}: vuestra estrella`,
@@ -150,14 +150,14 @@ export const PT = {
     exactDate: 'Para la estrella exacta de tu cumpleaños, y para saber dónde mirarla esta noche:',
     moonOfYear: (y: number) => `La Luna en ${y}`,
 
-    starsHubTitle: 'Las estrellas con nombre: dónde encontrarlas, distancia y curiosidades | Sky of Your Day',
+    starsHubTitle: 'Estrellas con nombre: dónde encontrarlas, distancia y datos',
     starsHubDescription: 'Todas las estrellas con nombre oficial: dónde están en el cielo, a qué distancia, cuándo se ven y cuándo salió la luz que ves esta noche.',
     starsHubH1: 'Las estrellas con nombre',
     starsHubLead: 'La Unión Astronómica Internacional ha dado nombre oficial a unos cientos de estrellas. Para cada una: dónde encontrarla, a qué distancia está y cuándo salió la luz que ves esta noche.',
     brightestHeading: 'Las más brillantes',
     allHeading: 'Todas las estrellas con nombre',
 
-    starTitle: (name: string) => `${name}: dónde encontrarla, distancia y curiosidades | Sky of Your Day`,
+    starTitle: (name: string) => `${name}: dónde encontrarla, distancia y curiosidades`,
     starDescription: (name: string, kind: string, dist: string) => `${name} es ${kind}${dist}. Dónde encontrarla en el cielo, cuándo se ve y cuánto brilla.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, a ${ly} años luz: la luz que ves esta noche salió hacia ${year}` : `, a ${ly} años luz`),
     whereHeading: 'Dónde encontrarla',
@@ -184,7 +184,7 @@ export const PT = {
     moonTz: 'Europe/Rome',
     visibilityLat: 42,
 
-    moonHubTitle: 'Che luna c’era il giorno della tua nascita? Fasi lunari di ogni data | Sky of Your Day',
+    moonHubTitle: 'Che luna c’era il giorno della tua nascita? Fasi lunari',
     moonHubDescription: 'Scopri la fase della Luna in qualsiasi data dal 1930: lune piene, lune nuove e calendario lunare di ogni mese, con gli orari esatti.',
     moonHubH1: 'Che luna c’era il giorno della tua nascita?',
     moonHubLead: 'Scegli una data per vedere la fase della Luna quel giorno, quanta parte era illuminata e quando sono cadute la luna piena e la luna nuova più vicine. Ogni mese dal 1930 ha il suo calendario.',
@@ -192,7 +192,7 @@ export const PT = {
     dateLabel: 'Data',
     yearsHeading: 'Sfoglia per anno',
 
-    moonYearTitle: (y: number) => `Fasi lunari ${y}: tutte le lune piene e le lune nuove | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Fasi lunari ${y}: tutte le lune piene e le lune nuove`,
     moonYearDescription: (y: number, fulls: number) => `Le ${fulls} lune piene e tutte le lune nuove del ${y}, con data e ora, e il calendario lunare giorno per giorno di ogni mese.`,
     moonYearH1: (y: number) => `Fasi lunari del ${y}`,
     moonYearLead: (y: number, fulls: number) => `Nel ${y} ci sono state ${fulls} lune piene. Scegli un mese per vedere la fase della Luna giorno per giorno.`,
@@ -201,7 +201,7 @@ export const PT = {
     colFull: 'Luna piena',
     colNew: 'Luna nuova',
 
-    moonMonthTitle: (m: string, y: number) => `Fasi lunari ${m} ${y}: luna piena, luna nuova e calendario | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Fasi lunari ${m} ${y}: luna piena, nuova e calendario`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Luna piena il ${full}. ` : ''}${nw ? `Luna nuova il ${nw}. ` : ''}La fase della Luna e quanta parte era illuminata in ogni giorno di ${m} ${y}.`,
     moonMonthH1: (m: string, y: number) => `Fasi lunari di ${m} ${y}`,
@@ -217,11 +217,11 @@ export const PT = {
     next: 'Successivo',
     allYears: 'Tutti gli anni',
 
-    bornHubTitle: 'La stella del tuo anno di nascita: la luce partita quell’anno arriva adesso | Sky of Your Day',
+    bornHubTitle: 'La stella del tuo anno di nascita: la sua luce arriva adesso',
     bornHubDescription: 'Per ogni anno di nascita dal 1930, le stelle la cui luce è partita quell’anno e arriva sulla Terra adesso. Trova la tua.',
     bornHubH1: 'La stella del tuo anno di nascita',
     bornHubLead: 'La luce di una stella lontana 40 anni luce è partita 40 anni fa. Ogni anno di nascita ha quindi le sue stelle: quelle la cui luce è partita allora e arriva adesso.',
-    bornTitle: (y: number) => `Nati nel ${y}: la stella la cui luce è partita quell’anno | Sky of Your Day`,
+    bornTitle: (y: number) => `Nati nel ${y}: la stella la cui luce è partita quell’anno`,
     bornDescription: (y: number, star: string, ly: string) =>
       `La luce partita nel ${y} arriva sulla Terra adesso da stelle lontane circa ${ly} anni luce, come ${star}. La stella di ogni mese del ${y} e dove trovarla.`,
     bornH1: (y: number) => `Nati nel ${y}: la vostra stella`,
@@ -235,14 +235,14 @@ export const PT = {
     exactDate: 'Per la stella esatta del tuo compleanno, e per sapere dove guardarla stasera:',
     moonOfYear: (y: number) => `La Luna nel ${y}`,
 
-    starsHubTitle: 'Le stelle con un nome: dove trovarle, distanza e curiosità | Sky of Your Day',
+    starsHubTitle: 'Stelle con un nome: dove trovarle, distanza e curiosità',
     starsHubDescription: 'Tutte le stelle con un nome ufficiale: dove si trovano in cielo, quanto distano, quando si vedono e quando è partita la luce che vedi stasera.',
     starsHubH1: 'Le stelle con un nome',
     starsHubLead: 'L’Unione Astronomica Internazionale ha dato un nome ufficiale ad alcune centinaia di stelle. Per ognuna: dove trovarla, quanto dista e quando è partita la luce che vedi stasera.',
     brightestHeading: 'Le più luminose',
     allHeading: 'Tutte le stelle con un nome',
 
-    starTitle: (name: string) => `${name}: dove si trova, distanza e curiosità | Sky of Your Day`,
+    starTitle: (name: string) => `${name}: dove si trova, distanza e curiosità`,
     starDescription: (name: string, kind: string, dist: string) => `${name} è ${kind}${dist}. Dove trovarla in cielo, quando si vede e quanto è luminosa.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, a ${ly} anni luce: la luce che vedi stasera è partita intorno al ${year}` : `, a ${ly} anni luce`),
     whereHeading: 'Dove trovarla',
@@ -269,7 +269,7 @@ export const PT = {
     moonTz: 'Europe/Berlin',
     visibilityLat: 50,
 
-    moonHubTitle: 'Welcher Mond war an deinem Geburtstag? Mondphasen für jedes Datum | Sky of Your Day',
+    moonHubTitle: 'Welcher Mond war an deinem Geburtstag? Mondphasen nach Datum',
     moonHubDescription: 'Finde die Mondphase an jedem Datum seit 1930: Vollmonde, Neumonde und ein Mondkalender für jeden Monat, mit genauen Uhrzeiten.',
     moonHubH1: 'Welcher Mond war an deinem Geburtstag?',
     moonHubLead: 'Wähle ein Datum und sieh die Mondphase an diesem Tag, wie viel von ihm beleuchtet war und wann der nächste Vollmond und Neumond waren. Jeder Monat seit 1930 hat seinen Kalender.',
@@ -277,7 +277,7 @@ export const PT = {
     dateLabel: 'Datum',
     yearsHeading: 'Nach Jahren',
 
-    moonYearTitle: (y: number) => `Mondphasen ${y}: alle Vollmonde und Neumonde | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Mondphasen ${y}: alle Vollmonde und Neumonde`,
     moonYearDescription: (y: number, fulls: number) => `Alle ${fulls} Vollmonde und alle Neumonde ${y}, mit Datum und Uhrzeit, und ein Mondkalender für jeden Tag jedes Monats.`,
     moonYearH1: (y: number) => `Mondphasen ${y}`,
     moonYearLead: (y: number, fulls: number) => `${y} gab es ${fulls} Vollmonde. Wähle einen Monat für die Mondphase an jedem Tag.`,
@@ -286,7 +286,7 @@ export const PT = {
     colFull: 'Vollmond',
     colNew: 'Neumond',
 
-    moonMonthTitle: (m: string, y: number) => `Mondphasen ${m} ${y}: Vollmond, Neumond und Mondkalender | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Mondphasen ${m} ${y}: Vollmond, Neumond und Mondkalender`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Vollmond am ${full}. ` : ''}${nw ? `Neumond am ${nw}. ` : ''}Die Mondphase und wie viel vom Mond beleuchtet war, an jedem Tag im ${m} ${y}.`,
     moonMonthH1: (m: string, y: number) => `Mondphasen im ${m} ${y}`,
@@ -302,11 +302,11 @@ export const PT = {
     next: 'Weiter',
     allYears: 'Alle Jahre',
 
-    bornHubTitle: 'Der Stern deines Geburtsjahres: das Licht, das damals aufbrach, kommt jetzt an | Sky of Your Day',
+    bornHubTitle: 'Der Stern deines Geburtsjahres: sein Licht kommt jetzt an',
     bornHubDescription: 'Für jedes Geburtsjahr seit 1930 die Sterne, deren Licht in jenem Jahr aufgebrochen ist und jetzt die Erde erreicht. Finde deinen.',
     bornHubH1: 'Der Stern deines Geburtsjahres',
     bornHubLead: 'Das Licht eines Sterns in 40 Lichtjahren Entfernung ist vor 40 Jahren aufgebrochen. Jedes Geburtsjahr hat also seine Sterne: die, deren Licht damals aufbrach und jetzt ankommt.',
-    bornTitle: (y: number) => `Geboren ${y}? Der Stern, dessen Licht in deinem Geburtsjahr aufbrach | Sky of Your Day`,
+    bornTitle: (y: number) => `Geboren ${y}? Der Stern, dessen Licht damals aufbrach`,
     bornDescription: (y: number, star: string, ly: string) =>
       `Licht, das ${y} aufgebrochen ist, erreicht die Erde jetzt von Sternen in etwa ${ly} Lichtjahren Entfernung, wie ${star}. Der Stern für jeden Monat ${y} und wo du ihn findest.`,
     bornH1: (y: number) => `Geboren ${y}: dein Stern`,
@@ -320,14 +320,14 @@ export const PT = {
     exactDate: 'Für den genauen Stern deines Geburtstags, und um zu wissen, wo du ihn heute Nacht siehst:',
     moonOfYear: (y: number) => `Der Mond ${y}`,
 
-    starsHubTitle: 'Sterne mit Namen: wo man sie findet, Entfernung und Wissenswertes | Sky of Your Day',
+    starsHubTitle: 'Sterne mit Namen: Fundort, Entfernung und Wissenswertes',
     starsHubDescription: 'Alle Sterne mit offiziellem Namen: wo sie am Himmel stehen, wie weit sie entfernt sind, wann man sie sieht und wann das Licht aufbrach, das du heute Nacht siehst.',
     starsHubH1: 'Sterne mit Namen',
     starsHubLead: 'Die Internationale Astronomische Union hat einigen hundert Sternen offizielle Namen gegeben. Für jeden: wo du ihn findest, wie weit er entfernt ist und wann das Licht aufbrach, das du heute Nacht siehst.',
     brightestHeading: 'Die hellsten',
     allHeading: 'Alle Sterne mit Namen',
 
-    starTitle: (name: string) => `${name}: wo man ihn findet, Entfernung und Wissenswertes | Sky of Your Day`,
+    starTitle: (name: string) => `${name}: wo man ihn findet, Entfernung und Wissenswertes`,
     starDescription: (name: string, kind: string, dist: string) => `${name} ist ${kind}${dist}. Wo du ihn am Himmel findest, wann er zu sehen ist und wie hell er ist.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, ${ly} Lichtjahre entfernt: das Licht, das du heute Nacht siehst, brach um ${year} auf` : `, ${ly} Lichtjahre entfernt`),
     whereHeading: 'Wo du ihn findest',
@@ -354,7 +354,7 @@ export const PT = {
     moonTz: 'Europe/Paris',
     visibilityLat: 47,
 
-    moonHubTitle: 'Quelle lune le jour de ta naissance ? Phases de la Lune à toute date | Sky of Your Day',
+    moonHubTitle: 'Quelle lune le jour de ta naissance ? Phases de la Lune',
     moonHubDescription: 'La phase de la Lune à n’importe quelle date depuis 1930 : pleines lunes, nouvelles lunes et calendrier lunaire de chaque mois, avec les heures exactes.',
     moonHubH1: 'Quelle lune y avait-il le jour de ta naissance ?',
     moonHubLead: 'Choisis une date pour voir la phase de la Lune ce jour-là, quelle part était éclairée et quand sont tombées la pleine lune et la nouvelle lune les plus proches. Chaque mois depuis 1930 a son calendrier.',
@@ -362,7 +362,7 @@ export const PT = {
     dateLabel: 'Date',
     yearsHeading: 'Par année',
 
-    moonYearTitle: (y: number) => `Phases de la Lune ${y} : toutes les pleines lunes et nouvelles lunes | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Phases de la Lune ${y} : pleines lunes et nouvelles lunes`,
     moonYearDescription: (y: number, fulls: number) => `Les ${fulls} pleines lunes et toutes les nouvelles lunes de ${y}, avec date et heure, et le calendrier lunaire jour par jour de chaque mois.`,
     moonYearH1: (y: number) => `Phases de la Lune en ${y}`,
     moonYearLead: (y: number, fulls: number) => `En ${y}, il y a eu ${fulls} pleines lunes. Choisis un mois pour voir la phase de la Lune jour par jour.`,
@@ -371,7 +371,7 @@ export const PT = {
     colFull: 'Pleine lune',
     colNew: 'Nouvelle lune',
 
-    moonMonthTitle: (m: string, y: number) => `Phases de la Lune ${m} ${y} : pleine lune, nouvelle lune et calendrier | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Phases de la Lune ${m} ${y} : pleine et nouvelle lune`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Pleine lune le ${full}. ` : ''}${nw ? `Nouvelle lune le ${nw}. ` : ''}La phase de la Lune et la part éclairée chaque jour de ${m} ${y}.`,
     moonMonthH1: (m: string, y: number) => `Phases de la Lune en ${m} ${y}`,
@@ -387,11 +387,11 @@ export const PT = {
     next: 'Suivant',
     allYears: 'Toutes les années',
 
-    bornHubTitle: 'L’étoile de ton année de naissance : la lumière partie cette année-là arrive maintenant | Sky of Your Day',
+    bornHubTitle: 'L’étoile de ton année de naissance : sa lumière arrive',
     bornHubDescription: 'Pour chaque année de naissance depuis 1930, les étoiles dont la lumière est partie cette année-là et atteint la Terre maintenant. Trouve la tienne.',
     bornHubH1: 'L’étoile de ton année de naissance',
     bornHubLead: 'La lumière d’une étoile à 40 années-lumière est partie il y a 40 ans. Chaque année de naissance a donc ses étoiles : celles dont la lumière est partie alors et arrive maintenant.',
-    bornTitle: (y: number) => `Né en ${y} ? L’étoile dont la lumière est partie ton année de naissance | Sky of Your Day`,
+    bornTitle: (y: number) => `Né en ${y} ? L’étoile dont la lumière est partie cette année`,
     bornDescription: (y: number, star: string, ly: string) =>
       `La lumière partie en ${y} atteint la Terre maintenant depuis des étoiles situées à environ ${ly} années-lumière, comme ${star}. L’étoile de chaque mois de ${y} et où la trouver.`,
     bornH1: (y: number) => `Nés en ${y} : votre étoile`,
@@ -405,14 +405,14 @@ export const PT = {
     exactDate: 'Pour l’étoile exacte de ton anniversaire, et pour savoir où la regarder ce soir :',
     moonOfYear: (y: number) => `La Lune en ${y}`,
 
-    starsHubTitle: 'Les étoiles qui ont un nom : où les trouver, distance et curiosités | Sky of Your Day',
+    starsHubTitle: 'Étoiles qui ont un nom : où les trouver, distance, curiosités',
     starsHubDescription: 'Toutes les étoiles qui ont un nom officiel : où elles sont dans le ciel, à quelle distance, quand on les voit et quand est partie la lumière que tu vois ce soir.',
     starsHubH1: 'Les étoiles qui ont un nom',
     starsHubLead: 'L’Union astronomique internationale a donné un nom officiel à quelques centaines d’étoiles. Pour chacune : où la trouver, à quelle distance elle est et quand est partie la lumière que tu vois ce soir.',
     brightestHeading: 'Les plus brillantes',
     allHeading: 'Toutes les étoiles qui ont un nom',
 
-    starTitle: (name: string) => `${name} : où la trouver, distance et curiosités | Sky of Your Day`,
+    starTitle: (name: string) => `${name} : où la trouver, distance et curiosités`,
     starDescription: (name: string, kind: string, dist: string) => `${name} est ${kind}${dist}. Où la trouver dans le ciel, quand on la voit et à quel point elle brille.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, à ${ly} années-lumière : la lumière que tu vois ce soir est partie vers ${year}` : `, à ${ly} années-lumière`),
     whereHeading: 'Où la trouver',
@@ -439,7 +439,7 @@ export const PT = {
     moonTz: 'America/Sao_Paulo',
     visibilityLat: -23,
 
-    moonHubTitle: 'Qual era a lua no dia em que você nasceu? Fases da Lua de qualquer data | Sky of Your Day',
+    moonHubTitle: 'Qual era a lua no dia em que você nasceu? Fases da Lua',
     moonHubDescription: 'Veja a fase da Lua em qualquer data desde 1930: luas cheias, luas novas e o calendário lunar de cada mês, com os horários exatos.',
     moonHubH1: 'Qual era a lua no dia do seu nascimento?',
     moonHubLead: 'Escolha uma data para ver a fase da Lua naquele dia, quanto dela estava iluminado e quando caíram a lua cheia e a lua nova mais próximas. Cada mês desde 1930 tem seu calendário.',
@@ -447,7 +447,7 @@ export const PT = {
     dateLabel: 'Data',
     yearsHeading: 'Por ano',
 
-    moonYearTitle: (y: number) => `Fases da Lua ${y}: todas as luas cheias e luas novas | Sky of Your Day`,
+    moonYearTitle: (y: number) => `Fases da Lua ${y}: todas as luas cheias e luas novas`,
     moonYearDescription: (y: number, fulls: number) => `As ${fulls} luas cheias e todas as luas novas de ${y}, com data e hora, e o calendário lunar dia a dia de cada mês.`,
     moonYearH1: (y: number) => `Fases da Lua em ${y}`,
     moonYearLead: (y: number, fulls: number) => `Em ${y} houve ${fulls} luas cheias. Escolha um mês para ver a fase da Lua dia a dia.`,
@@ -456,7 +456,7 @@ export const PT = {
     colFull: 'Lua cheia',
     colNew: 'Lua nova',
 
-    moonMonthTitle: (m: string, y: number) => `Fases da Lua ${m} ${y}: lua cheia, lua nova e calendário | Sky of Your Day`,
+    moonMonthTitle: (m: string, y: number) => `Fases da Lua ${m} ${y}: lua cheia, lua nova e calendário`,
     moonMonthDescription: (m: string, y: number, full: string, nw: string) =>
       `${full ? `Lua cheia em ${full}. ` : ''}${nw ? `Lua nova em ${nw}. ` : ''}A fase da Lua e quanto dela estava iluminado em cada dia de ${m} de ${y}.`,
     moonMonthH1: (m: string, y: number) => `Fases da Lua em ${m} de ${y}`,
@@ -472,11 +472,11 @@ export const PT = {
     next: 'Próximo',
     allYears: 'Todos os anos',
 
-    bornHubTitle: 'A estrela do seu ano de nascimento: a luz que partiu naquele ano chega agora | Sky of Your Day',
+    bornHubTitle: 'A estrela do seu ano de nascimento: a luz que chega agora',
     bornHubDescription: 'Para cada ano de nascimento desde 1930, as estrelas cuja luz partiu naquele ano e está chegando agora à Terra. Encontre a sua.',
     bornHubH1: 'A estrela do seu ano de nascimento',
     bornHubLead: 'A luz de uma estrela a 40 anos-luz partiu há 40 anos. Então cada ano de nascimento tem as suas estrelas: aquelas cuja luz partiu naquela época e está chegando agora.',
-    bornTitle: (y: number) => `Nascidos em ${y}: a estrela cuja luz partiu naquele ano | Sky of Your Day`,
+    bornTitle: (y: number) => `Nascidos em ${y}: a estrela cuja luz partiu naquele ano`,
     bornDescription: (y: number, star: string, ly: string) =>
       `A luz que partiu em ${y} está chegando agora à Terra de estrelas a cerca de ${ly} anos-luz, como ${star}. A estrela de cada mês de ${y} e onde encontrá-la.`,
     bornH1: (y: number) => `Nascidos em ${y}: a sua estrela`,
@@ -490,14 +490,14 @@ export const PT = {
     exactDate: 'Para a estrela exata do seu aniversário, e para saber onde olhar esta noite:',
     moonOfYear: (y: number) => `A Lua em ${y}`,
 
-    starsHubTitle: 'As estrelas com nome: onde encontrá-las, distância e curiosidades | Sky of Your Day',
+    starsHubTitle: 'Estrelas com nome: onde encontrá-las e curiosidades',
     starsHubDescription: 'Todas as estrelas com nome oficial: onde estão no céu, a que distância, quando podem ser vistas e quando partiu a luz que você vê esta noite.',
     starsHubH1: 'As estrelas com nome',
     starsHubLead: 'A União Astronômica Internacional deu nome oficial a algumas centenas de estrelas. Para cada uma: onde encontrá-la, a que distância está e quando partiu a luz que você vê esta noite.',
     brightestHeading: 'As mais brilhantes',
     allHeading: 'Todas as estrelas com nome',
 
-    starTitle: (name: string) => `${name}: onde encontrá-la, distância e curiosidades | Sky of Your Day`,
+    starTitle: (name: string) => `${name}: onde encontrá-la, distância e curiosidades`,
     starDescription: (name: string, kind: string, dist: string) => `${name} é ${kind}${dist}. Onde encontrá-la no céu, quando ela pode ser vista e quanto ela brilha.`,
     distanceShort: (ly: string, year: number | null) => (year ? `, a ${ly} anos-luz: a luz que você vê esta noite partiu por volta de ${year}` : `, a ${ly} anos-luz`),
     whereHeading: 'Onde encontrá-la',

@@ -89,11 +89,17 @@ Su Windows con Git Bash, per provare il percorso di una sottocartella serve
   hreflang, sitemap e og:image derivano da lì. `VITE_COUNTER_URL=https://api.skyofyourday.com`
   accende il contatore: senza (in sviluppo) non conta nulla.
 - Google Search Console: proprietà Dominio verificata, sitemap `https://skyofyourday.com/sitemap.xml`
-  inviata. Al 15/10/2026: **11.046 pagine rilevate, 1.400 indicizzate**. Le 9.629 non indicizzate sono
-  quasi tutte "Rilevata, ma attualmente non indicizzata" (Google non le ha mai scaricate) contro sole
-  17 "scansionata ma non indicizzata": **il limite è l'autorità del dominio, non la qualità delle
-  pagine**. Finché quel rapporto non migliora, aggiungere lingue o pagine peggiora la situazione —
-  diluisce un budget di scansione già razionato. La leva sono i link in entrata.
+  inviata. Dal 03/10/2026 `sitemap.xml` è un **indice** di 24 file `/sitemaps/<sezione>-<lingua>.xml`
+  (pages, moon, born, stars × 6 lingue, `src/lib/server/sitemap.ts`): in Search Console si vede
+  l'indicizzazione per sezione. Al 15/10/2026: **11.046 pagine rilevate, 1.400 indicizzate**. Le 9.629
+  non indicizzate sono quasi tutte "Rilevata, ma attualmente non indicizzata" (Google non le ha mai
+  scaricate) contro sole 17 "scansionata ma non indicizzata": **il limite è l'autorità del dominio,
+  non la qualità delle pagine**. Finché quel rapporto non migliora, aggiungere lingue o pagine
+  peggiora la situazione — diluisce un budget di scansione già razionato. La leva sono i link in
+  entrata.
+- `<title>` di massimo ~60 caratteri, **senza** il suffisso ` | Sky of Your Day` (tranne le
+  Condizioni): il nome del sito lo prende Google dai dati `WebSite`/`Organization` della home
+  (`siteJsonLd()` in `src/lib/structured.ts`, in `PosterPage.svelte` ora che il poster è alla radice).
 
 ## Trappole già incontrate
 
